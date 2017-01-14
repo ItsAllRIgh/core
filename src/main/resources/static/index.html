@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/app.css" rel="stylesheet">
@@ -13,7 +14,7 @@
 Hey welcome!
 <div class="btn-group" role="group" aria-label="...">
 
-    <a class="btn btn-primary btn-lg" th:href="@{/hello}">CLICKKKKKKKKK!!!!!</a>
+    <a class="btn btn-primary btn-lg" th:href="@{/hello}">CLICK</a>
     <div id="LOGIN" class="@{/hello}">
         <button type="button" class="btn btn-default">Login</button>
     </div>

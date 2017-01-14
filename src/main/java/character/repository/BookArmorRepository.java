@@ -13,7 +13,6 @@ import java.util.List;
 public interface BookArmorRepository extends CrudRepository<BookArmorEntity, Integer> {
 
     List<BookArmorEntity> findAll();
-
     // Enables the distinct flag for the query
     List<BookArmorEntity> findDistinctBookArmorEntityByRestricted(boolean restricted);
 
@@ -22,7 +21,6 @@ public interface BookArmorRepository extends CrudRepository<BookArmorEntity, Int
 
     // Enabling static ORDER BY for a query
     List<BookArmorEntity> findByRestrictedOrderByPriceAsc(boolean restricted);
-
     List<BookArmorEntity> findByRestrictedOrderByPriceDesc(boolean restricted);
 
 }

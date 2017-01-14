@@ -54,11 +54,12 @@ public class Player implements Serializable {
     public int credits = 0;
     public String equipments = "";
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Skill> skills;
+    public List<Skill> skills = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Weapon> weapons;
+    @JsonProperty(value = "weapons")
+    public List<Player_Weapon> playerWeapons = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Talent> talents;
+    public List<Talent> talents = new ArrayList<>();
     public int encumbrance = 0;
     @Column(name = "FORCE_POWERS")
     public int force = 0;
@@ -71,6 +72,7 @@ public class Player implements Serializable {
     @Transient
     public int selectedAchievement;
     @Transient
+    @JsonProperty(value = "world")
     public String world;
     @Transient
     public String webhash;
@@ -104,7 +106,7 @@ public class Player implements Serializable {
         this.credits = them.credits;
         this.equipments = them.equipments;
         this.skills = them.skills;
-        this.weapons = them.weapons;
+        this.playerWeapons = them.playerWeapons;
         this.talents = them.talents;
         this.encumbrance = them.encumbrance;
         this.force = them.force;
@@ -114,7 +116,7 @@ public class Player implements Serializable {
         this.motivations = them.motivations;
     }
 
-    public Player(String name, String userName, Species species, String career, String specialization, String avatar, int currentXP, int totalXP, int soak, int currentWounds, int totalWounds, int currentStrain, int totalStrain, int defense, int brawn, int agility, int intellect, int cunning, int willpower, int presence, int gender, int age, String height, String eyes, String hair, String other, int credits, String equipments, List<Skill> skills, List<Weapon> weapons, List<Talent> talents, int encumbrance, int force, String hashKey, String background, String obligations, String motivations, String achievements, int selectedAchievement, String world, String webhash) {
+    public Player(String name, String userName, Species species, String career, String specialization, String avatar, int currentXP, int totalXP, int soak, int currentWounds, int totalWounds, int currentStrain, int totalStrain, int defense, int brawn, int agility, int intellect, int cunning, int willpower, int presence, int gender, int age, String height, String eyes, String hair, String other, int credits, String equipments, List<Skill> skills, List<Player_Weapon> playerWeapons, List<Talent> talents, int encumbrance, int force, String hashKey, String background, String obligations, String motivations, String achievements, int selectedAchievement, String world, String webhash) {
         this.name = name;
         this.userName = userName;
         this.species = species;
@@ -144,7 +146,7 @@ public class Player implements Serializable {
         this.credits = credits;
         this.equipments = equipments;
         this.skills = skills;
-        this.weapons = weapons;
+        this.playerWeapons = playerWeapons;
         this.talents = talents;
         this.encumbrance = encumbrance;
         this.force = force;
@@ -389,12 +391,12 @@ public class Player implements Serializable {
         this.skills = skills;
     }
 
-    public List<Weapon> getWeapons() {
-        return weapons;
+    public List<Player_Weapon> getPlayerWeapons() {
+        return playerWeapons;
     }
 
-    public void setWeapons(ArrayList<Weapon> weapons) {
-        this.weapons = weapons;
+    public void setPlayerWeapons(ArrayList<Player_Weapon> playerWeapons) {
+        this.playerWeapons = playerWeapons;
     }
 
     public List<Talent> getTalents() {

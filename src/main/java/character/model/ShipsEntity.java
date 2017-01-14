@@ -23,6 +23,7 @@ public class ShipsEntity {
     private Integer rarity;
     private Integer hp;
     private Integer wep;
+    private Integer fuel;
     private String bookIndex;
     private Byte restricted;
 
@@ -34,6 +35,16 @@ public class ShipsEntity {
 
     public void setShipsId(int shipsId) {
         this.shipsId = shipsId;
+    }
+
+    @Basic
+    @Column(name = "fuel", nullable = true, insertable = true, updatable = true)
+    public Integer getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(Integer fuel) {
+        this.fuel = fuel;
     }
 
     @Basic

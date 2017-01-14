@@ -1162,3 +1162,4 @@ VALUES (1, 'Adult Chemilizard', 'Rival', 'Brawl 3, Resilience 2, Vigilance 2', '
    'Sure-Footed, Terrifying Howl', 'Teeth and claws', 'SoF:20'),
   (134, 'Ysalamir', 'Minion', 'None', 'None', 'Negate Force Powers', 'Teeth', 'F-CRB:417');
 
+INSERT INTO `role` (name) VALUES ('USER'), ('ADMIN');

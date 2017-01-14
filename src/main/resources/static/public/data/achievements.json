@@ -1,0 +1,158 @@
+[
+  {
+    "id": 0,
+    "name": "Padawan",
+    "description": "And that's just the beginning",
+    "objective": "Jedi relative career"
+  },
+  {
+    "id": 1,
+    "name": "Jedi",
+    "description": "Strong is the Force with this one",
+    "objective": "Jedi relative career with >1K XP"
+  },
+  {
+    "id": 2,
+    "name": "Jedi Master",
+    "description": "And probably one of the last",
+    "objective": "Jedi relative career with >5K XP"
+  },
+  {
+    "id": 3,
+    "name": "Sith",
+    "description": "Is he an apprentice, our the Master?",
+    "objective": "Sith relative career"
+  },
+  {
+    "id": 4,
+    "name": "First shooter",
+    "description": "Because Han shoots first",
+    "objective": "Smuggler with ranged 2+"
+  },
+  {
+    "id": 5,
+    "name": "Deadly eye",
+    "description": "Better to have him in your team",
+    "objective": "Ranged skill 3+"
+  },
+  {
+    "id": 6,
+    "name": "Brawl master",
+    "description": "He has trained his skills in fights with big wookies",
+    "objective": "Brawl skill 3+"
+  },
+  {
+    "id": 7,
+    "name": "Explosive man",
+    "description": "BOUM",
+    "objective": "Gunnery skill 3+"
+  },
+  {
+    "id": 8,
+    "name": "Rogue leader",
+    "description": "Lightspeed is also a way of life",
+    "objective": "Pilot skill 3+"
+  },
+  {
+    "id": 9,
+    "name": "Archives Master",
+    "description": "Sounds like he has spent a lot of time at the library",
+    "objective": "Knowledge skill 3+"
+  },
+  {
+    "id": 10,
+    "name": "Kessel runner",
+    "description": "But maybe not in twelve parsecs",
+    "objective": "Kessel as world"
+  },
+  {
+    "id": 11,
+    "name": "He shoots first",
+    "description": "Except if he's Rodian",
+    "objective": "Cool skill 3+"
+  },
+  {
+    "id": 12,
+    "name": "Droid's creed",
+    "description": "Do you know a guy named IG-89?",
+    "objective": "Droid assassin"
+  },
+  {
+    "id": 13,
+    "name": "Weapons dealer",
+    "description": "He probably need a droid to carry all this deadly stuff",
+    "objective": "3+ weapons"
+  },
+  {
+    "id": 14,
+    "name": "Strong as a Rancor",
+    "description": "Well, maybe not as strong as a Rancor, but almost",
+    "objective": "5+ Brawn"
+  },
+  {
+    "id": 15,
+    "name": "Deadly as a Mandalorian",
+    "description": "So cool with this mandalorian armor",
+    "objective": "Damages 9+"
+  },
+  {
+    "id": 16,
+    "name": "Master of Knowledge",
+    "description": "Is he trying to replace the Jedi temple archives?",
+    "objective": "Knowledge skill 5+"
+  },
+  {
+    "id": 17,
+    "name": "Stranger in a strange land",
+    "description": "I hope he's not the last of his species.",
+    "objective": "Exotic race"
+  },
+  {
+    "id": 18,
+    "name": "Explorer of the Unknown",
+    "description": "Hope he's not a Rataka",
+    "objective": "Knowledge outer rim skill 3+"
+  },
+  {
+    "id": 19,
+    "name": "The man who would be King",
+    "description": "Sorry, we live under an imperial government",
+    "objective": "XP 2000+ and 10K+ credits"
+  },
+  {
+    "id": 20,
+    "name": "His will is reality",
+    "description": "Not literally, just in a \"mysterious and enigmatic\" way",
+    "objective": "Willpower 5+"
+  },
+  {
+    "id": 21,
+    "name": "New at the Edge",
+    "description": "A few of them survive at their first mission",
+    "objective": "Basic"
+  },
+  {
+    "id": 22,
+    "name": "City Lord",
+    "description": "Another one from Coruscant! Sorry, Imperial center",
+    "objective": "From Coruscant"
+  },
+  {
+    "id": 23,
+    "name": "Ship lover",
+    "description": "Fast is the only acceptable speed",
+    "objective": "From Corellia"
+  },
+  {
+    "id": 24,
+    "name": "Red 5, Standing by",
+    "description": "All wings check in",
+    "objective": "Having a spaceship"
+  },
+  {
+    "id": 25,
+    "name": "Dark as night",
+    "description": "Dawn is not coming for your enemies",
+    "objective": "Stealth 3+"
+  }
+]

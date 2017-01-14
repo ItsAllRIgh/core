@@ -2,6 +2,7 @@ package character.repository;
 
 import character.model.User;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -11,6 +12,5 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
 
     List<User> findAll();
-
     User findByUserName(String username);
 }

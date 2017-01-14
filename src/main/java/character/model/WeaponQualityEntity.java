@@ -8,16 +8,26 @@ import javax.persistence.*;
 @Entity
 @Table(name = "weapon_quality", schema = "", catalog = "legends")
 public class WeaponQualityEntity {
-
-    private int weaponQualityId;
-    private String qualityName;
-    private String active;
-    private Byte ranked;
-    private String effect;
-    private String bookIndex;
-
     @Id
     @Column(name = "weapon_quality_id", nullable = false, insertable = true, updatable = true)
+    private int weaponQualityId;
+    @Basic
+    @Column(name = "quality_name", nullable = true, insertable = true, updatable = true, length = 255)
+    private String qualityName;
+    @Basic
+    @Column(name = "active", nullable = true, insertable = true, updatable = true, length = 12)
+    private String active;
+    @Basic
+    @Column(name = "ranked", nullable = true, insertable = true, updatable = true)
+    private Byte ranked;
+    @Basic
+    @Column(name = "effect", nullable = true, insertable = true, updatable = true, length = 255)
+    private String effect;
+    @Basic
+    @Column(name = "book_index", nullable = true, insertable = true, updatable = true, length = 255)
+    private String bookIndex;
+
+
     public int getWeaponQualityId() {
         return weaponQualityId;
     }
@@ -26,8 +36,7 @@ public class WeaponQualityEntity {
         this.weaponQualityId = weaponQualityId;
     }
 
-    @Basic
-    @Column(name = "quality_name", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getQualityName() {
         return qualityName;
     }
@@ -36,8 +45,7 @@ public class WeaponQualityEntity {
         this.qualityName = qualityName;
     }
 
-    @Basic
-    @Column(name = "active", nullable = true, insertable = true, updatable = true, length = 12)
+
     public String getActive() {
         return active;
     }
@@ -46,8 +54,6 @@ public class WeaponQualityEntity {
         this.active = active;
     }
 
-    @Basic
-    @Column(name = "ranked", nullable = true, insertable = true, updatable = true)
     public Byte getRanked() {
         return ranked;
     }
@@ -56,8 +62,7 @@ public class WeaponQualityEntity {
         this.ranked = ranked;
     }
 
-    @Basic
-    @Column(name = "effect", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getEffect() {
         return effect;
     }
@@ -66,8 +71,7 @@ public class WeaponQualityEntity {
         this.effect = effect;
     }
 
-    @Basic
-    @Column(name = "book_index", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getBookIndex() {
         return bookIndex;
     }

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <!-- May the Force be with You     -->
-<html class="ng-app" ng-app="empire" manifest="manifest.appcache" xmlns="http://www.w3.org/1999/xhtml"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      class="ng-app" ng-app="empire" manifest="manifest.appcache"
+      xmlns="http://www.w3.org/1999/xhtml">
+<headers>
+    <frame-options
+            policy="SAMEORIGIN"/>
+</headers>
 <head>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/main.css" rel="stylesheet">
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <title>Empire Legends</title>
+    <title>Character Sheets</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description"
-          content="The Force must be with you to survive at the edge of the Empire. But having a powerful app is also a good way to do it! Empire Legends lets you manage all your characters for the game Edge of the Empire. ">
+          content="The Force must be with you to survive at the edge of the Empire. But having a powerful app is also a good way to do it! ">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="application-name" content="Empire Legends"/>
     <meta name="msapplication-TileColor" content="#ffffff"/>
     <!--    <meta name="msapplication-TileImage" content="gfx/apps/Chrome/128.png"/>    -->
     <link rel="shortcut icon" type="image/png" href="public/gfx/favicon.ico">
-
     <link rel="stylesheet" href="public/style/all.min.css">
 </head>
 <body ng-controller="EmpireController" ng-keydown="handleShortcuts($event)">
@@ -33,12 +37,13 @@
             <div class="menuItem transition" ng-click="openDialog('CGUDialog');"><h3>Terms of use</h3></div>
         </div>
         <div id="charactersListContainer">
-            <div ng-click="addCharacter();" class="glyphicon glyphicon-user" id="addCharacterDiv">
+            <div ng-click="addCharacter();" id="addCharacterDiv" style="display: inline-block; white-space: nowrap;">
+                <span class="fleft"><h3>Create a character</h3>And may the Force be with them . . .</span>
             </div>
-
+            <!-- ngRepeat: character in characters -->
             <ul ng-repeat="character in characters">
-                <li ng-click="selectCharacter($book_index)"><img ng-src="{{character.avatar}}"
-                                                                 alt="{{character.name}}" class="avatar"/>
+                <li ng-click="selectCharacter($index)"><img ng-src="{{character.avatar}}"
+                                                            alt="{{character.name}}" class="avatar"/>
 
                     <div class="fleft"><h3>{{character.name}}</h3><h4>{{ getAchievementTitle(character); }}</h4>
                         {{character.species}} {{character.career}}
@@ -46,6 +51,7 @@
                     <div class="gc"></div>
                 </li>
             </ul>
+            <!-- end ngRepeat: character in characters -->
         </div>
         <div class="gc"><br/><br/></div>
     </div>
@@ -97,8 +103,8 @@
 
                     <div id="speciesAutocomplete" class="autocompleteBox"
                          ng-show="autoChoices && currentAuto == 'species'">
-                        <ul ng-repeat="choice in autoChoices  track by $book_index">
-                            <li ng-click="selectChoice('species', choice);">{{choice.name}}</li>
+                        <ul ng-repeat="choice in autoChoices  track by $index">
+                            <li style="color: #000000" ng-click="selectChoice('species', choice);">{{choice.name}}</li>
                         </ul>
                     </div>
                     </p>
@@ -108,10 +114,10 @@
                         <input type="text" placeholder="Career" ng-change="autoComplete('careers');" id="infoCareer"
                                ng-model="currentCharacter.career"/>
 
-                    <div id="careerAutocomplete" class="autocompleteBox"
+                    <div style="color: #000000" id="careerAutocomplete" class="autocompleteBox"
                          ng-show="autoChoices && currentAuto == 'careers'">
-                        <ul ng-repeat="choice in autoChoices  track by $book_index">
-                            <li ng-click="selectChoice('careers', choice);">{{choice.name}}</li>
+                        <ul style="color: #000000" ng-repeat="choice in autoChoices  track by $index">
+                            <li style="color: #000000" ng-click="selectChoice('careers', choice);">{{choice.name}}</li>
                         </ul>
                     </div>
                     </p>
@@ -124,8 +130,10 @@
 
                     <div id="specializationAutocomplete" class="autocompleteBox"
                          ng-show="autoChoices && currentAuto == 'specializations'">
-                        <ul ng-repeat="choice in autoChoices  track by $book_index">
-                            <li ng-click="selectChoice('specializations', choice);">{{choice.name}}</li>
+                        <ul ng-repeat="choice in autoChoices  track by $index">
+                            <li style="color: #000000" ng-click="selectChoice('specializations', choice);">
+                                {{choice.name}}
+                            </li>
                         </ul>
                     </div>
                     </p>
@@ -265,8 +273,8 @@
             <div class="characterGroupItem  transition" ng-show="currentCharacter">
                 <h2>Skills</h2>
                 <br/>
-                <ul ng-repeat="skill in currentCharacter.skills  track by $book_index">
-                    <li ng-click="selectSkill($book_index)">{{skill.name}}: <h4>{{skill.rank}}</h4>
+                <ul ng-repeat="skill in currentCharacter.skills  track by $index">
+                    <li ng-click="selectSkill($index)">{{skill.name}}: <h4>{{skill.rank}}</h4>
                         <div ng-bind-html="getSkillImage(skill);"></div>
                         <hr/>
                     </li>
@@ -277,8 +285,8 @@
             <div class="characterGroupItem  transition" ng-show="currentCharacter">
                 <h2>Talents</h2>
                 <br/>
-                <ul ng-repeat="talent in currentCharacter.talents  track by $book_index">
-                    <li ng-click="selectTalent($book_index)"><h4>{{talent.name}}</h4><br/>
+                <ul ng-repeat="talent in currentCharacter.talents  track by $index">
+                    <li ng-click="selectTalent($index)"><h4>{{talent.name}}</h4><br/>
                         {{talent.summary}}<br/>
                     </li>
                     <hr/>
@@ -347,8 +355,8 @@
             <div class="characterGroupItem  transition" ng-show="currentCharacter">
                 <h2>Weapons</h2>
                 <br/>
-                <ul ng-repeat="weapon in currentCharacter.weapons  track by $book_index">
-                    <li ng-click="selectWeapon($book_index)"><h4>{{weapon.name}}</h4><br/>
+                <ul ng-repeat="weapon in currentCharacter.weapons  track by $index">
+                    <li ng-click="selectWeapon($index)"><h4>{{weapon.name}}</h4><br/>
                         Damages: <span class="brown">{{weapon.damages}}</span><br/>
                         <em>{{weapon.skill}}</em><br/><br/>
                         Critique: <span class="brown">{{weapon.critique}}</span><br/>
@@ -676,7 +684,7 @@
             }}</span>
         </div>
         <ul id="achievementsListview" class="cardsListview">
-            <li ng-repeat="achievement in achievements | filter:isUnlocked track by $book_index" class="cardUI"
+            <li ng-repeat="achievement in achievements | filter:isUnlocked track by $index" class="cardUI"
                 ng-click="selectAchievement(achievement.id);">
                 <h3>{{ achievement.name }}</h3>
 
@@ -691,42 +699,7 @@
     <header>Terms of use<span class="dialogClose" ng-click="closeDialog($event);">X</span></header>
     <div>
         <p class="license">
-            <!-- Aerilys is committed to protecting your privacy. Most of our services
-             can be explored without having to disclose personal given, but in
-             some cases they may be required to provide certain information to
-             access services. This Privacy Policy explains the collection and
-             processing of data in such cases. This privacy statement applies only
-             to services provided by the application Aerilys <br> <br> <strong>Collection
-             and use of personal data</strong> <br> <br> Personal information
-             will be requested only in cases where such information is necessary
-             to identify you or contact you. Typically, this is done in cases
-             where it is necessary to register to receive a character.service, such as leave
-             feedback or join a discussion. Aerilys may also collect information
-             about the pages visited by users in the character.service. Data related to
-             visited pages are never linked to your personal information. Personal
-             information is collected to access value-added services. <br> <br>
-             If you decide to give your consent, your data can be used for
-             promotional activities Aerilys. Aerilys may disclose
-             personal information only if required by law or where there is a firm
-             belief that such action is necessary to: <br> <br> (1)
-             comply with legal regulations; <br> <br> (2) protect and
-             defend the rights or property of Aerilys. <br> <br> <b>And
-             control access to personal information</b> <br> <br> The
-             personal information you provide to Aerilys for recording, or for
-             other purposes are not shared with third parties without the express
-             permission of the user, except in limited cases described above.
-             Personal information will always be used for the purposes described
-             above. Registration, if necessary, also allows the user to specify
-             whether you want to be contacted by Aerilys and how such contact
-             should occur. Aerilys provides users with all the tools you need to
-             make sure that personal information is accurate and up to date. If
-             you register for services offered by Aerilys, you can edit and
-             update this information at any time. <br> <br> <strong>Changes
-             to this Privacy Policy</strong><br> <br> Aerilys reserves the right
-             to modify this document. If we use your personal information other
-             than specified in the legal information provided at the time of data
-             collection, users will be informed through messages posted by
-             Aerilys. <br>-->
+            Legal jargon goes here.
 
         </p>
     </div>
@@ -745,7 +718,7 @@
             ̧̥͍̙͇̇͒̈́̒̒̊̒͗̊ͭ̃͜h̋̀͛͊̋͐̆ͧ̽҉̴̮̮͔̤͓̮̤͔̞̳̥̳͕̙̞͈̜̬ͅr̢͉̺̯͐̄ͩ̔ͪ̇͌̍͗̇̃̀̒ͯ͆̈̚͘͜͟͝e̩̮̮ͥ̔̆ͮ̔ͮ̔̓̑ͧ̽̇̊͘͜ͅf̶̦̟̻̞̬̣̫̦̤̤͙̞̬̐̉̂̈ͪ̒ͮͭͧ̂͑̄͡=̷̰͚͈̲͙͍̱̠̞͖̹̭̅ͥ̒ͫ̆͟"̸͎̜̩̠͙̩̦̫̝̭̱̦͈̒̏ͤͯ̔͒̊ͬ̈́̉̈͐ͬ̇͗͂ͩ̐̓͟ͅh̢̺̝̥̤͎̹ͧ̊̐̃ͮ̿̄ͣͪ̈́͢͝t̸̸̡͎̰͔̼̝̤̩͎̟̩̯͚̲̝̯ͨͨͣ̃ͭ̄̐͊̍̾̕͘ͅt̊̈̐͗̈͌̋҉̷̴̝̯͚̼͎͕̗̝͖̤̮͎̳̫p̢̧̫̺̩̬͉̭̬̳̠͔̲̫̞̬͎̝̬͈̐͗͒̐̆̈ͩ̎̃̅̐ͦ̂̓̆ͣ̍̈́̈́̀:̛̖̳̹͔̟͈ͧͧ͒̄͋͟͡͠ͅ/̸̧̻̬̪ͣ̾͋̽͒̋ͦ̇̏͗ͧ̆̑̓̒͐̎̊͞/̷̸̶̨̱͓̠̪ͣ̏͑ͣͭͨ̄͋ͯw̶͓̻̯̳̼͓͉̦̺̤͉̘̭ͬ̄͗ͯ͒ͪͨͪͤ͌ͦͦ͡͠͞w͚̝̝̯̤̝͍̜̰̦͇̉ͮͧ̋̊ͨ̂̆̑͊͗ͬ̊̄͊͋ͫ́͡w̢̼̫̟̳͚̥̞̼̼̲̭̺̖̫̘͕̙̹͒̔͑ͨ̅̇̈͋ͩͦ̈̂̎̐͋̓̏́̚͘͟͝.̦̠͎͇͎̲͎̜ͬ̓ͪ́͞t̡̨̛̫̹̮̙̮̲͎̦̝̲̦̱̆́̍̒̈́͡͝w̶̨̧̺̻̳̹̲̙̩̺̝̦̝̱͎͙͙̘̫͓ͬͬͯ̅͆ͪ͋̄͟͠i̧͉̠͎͔̼̱̝ͣͧͫͩ̆ͬͮͤ̅̏͋́ͫ̿͛͋͞͠ͅt̶̛̬͉̩͖͇̱̫̝̭̥̮̼͌ͦ͗̑̅́ͤ̐̀͂͒ͩ͑͠ț̸̻͉̮̯͓͖̬͙̞͚̱̰̖̱͔͒̈̈́̀ͦ͛̏̐͑͑ͩ̀ͫ̑̚͟͝͠͠e̸ͮ̉͑̆́̂͂̋̊͝͏̶̝̻̣͎̭͕͕̖̜̱̝̫͕̮̦r̫̱̺̩̔ͤͧ͒ͣ̌ͯ͛ͫ̔̅ͦ̆͒̽͠͠͡.̴̴̧̧̖̙̰͓̟̠̹̯̻̞͎̠̤̻͔͊͐͒͒͂͡c̸̛̭̜̹̪̟̠̰̀̒ͪ̍ͨͦ̑ͦ̿ͭ̓͑̀̚̕͡ọ͍̱͚̭̻̝̪͖̤͍̼̜͉̺̐̽ͯ̄̾̓ͥ̏́̚m̨̧̦̦̖̞̍̔ͩͮ̔̒̏ͣ̓͋̊ͣͮ̀͘͜/̽̀̃ͧ͢҉̩̥̜̬̭̙̭̘͉͔̩͈͎A̐͛̓ͤ͘҉̠̫̲̤̼̟̜̟̲̫̜e̶̶̷̡̺̪̬̣̟̲̠̫̹͙͉̭͇̞̞͆̊ͫͦͣ̏̑̀́̏ͤͦṛ̸̴̛͖̻͔̱̥͎̟̘̞̬̫̫̳͎̭̃͒ͦͭ͋̅̅̒͗̽̏́ͤ̚̚͟͞ï̧̂͒ͣ̎ͧ̉́͛͋̒͗͏̞̼̘͎̖̱͓̭̘͈͕̪̫ḻ̵̴̵̴̢̻̖̠̜̮̾̓̃̌̀̅̎ͦ͆͐̓̔̿́ͯy̴̮̭̝̠̜̭͇͖̠̰͈͇̗͖͗ͯ͐͒̐͢s̛̛̙̞̖̤̮͙̺̅ͪ̒̄̓̈̔͑͒"̃̅̽̍̋̇̾̊̎͆̉ͭ̉̇ͬ͏̛̻̥̦͕̖̪̣̙́ͅ≯͕͇̞̦̻͓̖̞͚̰̲̭͍̙̰ͬ͛ͤ͂̉̉͐̏͛̀̇ͧͬ̚͘͟@̶͚͚͖̲̼͙͚͎ͥ͗͐͋͌̐ͯ̉̂̂̈́̊̀̀A̡̨͎̲͕̹̜̪̫̩̮̯͔̍̀̔̎̄ͬ͌̄e̓ͤ͂͒͏͖̹͖͇͕͕͓̣̻͕̩̥͟r̞̮̰̻̩̻̥͓̞̖̜͕̭̲̤̝͇̹̬ͪ́̋̓͋ͯ͆̍ͤ̓̃ͯͣ̄͗̀͝i̷̧͔̜͓̼̖͍̻͇̹ͬ̏̈ͣͨͥ̃̄̽ͮ̐̊̀͜͠l̙̮͚͖̠̹̹̲̗̱̣͉̪̮͕̪̝̝̱ͭ͌ͤ̂̀̚̚͟y̢ͮͭ̒͐͑͊͟͏̸̹̣̘̰͓̟͚̻̜̻͕̠̖̘͎̯̝͔̯s̶̫̙̭̞̬͎̙̒̃͐̔̊̓͆͋̆̅̈́ͮ͊͐ͨ̕͜͞<͂ͮ̒ͣ̓͛̍ͨ́͏̬̻̠̫̫͇/̯͓͈̪̾̌ͭ̅̔̇ͭͮͫ̏̈́́͟͡à̷̠͖̬̜͎̰̫̠̮͍̟̼̼̠͓̼͎̘͔͒ͤ̿̃͌̂̐ͤͣͫ͗̾ͬͬ̕>̧͑ͯ͒ͨ̽̀̚͡҉̧̝͎̭̭̼̫̘̗̥̣̹̥̱̦̤̺ͅ
             <br>
             <br>
-            <br>
+            <br><BR><BR>
             With the help of ItsAllRigh.
         </p>
 
@@ -829,30 +802,5 @@
 </div>
 
 <script src="public/scripts/character.js"></script>
-<div class="row">
-    <div class="col-md-6">
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="connect">WebSocket connection:</label>
-                <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Greetings</th>
-                </tr>
-                </thead>
-                <tbody id="greetings">
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 </body>
 </html>
