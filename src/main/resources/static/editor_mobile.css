@@ -1,0 +1,46 @@
+div#page-toolbar:hover div.handle {
+    color: #D1D1D1;
+}
+
+.ui-dialog, .ui-tabs-panel, #editor-wrapper {
+    -webkit-overflow-scrolling: touch;
+}
+
+#editor-wrapper.panning .canvas-container {
+    pointer-events: none;
+}
+
+#page-toolbar .pages .availablepage .delete, #page-toolbar .pages .availablepage .settings {
+    display: block;
+}
+
+#color_selector {
+    width: 300px !important;
+}
+
+#color_selector .color_swatch {
+    width: 30px;
+    height: 30px;
+}
+
+#page-toolbar {
+    background: -webkit-linear-gradient(top, #A8AAAD 85%, #666666 100%);
+}
+
+#imagedialog {
+    background: -webkit-linear-gradient(left, #ffffff 87%, #c6c6c6 100%);
+}
+
+canvas, svg, svg > *, #playerzone .player {
+    -webkit-transform-origin: 0 0 0;
+}
+
+#editor-wrapper, #fowcanvas, .upper-canvas, #floatingtoolbar *, #secondarytoolbar *, .tabmenu * {
+    -webkit-user-select: none; /* disable cut copy paste */
+    -webkit-touch-callout: none; /* disable callout, image save panel */
+    -webkit-tap-highlight-color: transparent; /* "turn off" link highlight */
+}
+
+.deckpile .steal {
+    display: none;
+}

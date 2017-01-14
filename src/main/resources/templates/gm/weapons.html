@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/style/all.min.css">
+    <script type="text/javascript" src="../public/scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/jquery.tablesorter.js"></script>
+    <meta http-equiv="Content-Type" content="../text/html; charset=UTF-8"/>
+    <title>WEAPONS</title>
+</head>
+<body style="overflow:scroll;">
+<div class="container">
+    <table id="myTable" class="tablesorter table table-striped  table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Weapon Name</th>
+            <th>Type</th>
+            <th>Range</th>
+            <th>Damage</th>
+            <th>Critical</th>
+            <th>Encumbrance</th>
+            <th>Hard Points</th>
+            <th>Price</th>
+            <th>Rarity</th>
+            <th>Is Restricted</th>
+            <th>Book:INDEX</th>
+        </tr>
+        </thead>
+        <!--/*@thymesVar id="weapons" type="character.model.BookWeaponsEntity"*/-->
+        <tbody>
+        <tr th:each="weapon : ${weapons}">
+            <td th:text="${weapon.weaponsId}">1</td>
+            <td th:text="${weapon.weaponName}">Name ...</a></td>
+            <td th:text="${weapon.weapType}">Type . . .</a>
+            <td th:text="${weapon.wepRange}">Range . . .</a></td>
+            <td th:text="${weapon.damage}">0</td>
+            <td th:text="${weapon.critical}">0</td>
+            <td th:text="${weapon.encumbrance}">0</td>
+            <td th:text="${weapon.hp}">0</td>
+            <td th:text="${weapon.price}">0</td>
+            <td th:text="${weapon.rarity}">0</td>
+            <td th:text="${weapon.restricted}">is restricted</td>
+            <td th:text="${weapon.bookIndex}">Book_INDEX</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+
+            $('#myTable').tablesorter();
+        }
+    );
+
+</script>

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<!-- May the Force be with You     -->
+<html class="ng-app" ng-app="empire" manifest="manifest.appcache" xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <title>Empire Legends</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description"
+          content="The Force must be with you to survive at the edge of the Empire. But having a powerful app is also a good way to do it! Empire Legends lets you manage all your characters for the game Edge of the Empire. ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="application-name" content="Empire Legends"/>
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <!--    <meta name="msapplication-TileImage" content="gfx/apps/Chrome/128.png"/>    -->
+    <link rel="shortcut icon" type="image/png" href="public/gfx/favicon.ico">
+
+    <link rel="stylesheet" href="public/style/all.min.css">
+</head>
+<body ng-controller="EmpireController" ng-keydown="handleShortcuts($event)">
+<div id="mainContainer" style="display: none;">
+    <div id="mainScreenContainer" class="animated" ng-show="onMainMenu" accesskey="b">
+        <div id="menuContainer"><h1>Empire Legends</h1>
+
+            <div class="menuItem transition" ng-click="profileClick();"><h3>SERVER</h3><br/>
+
+            </div>
+            <div class="menuItem transition" ng-click="openDialog('aboutDialog');"><h3>About</h3></div>
+            <div class="menuItem transition" ng-click="openDialog('CGUDialog');"><h3>Terms of use</h3></div>
+        </div>
+        <div id="charactersListContainer">
+            <div ng-click="addCharacter();" class="glyphicon glyphicon-user" id="addCharacterDiv">
+            </div>
+
+            <ul ng-repeat="character in characters">
+                <li ng-click="selectCharacter($book_index)"><img ng-src="{{character.avatar}}"
+                                                                 alt="{{character.name}}" class="avatar"/>
+
+                    <div class="fleft"><h3>{{character.name}}</h3><h4>{{ getAchievementTitle(character); }}</h4>
+                        {{character.species}} {{character.career}}
+                    </div>
+                    <div class="gc"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="gc"><br/><br/></div>
+    </div>
+    <div id="characterContainer" class="animated" ng-show="onSelectedCharacter">
+        <header id="actionBar" ng-swipe-left="backToCharacters();">
+            <div class="fa fa-empire" aria-hidden="true" class="backButton actionbarIcon transition fleft"
+                 ng-click="backToCharacters()"/>
+
+            <h3>Empire Legends</h3>
+            <div alt="Share" class="actionbarIcon transition fright"
+                 ng-click="shareExploit()"></div>
+        </header>
+        <div class="twoBlocksLeft">
+            <div id="characterBasicsDiv" class="characterGroupItem  transition">
+                <div id="basicsContent" ng-hide="isEditingBasics"
+                     ng-click="isEditingBasics = true; showFadeIn('basicsEditor');">
+                    <img ng-src="{{currentCharacter.avatar}}" alt="{{currentCharacter.name}}" class="avatar"/>
+
+                    <div id="characterBasicsInfos" class="fleft mm">
+                        <h2>{{currentCharacter.name}}</h2>
+
+                        <h3>{{currentCharacter.species}} {{currentCharacter.career}}</h3>
+                        {{currentCharacter.specializationTrees}}
+                        <br/>XP: <h4>{{currentCharacter.currentXP}}/{{currentCharacter.totalXP}}</h4>
+
+                        <div ng-show="currentCharacter && currentCharacter.force > 0">
+                            Force: <h4>{{currentCharacter.force}}</h4>
+                        </div>
+                        <br/>
+
+                        <p>
+                            <button disabled ng-click="displayAchievements($event);"
+                                    ng-show="currentCharacter && currentCharacter.name">Achievements
+                            </button>
+                        </p>
+                    </div>
+                    <div class="gc"><br/></div>
+                </div>
+                <div id="basicsEditor" ng-show="isEditingBasics" class="editor animated">
+                    <p>
+                        <label for="infoName">Name</label><br/>
+                        <input type="text" placeholder="Name" id="infoName" ng-model="currentCharacter.name"/>
+                    </p>
+
+                    <p>
+                        <label for="infoSpecies">Species</label><br/>
+                        <input type="text" placeholder="Species" ng-change="autoComplete('species');" id="infoSpecies"
+                               ng-model="currentCharacter.species"/>
+
+                    <div id="speciesAutocomplete" class="autocompleteBox"
+                         ng-show="autoChoices && currentAuto == 'species'">
+                        <ul ng-repeat="choice in autoChoices  track by $book_index">
+                            <li ng-click="selectChoice('species', choice);">{{choice.name}}</li>
+                        </ul>
+                    </div>
+                    </p>
+
+                    <p>
+                        <label for="infoCareer">Career</label><br/>
+                        <input type="text" placeholder="Career" ng-change="autoComplete('careers');" id="infoCareer"
+                               ng-model="currentCharacter.career"/>
+
+                    <div id="careerAutocomplete" class="autocompleteBox"
+                         ng-show="autoChoices && currentAuto == 'careers'">
+                        <ul ng-repeat="choice in autoChoices  track by $book_index">
+                            <li ng-click="selectChoice('careers', choice);">{{choice.name}}</li>
+                        </ul>
+                    </div>
+                    </p>
+
+                    <p>
+                        <label for="infoSpecialization">Specialization</label><br/>
+                        <input type="text" placeholder="Specialization" id="infoSpecialization"
+                               ng-model="currentCharacter.specializationTrees"
+                               ng-change="autoComplete('specializations');"/>
+
+                    <div id="specializationAutocomplete" class="autocompleteBox"
+                         ng-show="autoChoices && currentAuto == 'specializations'">
+                        <ul ng-repeat="choice in autoChoices  track by $book_index">
+                            <li ng-click="selectChoice('specializations', choice);">{{choice.name}}</li>
+                        </ul>
+                    </div>
+                    </p>
+
+                    <p>
+                        <label for="infoAvatar">Avatar URL</label><br/>
+                        <input type="text" placeholder="Avatar" id="infoAvatar"
+                               ng-model="currentCharacter.avatar"/>
+                        <br/><br/>You can upload your images on <strong>Imgur</strong>: <a href="http://imgur.com/"
+                                                                                           target="_blank">
+                        <button>Upload on Imgur</button>
+                    </a>
+                    </p>
+
+                    <p>
+                        <label for="infoCurrentXP">Current XP/Total XP</label><br/>
+                        <input type="number" id="infoCurrentXP" ng-model="currentCharacter.currentXP"/> /
+                        <input type="number" id="infoTotalXP" ng-model="currentCharacter.totalXP"/>
+                    </p>
+
+                    <p>
+                        <label for="infoForce">Force</label><br/>
+                        <input type="number" id="infoForce" ng-model="currentCharacter.force"/> /
+                    </p>
+
+                    <p>
+                        <button ng-click="isEditingBasics = false; saveCharacters(); showFadeIn('basicsContent');">
+                            Validate
+                        </button>
+                    </p>
+                </div>
+            </div>
+
+            <div id="characterStateDiv" class="characterGroupItem  transition" ng-show="currentCharacter"
+                 ng-click="openDialog('stateDialog');">
+                <h2>Character state</h2>
+                <br/>
+
+                <div id="stateContent" ng-hide="isEditingState"
+                     ng-click="isEditingState = true; showFadeIn('stateEditor');">
+                    <div class="column"> Soak: <h4>{{currentCharacter.soak}}</h4><br/>
+                        Wounds: <h4>{{currentCharacter.currentWounds}}/{{currentCharacter.totalWounds}}</h4><br/></div>
+                    <div class="columnLeft"> Strain: <h4>
+                        {{currentCharacter.currentStrain}}/{{currentCharacter.totalStrain}}</h4>
+                        <br/>
+                        Defense: <h4>{{currentCharacter.defense}}</h4></div>
+                    <div class="gc"><br/></div>
+                </div>
+                <div id="stateEditor" class="editor animated" ng-show="isEditingState">
+                    <p>
+                        <label for="stateSoak">Soak</label><br/>
+                        <input type="number" id="stateSoak" ng-model="currentCharacter.soak"/>
+                    </p>
+
+                    <p>
+                        <label for="stateWounds">Current wounds/Total</label><br/>
+                        <input type="number" id="stateWounds" ng-model="currentCharacter.currentWounds" accesskey="j"/>
+                        /
+                        <input type="number" id="stateWoundsTotal" ng-model="currentCharacter.totalWounds"
+                               accesskey="k"/>
+                    </p>
+
+                    <p>
+                        <label for="stateStrain">Current strain/Total</label><br/>
+                        <input type="number" id="stateStrain" ng-model="currentCharacter.currentStrain" accesskey="i"/>
+                        /
+                        <input type="number" id="stateStrainTotal" ng-model="currentCharacter.totalStrain"
+                               accesskey="o"/>
+                    </p>
+
+                    <p>
+                        <label for="stateDefense">Defense range/melee</label><br/>
+                        <input type="text" id="stateDefense" ng-model="currentCharacter.defense"/>
+                    </p>
+
+                    <p>
+                        <button ng-click="saveCharacters(); isEditingState = false; showFadeIn('stateContent');">
+                            Validate
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div id="characterCharacteristicsDiv" class="characterGroupItem  transition" ng-show="currentCharacter">
+                <h2>Characteristics</h2>
+                <br/>
+
+                <div id="characsContent" ng-hide="isEditingCharacs"
+                     ng-click="isEditingCharacs = true; showFadeIn('characsEditor');">
+                    <div class="column"> Brawn: <h4>{{currentCharacter.brawn}}</h4> <br/>
+                        Agility: <h4>{{currentCharacter.agility}}</h4><br/>
+                        Intellect: <h4>{{currentCharacter.intellect}}</h4><br/></div>
+                    <div class="columnLeft">Cunning: <h4>{{currentCharacter.cunning}}</h4><br/>
+                        Willpower: <h4>{{currentCharacter.willpower}}</h4><br/>
+                        Presence: <h4>{{currentCharacter.presence}}</h4><br/></div>
+
+                    <div class="gc"><br/></div>
+                </div>
+                <div class="editor animated" ng-show="isEditingCharacs" id="characsEditor">
+                    <p>
+                        <label for="characBrawn">Brawn</label><br/>
+                        <input type="number" id="characBrawn" ng-model="currentCharacter.brawn"/>
+                    </p>
+
+                    <p>
+                        <label for="characAgility">Agility</label><br/>
+                        <input type="number" id="characAgility" ng-model="currentCharacter.agility"/>
+                    </p>
+
+                    <p>
+                        <label for="characIntellect">Intellect</label><br/>
+                        <input type="number" id="characIntellect" ng-model="currentCharacter.intellect"/>
+                    </p>
+
+                    <p>
+                        <label for="characCunning">
+                            Cunning</label><br/>
+                        <input type="number" id="characCunning" ng-model="currentCharacter.cunning"/>
+                    </p>
+
+                    <p>
+                        <label for="characWill">Willpower</label><br/>
+                        <input type="number" id="characWill" ng-model="currentCharacter.willpower"/>
+                    </p>
+
+                    <p>
+                        <label for="characPresence">Presence</label><br/>
+                        <input type="number" id="characPresence" ng-model="currentCharacter.presence"/>
+                    </p>
+
+                    <p>
+                        <button ng-click="saveCharacters(); isEditingCharacs = false; showFadeIn('characsContent');">
+                            Validate
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div class="characterGroupItem  transition" ng-show="currentCharacter">
+                <h2>Skills</h2>
+                <br/>
+                <ul ng-repeat="skill in currentCharacter.skills  track by $book_index">
+                    <li ng-click="selectSkill($book_index)">{{skill.name}}: <h4>{{skill.rank}}</h4>
+                        <div ng-bind-html="getSkillImage(skill);"></div>
+                        <hr/>
+                    </li>
+                </ul>
+                <br/>
+                <button ng-click="addSkill();">Add a skill</button>
+            </div>
+            <div class="characterGroupItem  transition" ng-show="currentCharacter">
+                <h2>Talents</h2>
+                <br/>
+                <ul ng-repeat="talent in currentCharacter.talents  track by $book_index">
+                    <li ng-click="selectTalent($book_index)"><h4>{{talent.name}}</h4><br/>
+                        {{talent.summary}}<br/>
+                    </li>
+                    <hr/>
+                </ul>
+                <br/>
+                <button ng-click="addTalent();">Add a talent</button>
+            </div>
+        </div>
+        <div class="leftTwoBlocksLeft">
+            <div id="characterDescriptionDiv" class="characterGroupItem  transition" ng-show="currentCharacter">
+                <h2>Description</h2>
+                <br/>
+
+                <div id="descriptionContent" ng-hide="isEditingDescription"
+                     ng-click="isEditingDescription=true; showFadeIn('descriptionEditor');"> Gender:
+                    {{currentCharacter.gender}}<br/>
+                    Age: {{currentCharacter.age}}<br/>
+                    Height: {{currentCharacter.height}}<br/>
+                    Hair: {{currentCharacter.hair}}<br/>
+                    Eyes: {{currentCharacter.eyes}}<br/>
+                    Native world: {{currentCharacter.world}}<br/>
+                    Other: <br/>{{currentCharacter.other}}<br/></div>
+                <div class="animated editor" id="descriptionEditor" ng-show="isEditingDescription">
+                    <p>
+                        <label for="descGender">Gender</label><br/>
+                        <input type="text" id="descGender" placeholder="Gender" ng-model="currentCharacter.gender"/>
+                    </p>
+
+                    <p>
+                        <label for="descAge">Age</label><br/>
+                        <input type="number" id="descAge" placeholder="Age" ng-model="currentCharacter.age"/>
+                    </p>
+
+                    <p>
+                        <label for="descHeight">Height</label><br/>
+                        <input type="text" id="descHeight" placeholder="Height" ng-model="currentCharacter.height"/>
+                    </p>
+
+                    <p>
+                        <label for="descHair">Hair</label><br/>
+                        <input type="text" id="descHair" placeholder="Hair" ng-model="currentCharacter.hair"/>
+                    </p>
+
+                    <p>
+                        <label for="descEyes">Eyes</label><br/>
+                        <input type="text" id="descEyes" placeholder="Eyes" ng-model="currentCharacter.eyes"/>
+                    </p>
+
+                    <p>
+                        <label for="descWorld">Native world</label><br/>
+                        <input type="text" id="descWorld" placeholder="World" ng-model="currentCharacter.world"/>
+                    </p>
+
+                    <p>
+                        <label for="descOther">Other</label><br/>
+                        <input type="text" id="descOther" placeholder="Other" ng-model="currentCharacter.other"/>
+                    </p>
+
+                    <p>
+                        <button ng-click="saveCharacters(); isEditingDescription = false; showFadeIn('descriptionContent');">
+                            Validate
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div class="characterGroupItem  transition" ng-show="currentCharacter">
+                <h2>Weapons</h2>
+                <br/>
+                <ul ng-repeat="weapon in currentCharacter.weapons  track by $book_index">
+                    <li ng-click="selectWeapon($book_index)"><h4>{{weapon.name}}</h4><br/>
+                        Damages: <span class="brown">{{weapon.damages}}</span><br/>
+                        <em>{{weapon.skill}}</em><br/><br/>
+                        Critique: <span class="brown">{{weapon.critique}}</span><br/>
+                        Range: <span class="brown">{{weapon.range}}</span><br/>
+                        HP: <span class="brown">{{weapon.HP}}</span><br/>
+                        Mods: <span class="brown">{{weapon.mods}}</span><br/>
+                        Special: <span class="brown">{{weapon.special}}</span><br/>
+                        <hr/>
+                    </li>
+                </ul>
+                <br/>
+                <button ng-click="addWeapon();">Add a weapon</button>
+            </div>
+            <div class="characterGroupItem  transition" ng-show="currentCharacter">
+                <h2>Equipments</h2>
+
+                <div id="equipmentsContent" ng-hide="isEditingEqpts"
+                     ng-click="isEditingEqpts = true; showFadeIn('eqptsEditor');">
+                    <h3>{{currentCharacter.credits}} credits</h3>
+                    <strong>Encumbrance: </strong>{{currentCharacter.encumbrance}}<br/>
+                    <strong>Other:</strong><br/>
+                    {{currentCharacter.equipments}}
+                </div>
+                <div id="eqptsEditor" class="animated editor" ng-show="isEditingEqpts">
+                    <p>
+                        <label for="stuffCredits">Credits</label><br/>
+                        <input type="number" id="stuffCredits" ng-model="currentCharacter.credits"/>
+                    </p>
+
+                    <p>
+                        <label for="stuffEncumbrance">Encumbrance</label><br/>
+                        <input type="text" id="stuffEncumbrance" ng-model="currentCharacter.encumbrance"/>
+                    </p>
+
+                    <p>
+                        <label for="stuffOther">Other</label><br/>
+                        <textarea id="stuffOther" placeholder="Equipments"
+                                  ng-model="currentCharacter.equipments"></textarea>
+                    </p>
+
+                    <p>
+                        <button ng-click="saveCharacters(); isEditingEqpts = false; showFadeIn('equipmentsContent');">
+                            Validate
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div class="characterGroupItem transition" ng-show="currentCharacter">
+                <h2>Background</h2>
+                <br/>
+
+                <div ng-hide="isEditingBackground" id="backgroundContent"
+                     ng-click="isEditingBackground = true; showFadeIn('backgroundEditor');">
+                    {{currentCharacter.background}}
+                    <br/>
+
+                    <h3>Obligations</h3>
+                    {{ currentCharacter.obligations }}
+                    <br/>
+
+                    <h3>Motivations</h3>
+                    {{ currentCharacter.motivations }}
+                </div>
+                <div id="backgroundEditor" class="editor animated" ng-show="isEditingBackground">
+                    <form>
+                        <p>
+                            <label for="backgroundText">Background</label><br/>
+                            <textarea id="backgroundText" ng-model="currentCharacter.background"></textarea>
+                        </p>
+
+                        <p>
+                            <label for="obligationsText">Obligations</label><br/>
+                            <textarea id="obligationsText" ng-model="currentCharacter.obligations"></textarea>
+                        </p>
+
+                        <p>
+                            <label for="motivationsText">Motivations</label><br/>
+                            <textarea id="motivationsText" ng-model="currentCharacter.motivations"></textarea>
+                        </p>
+
+                        <p>
+                            <button ng-click="isEditingBackground = false; saveCharacters(); showFadeIn('backgroundContent');">
+                                Validate
+                            </button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="gc"><br/></div>
+        <div class="cornerMenu">
+            <div id="cornerMenuGuardian" class="cornerMenuGuardian transition" ng-click="openCharacterMenu()">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAABRJREFUCNdjYMAJ2B/gI2inDgUAAAyqED/+ubwWAAAAAElFTkSuQmCC"
+                     alt="Menu"/>
+            </div>
+            <div id="gameMenu" class="cornerMenuItems transition animated" ng-show="isMenuOpen">
+                <div class="glyphicon glyphicon-arrow-left" ng-click="backToCharacters()">
+                </div>
+                <div class="glyphicon glyphicon-floppy-disk" ng-click="shareExploit()"></div>
+                <div class="glyphicon glyphicon-info-sign" ng-click="openDialog('keymapDialog');">
+                </div>
+                <div class="glyphicon glyphicon-floppy-remove" ng-click="removeCharacter()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dialog" id="skillsDialog" accesskey="s">
+    <header>Skills<span class="dialogClose" ng-click="closeDialog($event);  saveCharacters();">X</span></header>
+    <div>
+        <p>
+            <label for="skillName">Name</label><br/>
+            <input type="text" id="skillName" placeholder="Name" ng-change="autoComplete('skills');"
+                   ng-model="currentSkill.name"/>
+
+        <div id="skillsAutocomplete" class="autocompleteBox" ng-show="autoChoices && currentAuto == 'skills'">
+            <ul ng-repeat="choice in autoChoices">
+                <li ng-click="selectChoice('skills', choice);">{{choice.name}}</li>
+            </ul>
+        </div>
+        </p>
+
+        <p>
+            <label for="skillRank">Rank</label><br/>
+            <input type="number" id="skillRank" placeholder="Rank" ng-model="currentSkill.rank"/>
+        </p>
+
+        <p>
+            <input type="checkbox" id="skillCareer" ng-model="currentSkill.career"/>
+            <label for="skillCareer">Career?</label>
+
+        </p>
+
+        <p>
+            <button ng-click="submitAddSkill($event);" ng-show="isAddingSkill">Validate</button>
+        </p>
+        <p>
+            <button ng-click="deleteSkill($event);" ng-hide="isAddingSkill">Remove</button>
+        </p>
+    </div>
+</div>
+
+<div class="dialog" id="weaponsDialog" accesskey="w">
+    <header>Weapons<span class="dialogClose" ng-click="closeDialog($event); saveCharacters(); ">X</span></header>
+    <div>
+        <p>
+            <label for="weaponName">Name</label><br/>
+            <input type="text" id="weaponName" placeholder="Name" ng-model="currentWeapon.name"/>
+        </p>
+
+        <p>
+            <label for="weaponSkill">Skill</label><br/>
+            <input type="text" id="weaponSkill" placeholder="Skill" ng-change="autoComplete('weapons');"
+                   ng-model="currentWeapon.skill"/>
+
+        <div id="weaponsAutocomplete" class="autocompleteBox" ng-show="autoChoices && currentAuto == 'weapons'">
+            <ul ng-repeat="choice in autoChoices">
+                <li ng-click="selectChoice('weapons', choice);">{{choice.name}}</li>
+            </ul>
+        </div>
+        </p>
+        <p>
+            <label for="weaponDamages">Damages</label><br/>
+            <input type="number" id="weaponDamages" placeholder="Damages" ng-model="currentWeapon.damages"/>
+        </p>
+
+        <p>
+            <label for="weaponCrit">Critique</label><br/>
+            <input type="number" id="weaponCrit" placeholder="Critique" ng-model="currentWeapon.critique"/>
+        </p>
+
+        <p>
+            <label for="weaponRange">Range</label><br/>
+            <input type="text" id="weaponRange" placeholder="Range" ng-model="currentWeapon.range"/>
+        </p>
+
+        <p>
+            <label for="weaponHP">HP</label><br/>
+            <input type="number" id="weaponHP" placeholder="HP" ng-model="currentWeapon.HP"/>
+        </p>
+
+        <p>
+            <label for="weaponMods">Mods</label><br/>
+            <input type="text" id="weaponMods" placeholder="Mods" ng-model="currentWeapon.mods"/>
+        </p>
+
+        <p>
+            <label for="weaponSpecial">Special</label><br/>
+            <input type="text" id="weaponSpecial" placeholder="Special" ng-model="currentWeapon.special"/>
+        </p>
+
+        <p>
+            <button ng-click="submitAddWeapon($event);" ng-show="isAddingWeapon">Validate</button>
+        </p>
+        <p>
+            <button ng-click="deleteWeapon($event);" ng-hide="isAddingWeapon">Remove</button>
+        </p>
+    </div>
+</div>
+<div class="dialog" id="talentsDialog" accesskey="t">
+    <header>Talents<span class="dialogClose" ng-click="closeDialog($event); saveCharacters();">X</span></header>
+    <div>
+        <p>
+            <label for="talentName">Name</label><br/>
+            <input type="text" id="talentName" placeholder="Name" ng-model="currentTalent.name"/>
+        </p>
+
+        <p>
+            <label for="talentSummary">Summary</label><br/>
+            <input type="text" id="talentSummary" placeholder="Summary" ng-model="currentTalent.summary"/>
+        </p>
+
+        <p>
+            <button ng-click="submitAddTalent($event);" ng-show="isAddingTalent">Validate</button>
+        </p>
+        <p>
+            <button ng-click="deleteTalent($event);" ng-hide="isAddingTalent">Remove</button>
+        </p>
+    </div>
+</div>
+<div class="dialog" id="deleteDialog">
+    <header>{{currentCharacter.name}}<span class="dialogClose"
+                                           ng-click="closeDialog($event);">X</span></header>
+    <div>
+        <p>
+            <label for="deleteName">If you are sure that you want to delete this character, write his name below</label>
+        </p>
+
+        <p>
+            <input type="text" id="deleteName" placeholder="Character name"/>
+        </p>
+
+        <p>
+            <button ng-click="confirmDeleteCharacter();">Validate</button>
+        </p>
+    </div>
+</div>
+<!--<div class="dialog" id="askForProfileDialog">
+    <header>Profile<span class="dialogClose"
+                         ng-click="closeDialog($event);">X</span></header>
+    <div>
+        <p>
+            We can synchronize all your characters on our holocrons, so you will be able to retrieve them anywhere,
+            using the web app or the Android application.
+            <br/><br/>For that, we just need you to provide us a login. <br/><br/>
+        </p>
+
+        <p>
+            <label for="profileNewLogin">Login</label><br/>
+            <input type="text" id="profileNewLogin" placeholder="Login" ng-model="newprofileLogin"/>
+        </p>
+
+        <p>
+            By validating this form you are accepting the <a href="#" ng-click="openDialog('CGUDialog');">General terms
+            of use</a>.
+        </p>
+
+        <p>
+            <button ng-click="confirmProfileCreation(newprofileLogin, $event);">Validate</button>
+        </p>
+        <br/>
+
+        <p>
+            <button ng-click="openDialog('connectProfileDialog'); closeDialogById('askForProfileDialog');">I already
+                have an account
+            </button>
+        </p>
+    </div>
+</div>
+<div class="dialog" id="connectProfileDialog">
+    <header>Profile<span class="dialogClose"
+                         ng-click="closeDialog($event);">X</span></header>
+    <div>
+        <form>
+            <p>
+                <label for="profileLogin">Login</label><br/>
+                <input type="text" id="profileLogin" placeholder="Login" ng-model="connectionLogin"/>
+            </p>
+
+            <p>
+                <label for="profilePassword">Secret key (case-sensitive)</label><br/>
+                <input type="password" id="profilePassword" ng-model="connectionPassword"/>
+            </p>
+
+            <p>
+                <button type="submit" ng-click="validateLogin(connectionLogin, connectionPassword, $event);">Validate
+                </button>
+            </p>
+        </form>
+    </div>
+</div>
+-->
+<div class="dialog" id="keymapDialog">
+    <header>Keymap<span class="dialogClose"
+                        ng-click="closeDialog($event);">X</span></header>
+    <div>
+        <p>
+            <strong>Navigation</strong><br/>
+            <span class="brown">Alt+B</span> back to characters list<br/>
+            <span class="brown">ESC</span>close a dialog
+        </p>
+
+        <p>
+            <strong>Quick Access</strong><br/>
+            <span class="brown">Alt+S</span> skills<br/>
+            <span class="brown">Alt+W</span> &nbsp;weapons<br/>
+            <span class="brown">Alt+T</span> talents<br/>
+            <span class="brown">Alt+H</span> share an exploit<br/>
+        </p>
+
+        <p>
+            <strong>Wounds and strain</strong><br/>
+            <span class="brown">Alt+J</span> -1 to current wounds<br/>
+            <span class="brown">Alt+K</span> +1 to current wounds<br/>
+            <span class="brown">Alt+I</span> -1 to current strain<br/>
+            <span class="brown">Alt+O</span> +1 to current strain
+        </p>
+    </div>
+</div>
+<div class="dialog" id="achievementsDialog" ng-show="currentCharacter != null">
+    <header>Achievements <span class="dialogClose" ng-click="closeDialog($event);">X</span></header>
+    <section>
+        <div class="cardUI">
+            <strong>{{ currentCharacter.name }}</strong> is known as <span class="brown">{{ getAchievementTitle(currentCharacter)
+            }}</span>
+        </div>
+        <ul id="achievementsListview" class="cardsListview">
+            <li ng-repeat="achievement in achievements | filter:isUnlocked track by $book_index" class="cardUI"
+                ng-click="selectAchievement(achievement.id);">
+                <h3>{{ achievement.name }}</h3>
+
+                <p>
+                    {{ achievement.description }}
+                </p>
+            </li>
+        </ul>
+    </section>
+</div>
+<div class="dialog" id="CGUDialog">
+    <header>Terms of use<span class="dialogClose" ng-click="closeDialog($event);">X</span></header>
+    <div>
+        <p class="license">
+            <!-- Aerilys is committed to protecting your privacy. Most of our services
+             can be explored without having to disclose personal given, but in
+             some cases they may be required to provide certain information to
+             access services. This Privacy Policy explains the collection and
+             processing of data in such cases. This privacy statement applies only
+             to services provided by the application Aerilys <br> <br> <strong>Collection
+             and use of personal data</strong> <br> <br> Personal information
+             will be requested only in cases where such information is necessary
+             to identify you or contact you. Typically, this is done in cases
+             where it is necessary to register to receive a character.service, such as leave
+             feedback or join a discussion. Aerilys may also collect information
+             about the pages visited by users in the character.service. Data related to
+             visited pages are never linked to your personal information. Personal
+             information is collected to access value-added services. <br> <br>
+             If you decide to give your consent, your data can be used for
+             promotional activities Aerilys. Aerilys may disclose
+             personal information only if required by law or where there is a firm
+             belief that such action is necessary to: <br> <br> (1)
+             comply with legal regulations; <br> <br> (2) protect and
+             defend the rights or property of Aerilys. <br> <br> <b>And
+             control access to personal information</b> <br> <br> The
+             personal information you provide to Aerilys for recording, or for
+             other purposes are not shared with third parties without the express
+             permission of the user, except in limited cases described above.
+             Personal information will always be used for the purposes described
+             above. Registration, if necessary, also allows the user to specify
+             whether you want to be contacted by Aerilys and how such contact
+             should occur. Aerilys provides users with all the tools you need to
+             make sure that personal information is accurate and up to date. If
+             you register for services offered by Aerilys, you can edit and
+             update this information at any time. <br> <br> <strong>Changes
+             to this Privacy Policy</strong><br> <br> Aerilys reserves the right
+             to modify this document. If we use your personal information other
+             than specified in the legal information provided at the time of data
+             collection, users will be informed through messages posted by
+             Aerilys. <br>-->
+
+        </p>
+    </div>
+</div>
+
+<div class="dialog" id="aboutDialog">
+    <header>About<span class="dialogClose" ng-click="closeDialog($event);">X</span></header>
+    <div>
+        <p class="license">
+            /<strong/>Empire
+            Legends<̛̍ͥ̈́̆̿̎̂̈́҉̵̲̳̳̭̱̤̠̹̥̰̻̘̗͕/̨̙̟͔̟͖̮̰̼̦̺̱̦̥̮̗̦̰̫ͬ͊̿̎ͦ̓ͥ̚ş̧̱̖̖͈̱̖̱͖̣̝̦͒̽̊̀̂̅ͩ̐ͮ͟͞ẗ́̓̐ͭ͆ͧ̀ͤͬͬ͏̡̠̮̮̭̩̘̝̭̣̼͖͎̮͔͍̫͢͝r̸̙̻͎̦̻̯̝̗͓̭̳̠̹̺͉͔̟͒͆̆̍͋̌o̎͌͋̆̆̅͑͘͢͏̖̫͕̪̩̠͡n̢̲̞̙̬͍͇̜͍̭ͭ͐ͤͧ͘͝g̫̭̺̳̝̣̓̓̍ͮ̔̄ͣͩ̑̚͠>ͨ̽̈̑ͩ͆̊̐̿̑ͭͩ̃̚͞҉͉̟̲̪̝̞͓̫̰̬͚͎̠̤̖ͅ
+            ͗̇̅̏́ͬ̀͏̵̗̤̥͇͙̩̲͕̩̖̻͚̗̪͙̣̥̹͠į̷̢͈͍̳̜̎̆̔ͥ̕s̵̡̮͚̗̝͕̳̮̬͓͆ͫͯ̋̎ͩͪ̌̓͒̇̿̉̉ͤ́͟ͅ
+            ̨̫̭̣̻̹͔̗̻̾̎̓͑͌͂ͪ̊̔͡d̵̡̼̠̟̫͕͌́ͮͪ̀ͅe̶̡̡̙̣̳̟̲͉͇̺̻̞͙̝̺̤̊̓̅̎̀͟v̴̢̑ͨͬ̊ͬ́͞҉̮̥̮̞̲̫̦̮̬̦͍̱ę̶͓̼̳͔̤͕̠͙͔̹̘͕̟̻̰͎̇̌͂̊͂ͤ̈́̌̔̌̉ͅl̸̡̪͇̖͕͚̞̜͍͉͉͕̆ͪ̓̍o̶̮̰̗̳̭̩̫͉̙̙͍̊̄̍̀̈ͭͭͨ́p̸̖̪̱̪̲͉̤̤͎̲ͤͪ̾e̸̢͉̜̮͉̖͔̯̩̖̳͈͍̫ͪ͑ͧͧ̔ͧͧ̀ͬ͐ͫͥ͌̚̕dͬ̑͂̐ͪ͒̄̇ͯ̈̀̀͏̷̼̞͉̖̼̣̠̝̩̠̹͇͚̭̞̻́͘ͅ
+            ͐̀͂ͥͤ̎҉͍̼̦͉̻͍̫̦̕b̶̶̖͇̮̭͓̤̖̜̪͇̘͖̗̱͔͙̅͛͊̾̇̍̐̆̈́̌̇ͯ̅͂͒͊͟ỳ̢͍̲̖͔͚̦̮̘̯̟̼̦͚͛ͤ̃ͪ͂̇̅̀͘ͅ
+            ͉͍͎͓̝̻͉̰͔͈̲̥̗̮̦͖̯ͥ̎̑͛̐̋̽ͬ̿̈͋͊́͠<͍͓͕̫͉̬̭̻̯̠̼͚̳̤̊̋̉͋͛̉̔ͬ̉ͮ̐̚͞ͅͅa̞̻͙̪̗͓̦̖̼͉͇͐̏̑̉ͬ̈̓͆̂̋̐̔̀͟ͅ
+            ̧̥͍̙͇̇͒̈́̒̒̊̒͗̊ͭ̃͜h̋̀͛͊̋͐̆ͧ̽҉̴̮̮͔̤͓̮̤͔̞̳̥̳͕̙̞͈̜̬ͅr̢͉̺̯͐̄ͩ̔ͪ̇͌̍͗̇̃̀̒ͯ͆̈̚͘͜͟͝e̩̮̮ͥ̔̆ͮ̔ͮ̔̓̑ͧ̽̇̊͘͜ͅf̶̦̟̻̞̬̣̫̦̤̤͙̞̬̐̉̂̈ͪ̒ͮͭͧ̂͑̄͡=̷̰͚͈̲͙͍̱̠̞͖̹̭̅ͥ̒ͫ̆͟"̸͎̜̩̠͙̩̦̫̝̭̱̦͈̒̏ͤͯ̔͒̊ͬ̈́̉̈͐ͬ̇͗͂ͩ̐̓͟ͅh̢̺̝̥̤͎̹ͧ̊̐̃ͮ̿̄ͣͪ̈́͢͝t̸̸̡͎̰͔̼̝̤̩͎̟̩̯͚̲̝̯ͨͨͣ̃ͭ̄̐͊̍̾̕͘ͅt̊̈̐͗̈͌̋҉̷̴̝̯͚̼͎͕̗̝͖̤̮͎̳̫p̢̧̫̺̩̬͉̭̬̳̠͔̲̫̞̬͎̝̬͈̐͗͒̐̆̈ͩ̎̃̅̐ͦ̂̓̆ͣ̍̈́̈́̀:̛̖̳̹͔̟͈ͧͧ͒̄͋͟͡͠ͅ/̸̧̻̬̪ͣ̾͋̽͒̋ͦ̇̏͗ͧ̆̑̓̒͐̎̊͞/̷̸̶̨̱͓̠̪ͣ̏͑ͣͭͨ̄͋ͯw̶͓̻̯̳̼͓͉̦̺̤͉̘̭ͬ̄͗ͯ͒ͪͨͪͤ͌ͦͦ͡͠͞w͚̝̝̯̤̝͍̜̰̦͇̉ͮͧ̋̊ͨ̂̆̑͊͗ͬ̊̄͊͋ͫ́͡w̢̼̫̟̳͚̥̞̼̼̲̭̺̖̫̘͕̙̹͒̔͑ͨ̅̇̈͋ͩͦ̈̂̎̐͋̓̏́̚͘͟͝.̦̠͎͇͎̲͎̜ͬ̓ͪ́͞t̡̨̛̫̹̮̙̮̲͎̦̝̲̦̱̆́̍̒̈́͡͝w̶̨̧̺̻̳̹̲̙̩̺̝̦̝̱͎͙͙̘̫͓ͬͬͯ̅͆ͪ͋̄͟͠i̧͉̠͎͔̼̱̝ͣͧͫͩ̆ͬͮͤ̅̏͋́ͫ̿͛͋͞͠ͅt̶̛̬͉̩͖͇̱̫̝̭̥̮̼͌ͦ͗̑̅́ͤ̐̀͂͒ͩ͑͠ț̸̻͉̮̯͓͖̬͙̞͚̱̰̖̱͔͒̈̈́̀ͦ͛̏̐͑͑ͩ̀ͫ̑̚͟͝͠͠e̸ͮ̉͑̆́̂͂̋̊͝͏̶̝̻̣͎̭͕͕̖̜̱̝̫͕̮̦r̫̱̺̩̔ͤͧ͒ͣ̌ͯ͛ͫ̔̅ͦ̆͒̽͠͠͡.̴̴̧̧̖̙̰͓̟̠̹̯̻̞͎̠̤̻͔͊͐͒͒͂͡c̸̛̭̜̹̪̟̠̰̀̒ͪ̍ͨͦ̑ͦ̿ͭ̓͑̀̚̕͡ọ͍̱͚̭̻̝̪͖̤͍̼̜͉̺̐̽ͯ̄̾̓ͥ̏́̚m̨̧̦̦̖̞̍̔ͩͮ̔̒̏ͣ̓͋̊ͣͮ̀͘͜/̽̀̃ͧ͢҉̩̥̜̬̭̙̭̘͉͔̩͈͎A̐͛̓ͤ͘҉̠̫̲̤̼̟̜̟̲̫̜e̶̶̷̡̺̪̬̣̟̲̠̫̹͙͉̭͇̞̞͆̊ͫͦͣ̏̑̀́̏ͤͦṛ̸̴̛͖̻͔̱̥͎̟̘̞̬̫̫̳͎̭̃͒ͦͭ͋̅̅̒͗̽̏́ͤ̚̚͟͞ï̧̂͒ͣ̎ͧ̉́͛͋̒͗͏̞̼̘͎̖̱͓̭̘͈͕̪̫ḻ̵̴̵̴̢̻̖̠̜̮̾̓̃̌̀̅̎ͦ͆͐̓̔̿́ͯy̴̮̭̝̠̜̭͇͖̠̰͈͇̗͖͗ͯ͐͒̐͢s̛̛̙̞̖̤̮͙̺̅ͪ̒̄̓̈̔͑͒"̃̅̽̍̋̇̾̊̎͆̉ͭ̉̇ͬ͏̛̻̥̦͕̖̪̣̙́ͅ≯͕͇̞̦̻͓̖̞͚̰̲̭͍̙̰ͬ͛ͤ͂̉̉͐̏͛̀̇ͧͬ̚͘͟@̶͚͚͖̲̼͙͚͎ͥ͗͐͋͌̐ͯ̉̂̂̈́̊̀̀A̡̨͎̲͕̹̜̪̫̩̮̯͔̍̀̔̎̄ͬ͌̄e̓ͤ͂͒͏͖̹͖͇͕͕͓̣̻͕̩̥͟r̞̮̰̻̩̻̥͓̞̖̜͕̭̲̤̝͇̹̬ͪ́̋̓͋ͯ͆̍ͤ̓̃ͯͣ̄͗̀͝i̷̧͔̜͓̼̖͍̻͇̹ͬ̏̈ͣͨͥ̃̄̽ͮ̐̊̀͜͠l̙̮͚͖̠̹̹̲̗̱̣͉̪̮͕̪̝̝̱ͭ͌ͤ̂̀̚̚͟y̢ͮͭ̒͐͑͊͟͏̸̹̣̘̰͓̟͚̻̜̻͕̠̖̘͎̯̝͔̯s̶̫̙̭̞̬͎̙̒̃͐̔̊̓͆͋̆̅̈́ͮ͊͐ͨ̕͜͞<͂ͮ̒ͣ̓͛̍ͨ́͏̬̻̠̫̫͇/̯͓͈̪̾̌ͭ̅̔̇ͭͮͫ̏̈́́͟͡à̷̠͖̬̜͎̰̫̠̮͍̟̼̼̠͓̼͎̘͔͒ͤ̿̃͌̂̐ͤͣͫ͗̾ͬͬ̕>̧͑ͯ͒ͨ̽̀̚͡҉̧̝͎̭̭̼̫̘̗̥̣̹̥̱̦̤̺ͅ
+            <br>
+            <br>
+            <br>
+            With the help of ItsAllRigh.
+        </p>
+
+        <h3>Star Wars</h3>
+
+        <p class="license"><strong>Star Wars</strong>, its characters, costumes, and all associated items are the
+            intellectual property
+            of Lucasfilm. �2013 Lucasfilm LLC & � All rights reserved. <br/><br/>
+            <strong>Fantasy Flight Games</strong> and the FFG Logo are trademarks
+            and/or registered trademarks of Fantasy Flight Publishing, Inc. All rights reserved to their respective
+            owners.<br/> <br/>
+            <strong>Disclaimer: </strong>This is an unofficial application for the game Edge of the Empire game. No
+            official affiliation to Lucasfilm Ltd. or Fantasy Flight Publishing, Inc.
+        </p>
+
+        <h3>Open-source licenses</h3>
+
+        <p class="license"><strong>Android</strong> is a trademark of Google Inc. Use of this trademark is subject to
+            Google
+            Permissions.</p>
+
+        <p class="license">
+            <strong>Modernizr 2.6.2:</strong><br/>
+            Copyright (c) 2009�2011 Permission is hereby granted, free of charge, to any person obtaining a copy of this
+            software and associated documentation files (the "Software"), to deal in the Software without restriction,
+            including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+            sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to
+            the
+            following conditions: The above copyright notice and this permission notice shall be included in all copies
+            or
+            substantial portions of the Software. <br/><br/>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+            KIND,
+            EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+            AND
+            NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+            OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+            THE
+            SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br/>
+            <a href="http://modernizr.com/" target="_blank">Link to Modernizr</a>
+        </p>
+
+        <p class="license">
+            <strong>Angular.js 1.2.3:</strong><br/>
+            The MIT License
+            <br/>
+            Copyright (c) 2010-2012 Google, Inc. <a href="http://angularjs.org" target="_blank">http://angularjs.org</a>
+            <br/>
+            Permission is hereby granted, free of charge, to any person obtaining a copy
+            of this software and associated documentation files (the "Software"), to deal
+            in the Software without restriction, including without limitation the rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions:
+            <br/>
+            The above copyright notice and this permission notice shall be included in
+            all copies or substantial portions of the Software.
+            <br/><br/>
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+            THE SOFTWARE.
+        </p>
+
+        <p class="license">
+            <strong>Animate.css: </strong><br/>
+            <a href="https://github.com/daneden/animate.css" target="_blank">Animate.css</a> is licensed under the ?
+            license. (<a href="http://licence.visualidiot.com/">http://licence.visualidiot.com/</a>)
+        </p>
+    </div>
+</div>
+<div id="toastsContainer" ng-show="isDisplayingToast">
+
+</div>
+<div id="loadingIndicator" class="animated" ng-show="isLoading">
+    <img src="public/gfx/logo.png" class="animated perpetualRotation" alt="Loading"/>
+</div>
+
+<script src="public/scripts/character.js"></script>
+<div class="row">
+    <div class="col-md-6">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="connect">WebSocket connection:</label>
+                <button id="connect" class="btn btn-default" type="submit">Connect</button>
+                <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="conversation" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Greetings</th>
+                </tr>
+                </thead>
+                <tbody id="greetings">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
