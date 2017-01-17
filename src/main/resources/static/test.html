@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Hello WebSocket</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -46,6 +46,8 @@
                 </tr>
 
 
+
+
                 </thead>
                 <tbody id="greetings">
                 </tbody>
@@ -56,89 +58,89 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-12" id="YoMamasDie"></div>
+        <div class="col-md-12" id = "YoMamasDie"></div>
     </div>
 </div>
 </body>
 
 <script>
-    var dice = {
-        ABILITY: {
-            BLANK: "/images/EotE/Ability/abilityBlank.png",
-            A: "/images/EotE/Ability/abilityA.png",
-            AA: "/images/EotE/Ability/abilityAA.png",
-            S: "/images/EotE/Ability/abilityS.png",
-            SA: "/images/EotE/Ability/abilitySA.png",
-            SS: "/images/EotE/Ability/abilitySS.png"
-        },
-        BOOST: {
-            BLANK: "/images/EotE/Boost/boostBlank.png",
-            A: "/images/EotE/Boost/boostA.png",
-            AA: "/images/EotE/Boost/boostAA.png",
-            S: "/images/EotE/Boost/boostS.png",
-            SA: "/images/EotE/Boost/boostSA.png"
-        },
-        CHALLENGE: {
-            BLANK: "/images/EotE/Challenge/ChallengeBlank.png",
-            F: "/images/EotE/Challenge/ChallengeF.png",
-            FF: "/images/EotE/Challenge/ChallengeFF.png",
-            FT: "/images/EotE/Challenge/ChallengeFT.png",
-            T: "/images/EotE/Challenge/ChallengeT.png",
-            TT: "/images/Challenge/ChallengeTT.png",
-            DESPAIR: "/images/Challenge/ChallengeDespair.png"
-        },
-        DIFFICULTY: {
-            BLANK: "/images/EotE/Difficulty/DifficultyBlank.png",
-            F: "/images/EotE/Difficulty/DifficultyF.png",
-            FF: "/images/EotE/Difficulty/DifficultyFF.png",
-            FT: "/images/Difficulty/DifficultyFT.png",
-            T: "/images/Difficulty/DifficultyT.png",
-            TT: "/images/EotE/Difficulty/DifficultyTT.png"
-        },
-        FORCE: {
-            D: "/images/EotE/Force/ForceD.png",
-            DD: "/images/EotE/Force/ForceDD.png",
-            L: "/images/EotE/Force/ForceL.png",
-            LL: "/images/EotE/Force/ForceLL.png"
-        },
-        PROFICIENCY: {
-            BLANK: "/images/EotE/Proficiency/ProficiencyBlank.png",
-            A: "/images/EotE/Proficiency/ProficiencyA.png",
-            S: "/images/EotE/Proficiency/ProficiencyS.png",
-            SA: "/images/EotE/Proficiency/ProficiencySA.png",
-            SS: "/images/EotE/Proficiency/ProficiencySS.png",
-            AA: "/images/EotE/Proficiency/ProficiencyAA.png",
-            TRIUMPH: "/images/EotE/Proficiency/ProficiencyTriumph.png"
-        },
-        SETBACK: {
-            BLANK: "/images/EotE/Setback/SetBackBlank.png",
-            F: "/images/EotE/Setback/SetBackF.png",
-            T: "/images/EotE/Setback/SetBackT.png"
-        },
-        SYMBOLS: {
-            A: "/images/EotE/Symbols/A.png",
-            S: "/images/EotE/Symbols/S.png",
-            T: "/images/EotE/Symbols/T.png",
-            F: "/images/EotE/Symbols/F.png",
-            TRIUMPH: "/images/EotE/Symbols/Triumph.png",
+    var dice = {ABILITY : {
+        BLANK : "/images/EotE/Ability/abilityBlank.png",
+            A : "/images/EotE/Ability/abilityA.png",
+            AA : "/images/EotE/Ability/abilityAA.png",
+            S : "/images/EotE/Ability/abilityS.png",
+            SA : "/images/EotE/Ability/abilitySA.png",
+            SS : "/images/EotE/Ability/abilitySS.png"
+    },
+    BOOST : {
+        BLANK : "/images/EotE/Boost/boostBlank.png",
+            A : "/images/EotE/Boost/boostA.png",
+            AA : "/images/EotE/Boost/boostAA.png",
+            S : "/images/EotE/Boost/boostS.png",
+            SA : "/images/EotE/Boost/boostSA.png"
+    },
+    CHALLENGE : {
+        BLANK : "/images/EotE/Challenge/ChallengeBlank.png",
+            F : "/images/EotE/Challenge/ChallengeF.png",
+            FF : "/images/EotE/Challenge/ChallengeFF.png",
+            FT : "/images/EotE/Challenge/ChallengeFT.png",
+            T : "/images/EotE/Challenge/ChallengeT.png",
+            TT : "/images/Challenge/ChallengeTT.png",
+            DESPAIR : "/images/Challenge/ChallengeDespair.png"
+    },
+    DIFFICULTY : {
+        BLANK : "/images/EotE/Difficulty/DifficultyBlank.png",
+            F : "/images/EotE/Difficulty/DifficultyF.png",
+            FF : "/images/EotE/Difficulty/DifficultyFF.png",
+            FT : "/images/Difficulty/DifficultyFT.png",
+            T : "/images/Difficulty/DifficultyT.png",
+            TT : "/images/EotE/Difficulty/DifficultyTT.png"
+    },
+    FORCE : {
+        D : "/images/EotE/Force/ForceD.png",
+            DD : "/images/EotE/Force/ForceDD.png",
+            L : "/images/EotE/Force/ForceL.png",
+            LL : "/images/EotE/Force/ForceLL.png"
+    },
+    PROFICIENCY : {
+        BLANK : "/images/EotE/Proficiency/ProficiencyBlank.png",
+            A : "/images/EotE/Proficiency/ProficiencyA.png",
+            S : "/images/EotE/Proficiency/ProficiencyS.png",
+            SA : "/images/EotE/Proficiency/ProficiencySA.png",
+            SS : "/images/EotE/Proficiency/ProficiencySS.png",
+            AA : "/images/EotE/Proficiency/ProficiencyAA.png",
+            TRIUMPH : "/images/EotE/Proficiency/ProficiencyTriumph.png"
+    },
+    SETBACK : {
+        BLANK : "/images/EotE/Setback/SetBackBlank.png",
+            F : "/images/EotE/Setback/SetBackF.png",
+            T : "/images/EotE/Setback/SetBackT.png"
+    },
+    SYMBOLS : {
+        A : "/images/EotE/Symbols/A.png",
+            S : "/images/EotE/Symbols/S.png",
+            T : "/images/EotE/Symbols/T.png",
+            F : "/images/EotE/Symbols/F.png",
+            TRIUMPH : "/images/EotE/Symbols/Triumph.png",
             DESPAIR: "/images/EotE/Symbols/Despair.png",
-            L: "/images/EotE/Symbols/L.png",
-            D: "/images/EotE/Symbols/D.png"
-        }
+            L : "/images/EotE/Symbols/L.png",
+            D : "/images/EotE/Symbols/D.png"
+    }
     };
 
-    $(document).ready(function () {
-        var wopon = "";
-        $.each(dice, function (key, type) {
-            console.log(dice + "," + type);
+$(document).ready(function(){
+    var wopon= "";
+    $.each(dice, function(key, type){
+        console.log(dice+ "," + type);
 
-            console.log(type);
-            $.each(type, function (key, side) {
-                console.log(dice + "," + type + ", side:" + side);
-                wopon += "<img src='" + side + "' class='img-fluid' alt='Responsive image'//>";
-            });
-            $("#YoMamasDie").html($(wopon));
+        console.log(type);
+        $.each(type, function(key, side)
+        {
+            console.log(dice+ "," + type +", side:"+ side);
+            wopon += "<img src='" + side + "' class='img-fluid' alt='Responsive image'//>";
         });
+    $("#YoMamasDie").html($(wopon));
+    });
     })
 </script>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Security Example </title>
 </head>
@@ -15,10 +15,10 @@
 <p th:if="${loginError}" class="error">Wrong user or password</p>
 <form th:action="@{/login}" method="post">
     <label for="username">Username</label>:
-    <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
     <label for="password">Password</label>:
-    <input type="password" id="password" name="password"/> <br/>
-    <input type="submit" value="Log in"/>
+    <input type="password" id="password" name="password" /> <br />
+    <input type="submit" value="Log in" />
 </form>
 </body>
 </html>

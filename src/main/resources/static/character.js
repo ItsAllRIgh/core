@@ -1,404 +1,44 @@
-var speciesList = [{
-    "book_species_id": 1,
-    "Species": "Chiss",
-    "Brawn": 2,
-    "Agility": 2,
-    "Int": 3,
-    "Cun": 2,
-    "Will": 2,
-    "Presence": 1,
-    "EXP": 100
-},
-    {
-        "book_species_id": 2,
-        "Species": "Duros",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 3,
-        "Species": "Toydarian",
-        "Brawn": 1,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 3,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 4,
-        "Species": "Bothan",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 5,
-        "Species": "Droid",
-        "Brawn": 1,
-        "Agility": 1,
-        "Int": 1,
-        "Cun": 1,
-        "Will": 1,
-        "Presence": 1,
-        "EXP": 175
-    },
-    {
-        "book_species_id": 6,
-        "Species": "Gand",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 1,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 7,
-        "Species": "Human",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 8,
-        "Species": "Rodian",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 9,
-        "Species": "Trandoshan",
-        "Brawn": 3,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 10,
-        "Species": "Twi\u2019lek",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 3,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 11,
-        "Species": "Wookiee",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 12,
-        "Species": "Hutt",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 70
-    },
-    {
-        "book_species_id": 13,
-        "Species": "Gank",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 14,
-        "Species": "Nikto",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 15,
-        "Species": "Aqualish",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 1,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 16,
-        "Species": "Klatooinian",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 17,
-        "Species": "Weequay",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 1,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 18,
-        "Species": "Arcona",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 19,
-        "Species": "Chevin",
-        "Brawn": 3,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 80
-    },
-    {
-        "book_species_id": 20,
-        "Species": "Gran",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 3,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 21,
-        "Species": "Falleen",
-        "Brawn": 2,
-        "Agility": 1,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 22,
-        "Species": "Gotal",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 23,
-        "Species": "Quarren",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 1,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 95
-    },
-    {
-        "book_species_id": 24,
-        "Species": "Gran",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 3,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 25,
-        "Species": "Ithorian",
-        "Brawn": 2,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 26,
-        "Species": "Mon Calamari",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 3,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 27,
-        "Species": "Sullustan",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 28,
-        "Species": "Chadra-fan",
-        "Brawn": 1,
-        "Agility": 3,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 29,
-        "Species": "Dressellian",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 1,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 30,
-        "Species": "Xexto",
-        "Brawn": 1,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 85
-    },
-    {
-        "book_species_id": 31,
-        "Species": "Cerean",
-        "Brawn": 2,
-        "Agility": 1,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 32,
-        "Species": "Kel Dor",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 33,
-        "Species": "Mirialan",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 34,
-        "Species": "Nautolan",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 35,
-        "Species": "Togruta",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 36,
-        "Species": "Zabrak",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 1,
-        "EXP": 100
-    }];
-function findSpeciesObjByName(name) {
+var speciesList = [{"book_species_id":1, "Species":"Chiss", "Brawn":2, "Agility":2, "Int":3, "Cun":2, "Will":2, "Presence":1, "EXP":100},
+    {"book_species_id":2, "Species":"Duros", "Brawn":1, "Agility":2, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":3, "Species":"Toydarian", "Brawn":1, "Agility":1, "Int":2, "Cun":2, "Will":3, "Presence":3, "EXP":90},
+    {"book_species_id":4, "Species":"Bothan", "Brawn":1, "Agility":2, "Int":2, "Cun":3, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":5, "Species":"Droid", "Brawn":1, "Agility":1, "Int":1, "Cun":1, "Will":1, "Presence":1, "EXP":175},
+    {"book_species_id":6, "Species":"Gand", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":100},
+    {"book_species_id":7, "Species":"Human", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":2, "EXP":110},
+    {"book_species_id":8, "Species":"Rodian", "Brawn":2, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
+    {"book_species_id":9, "Species":"Trandoshan", "Brawn":3, "Agility":1, "Int":2, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":10, "Species":"Twi\u2019lek", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":3, "EXP":100},
+    {"book_species_id":11, "Species":"Wookiee", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":90},
+    {"book_species_id":12, "Species":"Hutt", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":70},
+    {"book_species_id":13, "Species":"Gank", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":1, "EXP":110},
+    {"book_species_id":14, "Species":"Nikto", "Brawn":3, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":1, "EXP":100},
+    {"book_species_id":15, "Species":"Aqualish", "Brawn":3, "Agility":2, "Int":1, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":16, "Species":"Klatooinian", "Brawn":2, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
+    {"book_species_id":17, "Species":"Weequay", "Brawn":3, "Agility":2, "Int":1, "Cun":3, "Will":2, "Presence":1, "EXP":90},
+    {"book_species_id":18, "Species":"Arcona", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
+    {"book_species_id":19, "Species":"Chevin", "Brawn":3, "Agility":1, "Int":2, "Cun":3, "Will":2, "Presence":1, "EXP":80},
+    {"book_species_id":20, "Species":"Gran", "Brawn":2, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":3, "EXP":100},
+    {"book_species_id":21, "Species":"Falleen", "Brawn":2, "Agility":1, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":22, "Species":"Gotal", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
+    {"book_species_id":23, "Species":"Quarren", "Brawn":2, "Agility":2, "Int":1, "Cun":2, "Will":3, "Presence":2, "EXP":95},
+    {"book_species_id":24, "Species":"Gran", "Brawn":2, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":3, "EXP":100},
+    {"book_species_id":25, "Species":"Ithorian", "Brawn":2, "Agility":1, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":90},
+    {"book_species_id":26, "Species":"Mon Calamari", "Brawn":2, "Agility":2, "Int":3, "Cun":1, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":27, "Species":"Sullustan", "Brawn":2, "Agility":3, "Int":2, "Cun":1, "Will":2, "Presence":2, "EXP":110},
+    {"book_species_id":28, "Species":"Chadra-fan", "Brawn":1, "Agility":3, "Int":3, "Cun":2, "Will":1, "Presence":2, "EXP":90},
+    {"book_species_id":29, "Species":"Dressellian", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":110},
+    {"book_species_id":30, "Species":"Xexto", "Brawn":1, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":85},
+    {"book_species_id":31, "Species":"Cerean", "Brawn":2, "Agility":1, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":32, "Species":"Kel Dor", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
+    {"book_species_id":33, "Species":"Mirialan", "Brawn":2, "Agility":3, "Int":2, "Cun":1, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":34, "Species":"Nautolan", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
+    {"book_species_id":35, "Species":"Togruta", "Brawn":1, "Agility":2, "Int":2, "Cun":3, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":36, "Species":"Zabrak", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":100}];
+function findSpeciesObjByName (name){
     var find = null;
-    $.each(speciesList, function (key, obj) {
+    $.each(speciesList, function(key, obj){
         console.log(obj.Species);
-        if (name.toLowerCase() === obj.Species.toLowerCase()) {
+        if(name.toLowerCase() === obj.Species.toLowerCase()){
             find = obj;
         }
     });
@@ -8537,16 +8177,16 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         if (type == "species") {
             $scope.currentCharacter.species = choice.name
             var speciesObj = findSpeciesObjByName($scope.currentCharacter.species);
-            if (speciesObj) {
+            if(speciesObj){
                 //set all the basics
-                $scope.currentCharacter.agility = speciesObj.Agility;
-                $scope.currentCharacter.brawn = speciesObj.Brawn;
-                $scope.currentCharacter.currentXP = speciesObj.EXP;
-                $scope.currentCharacter.totalXP = speciesObj.EXP;
-                $scope.currentCharacter.intellect = speciesObj.Int;
-                $scope.currentCharacter.cunning = speciesObj.Cun;
-                $scope.currentCharacter.willpower = speciesObj.Will;
-                $scope.currentCharacter.presence = speciesObj.Presence;
+                $scope.currentCharacter.agility=speciesObj.Agility;
+                $scope.currentCharacter.brawn=speciesObj.Brawn;
+                $scope.currentCharacter.currentXP=speciesObj.EXP;
+                $scope.currentCharacter.totalXP=speciesObj.EXP;
+                $scope.currentCharacter.intellect=speciesObj.Int;
+                $scope.currentCharacter.cunning=speciesObj.Cun;
+                $scope.currentCharacter.willpower=speciesObj.Will;
+                $scope.currentCharacter.presence=speciesObj.Presence;
             }
         } else if (type == "careers") {
             $scope.currentCharacter.career = choice.name
@@ -8710,7 +8350,7 @@ window.onpopstate = function (e) {
         self.backToCharacters()
     }
 };
-var species = ["Chiss", "Duros", "Toydarian", "Bothan", "Droid", "Gand", "Human", "Rodian", "Trandoshan", "Twi’lek", "Wookiee", "Hutt", "Gank", "Nikto", "Aqualish", "Klatooinian", "Weequay", "Arcona", "Chevin", "Gran", "Falleen", "Gotal", "Quarren", "Gran", "Ithorian", "MonCalamari", "Sullustan", "Chadra-fan", "Dressellian", "Xexto", "Cerean", "KelDor", "Mirialan", "Nautolan", "Togruta", "Zabrak"];
+var species = ["Chiss","Duros","Toydarian","Bothan","Droid","Gand","Human","Rodian","Trandoshan","Twi’lek","Wookiee","Hutt","Gank","Nikto","Aqualish","Klatooinian","Weequay","Arcona","Chevin","Gran","Falleen","Gotal","Quarren","Gran","Ithorian","MonCalamari","Sullustan","Chadra-fan","Dressellian","Xexto","Cerean","KelDor","Mirialan","Nautolan","Togruta","Zabrak"];
 var skills = ["Astrogation (Int)", "Athletics (Br)", "Charm (Pr)", "Coercion (Will)", "Computers (Int)", "Cool (Pr)", "Coordination (Ag)", "Deception (Cun)", "Discipline (Will)", "Knowledge (Int)", "Leadership (Pr)", "Mechanics (Int)", "Medicine (Int)", "Negotiation (Pr)", "Perception (Cun)", "Piloting - Planetary (Ag)", "Piloting - Space (Ag)", "Resilience (Br)", "Skulduggery (Cun)", "Stealth (Ag)", "Streetwise (Cun)", "Survival (Cun)", "Vigilance (Will)", "Brawl (Br)", "Gunnery (Ag)", "Melee (Br)", "Ranged - Light (Ag)", "Ranged - Heavy (Ag)", "Core Worlds (Int)", "Education (Int)", "Lore (Int)", "Outer Rim (Int)", "Underworld (Int)", "Xenology (Int)"];
 var careers = ["Smuggler", "Bounty Hunter", "Colonist", "Technician", "Hire gun", "Explorer", "Jedi", "Sith", "Soldier"];
 var specializations = ["Assassin", "Gadgeteer", "Survivalist", "Doctor", "Politico", "Scholar", "Fringer", "Scout", "Trader", "Bodyguard", "Marauder", "Mercenary Soldier", "Pilot", "Scoundrel", "Thief", "Mechanic", "Outlaw tech", "Slicer"];

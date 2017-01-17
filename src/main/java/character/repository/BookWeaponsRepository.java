@@ -21,8 +21,7 @@ public interface BookWeaponsRepository extends CrudRepository<BookWeaponsEntity,
 
     // Enabling static ORDER BY for a query
     List<BookWeaponsEntity> findByRestrictedOrderByPriceAsc(boolean restricted);
-
-    List<BookWeaponsEntity> findByRestrictedAndRarityLessThanOrderByPriceAsc(boolean restricted, int rarity);
+   List<BookWeaponsEntity> findByRestrictedAndRarityLessThanOrderByPriceAsc(boolean restricted, int rarity);
     List<BookWeaponsEntity> findByRestrictedOrderByPriceDesc(boolean restricted);
 
 }

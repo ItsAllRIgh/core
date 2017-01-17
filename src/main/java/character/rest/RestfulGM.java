@@ -30,8 +30,8 @@ public class RestfulGM {
     @Autowired
     BookArmorRepository bookArmorRepository;
 
-    @Autowired
-    GearRepository gearRepository;
+   @Autowired
+   GearRepository gearRepository;
 
     @Autowired
     BookWeaponsRepository bookWeaponsRepository;
@@ -46,7 +46,7 @@ public class RestfulGM {
             System.out.println("Nice Repo");
             return playerRepository.findAll();
 
-        } else {
+        }else {
             System.err.println("BAD Repo");
             return null;
         }
@@ -55,7 +55,7 @@ public class RestfulGM {
     @RequestMapping("/players/{id}")
     public Player greeting(@PathVariable(name = "id", required = true) Long id, Model model) {
         Player player = null;
-        if (id != null && id > 0 && playerRepository != null) {
+        if(id!=null && id >0 && playerRepository!=null){
             player = playerRepository.findOne(id);
             model.addAttribute("player", player);
         }
@@ -69,7 +69,7 @@ public class RestfulGM {
             System.out.println("Nice Repo");
             return bookArmorRepository.findAll();
 
-        } else {
+        }else {
             System.err.println("BAD Repo");
             return null;
         }
@@ -78,7 +78,7 @@ public class RestfulGM {
     @RequestMapping("/armor/{id}")
     public BookArmorEntity armorById(@PathVariable(name = "id", required = true) int id, Model model) {
         BookArmorEntity book_armor = null;
-        if (id > 0 && bookArmorRepository != null) {
+        if(id >0 && bookArmorRepository!=null){
             book_armor = bookArmorRepository.findOne(id);
             model.addAttribute("armor", book_armor);
         }
@@ -93,30 +93,30 @@ public class RestfulGM {
             System.out.println("Nice Repo");
             return bookWeaponsRepository.findAll();
 
-        } else {
+        }else {
             System.err.println("BAD Repo");
             return null;
         }
     }
 
-    @RequestMapping("/gm/gear")
-    @ModelAttribute("gears")
-    public List<GearEntity> gear() {
-        if (gearRepository != null) {
-            System.out.println("Nice Repo");
-            return gearRepository.findAll();
+   @RequestMapping("/gm/gear")
+   @ModelAttribute("gears")
+   public List<GearEntity> gear() {
+      if (gearRepository != null) {
+         System.out.println("Nice Repo");
+         return gearRepository.findAll();
 
-        } else {
-            System.err.println("BAD Repo");
-            return null;
-        }
-    }
+      }else {
+         System.err.println("BAD Repo");
+         return null;
+      }
+   }
 
     @RequestMapping("/weapon/{id}")
     @ModelAttribute("weapon")
     public BookWeaponsEntity weaponById(@PathVariable(name = "id", required = true) int id, Model model) {
         BookWeaponsEntity book_armor = null;
-        if (id > 0 && bookWeaponsRepository != null) {
+        if(id >0 && bookWeaponsRepository!=null){
             book_armor = bookWeaponsRepository.findOne(id);
             model.addAttribute("weapon", book_armor);
         }

@@ -12,12 +12,12 @@ import java.io.Serializable;
 @Table(name = "skill", schema = "", catalog = "legends")
 public class Skill implements Serializable {
     /**
-     *
-     */
-    private static final long serialVersionUID = 5772429839841222500L;
-    @Id
+	 * 
+	 */
+	private static final long serialVersionUID = 5772429839841222500L;
+	@Id
     @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @GenericGenerator(name="increment", strategy="increment")
     Long id;
     String name = "SKILLNAME";
     boolean career = false;

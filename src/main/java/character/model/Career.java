@@ -10,11 +10,11 @@ import java.io.Serializable;
 @Table(name = "career", schema = "", catalog = "legends")
 public class Career implements Serializable {
     /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     Long id;
     @Column(name = "Career_Title")
     String name;

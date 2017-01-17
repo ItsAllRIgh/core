@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/registration")
-    public String registration(@ModelAttribute("user") User userForm) {
+    public String registration(@ModelAttribute ("user") User userForm) {
 
         userService.save(userForm);
 

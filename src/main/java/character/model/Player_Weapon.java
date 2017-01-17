@@ -13,18 +13,18 @@ import java.io.Serializable;
 @Table(name = "weapon", schema = "", catalog = "legends")
 public class Player_Weapon implements Serializable {
     /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    @Id
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @GenericGenerator(name="increment", strategy="increment")
     Long id;
     String name = "WEAPON";
     String skill = null;
     String special = "WEAPONSPECIAL";
     @Column(name = "WEP_RANGE")
-    int range = 0;
+    String range = "";
     int damages = 2;
     @JsonProperty(value = "critique")
     int crit = 0;
@@ -64,11 +64,11 @@ public class Player_Weapon implements Serializable {
         this.special = special;
     }
 
-    public int getRange() {
+    public String getRange() {
         return range;
     }
 
-    public void setRange(int range) {
+    public void setRange(String range) {
         this.range = range;
     }
 

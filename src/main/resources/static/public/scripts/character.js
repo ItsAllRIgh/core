@@ -1,408 +1,48 @@
-var speciesList = [{
-    "book_species_id": 1,
-    "Species": "Chiss",
-    "Brawn": 2,
-    "Agility": 2,
-    "Int": 3,
-    "Cun": 2,
-    "Will": 2,
-    "Presence": 1,
-    "EXP": 100
-},
-    {
-        "book_species_id": 2,
-        "Species": "Duros",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 3,
-        "Species": "Toydarian",
-        "Brawn": 1,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 3,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 4,
-        "Species": "Bothan",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 5,
-        "Species": "Droid",
-        "Brawn": 1,
-        "Agility": 1,
-        "Int": 1,
-        "Cun": 1,
-        "Will": 1,
-        "Presence": 1,
-        "EXP": 175
-    },
-    {
-        "book_species_id": 6,
-        "Species": "Gand",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 1,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 7,
-        "Species": "Human",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 8,
-        "Species": "Rodian",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 9,
-        "Species": "Trandoshan",
-        "Brawn": 3,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 10,
-        "Species": "Twi\u2019lek",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 3,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 11,
-        "Species": "Wookiee",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 12,
-        "Species": "Hutt",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 70
-    },
-    {
-        "book_species_id": 13,
-        "Species": "Gank",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 14,
-        "Species": "Nikto",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 15,
-        "Species": "Aqualish",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 1,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 16,
-        "Species": "Klatooinian",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 17,
-        "Species": "Weequay",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 1,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 18,
-        "Species": "Arcona",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 19,
-        "Species": "Chevin",
-        "Brawn": 3,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 1,
-        "EXP": 80
-    },
-    {
-        "book_species_id": 20,
-        "Species": "Gran",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 3,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 21,
-        "Species": "Falleen",
-        "Brawn": 2,
-        "Agility": 1,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 22,
-        "Species": "Gotal",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 23,
-        "Species": "Quarren",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 1,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 95
-    },
-    {
-        "book_species_id": 24,
-        "Species": "Gran",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 3,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 25,
-        "Species": "Ithorian",
-        "Brawn": 2,
-        "Agility": 1,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 26,
-        "Species": "Mon Calamari",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 3,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 27,
-        "Species": "Sullustan",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 28,
-        "Species": "Chadra-fan",
-        "Brawn": 1,
-        "Agility": 3,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 29,
-        "Species": "Dressellian",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 1,
-        "EXP": 110
-    },
-    {
-        "book_species_id": 30,
-        "Species": "Xexto",
-        "Brawn": 1,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 85
-    },
-    {
-        "book_species_id": 31,
-        "Species": "Cerean",
-        "Brawn": 2,
-        "Agility": 1,
-        "Int": 3,
-        "Cun": 2,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 90
-    },
-    {
-        "book_species_id": 32,
-        "Species": "Kel Dor",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 33,
-        "Species": "Mirialan",
-        "Brawn": 2,
-        "Agility": 3,
-        "Int": 2,
-        "Cun": 1,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 34,
-        "Species": "Nautolan",
-        "Brawn": 3,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 1,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 35,
-        "Species": "Togruta",
-        "Brawn": 1,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 3,
-        "Will": 2,
-        "Presence": 2,
-        "EXP": 100
-    },
-    {
-        "book_species_id": 36,
-        "Species": "Zabrak",
-        "Brawn": 2,
-        "Agility": 2,
-        "Int": 2,
-        "Cun": 2,
-        "Will": 3,
-        "Presence": 1,
-        "EXP": 100
-    }];
-function getCharacters() {
+var speciesList = [{"book_species_id":1, "Species":"Chiss", "Brawn":2, "Agility":2, "Int":3, "Cun":2, "Will":2, "Presence":1, "EXP":100},
+    {"book_species_id":2, "Species":"Duros", "Brawn":1, "Agility":2, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":3, "Species":"Toydarian", "Brawn":1, "Agility":1, "Int":2, "Cun":2, "Will":3, "Presence":3, "EXP":90},
+    {"book_species_id":4, "Species":"Bothan", "Brawn":1, "Agility":2, "Int":2, "Cun":3, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":5, "Species":"Droid", "Brawn":1, "Agility":1, "Int":1, "Cun":1, "Will":1, "Presence":1, "EXP":175},
+    {"book_species_id":6, "Species":"Gand", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":100},
+    {"book_species_id":7, "Species":"Human", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":2, "EXP":110},
+    {"book_species_id":8, "Species":"Rodian", "Brawn":2, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
+    {"book_species_id":9, "Species":"Trandoshan", "Brawn":3, "Agility":1, "Int":2, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":10, "Species":"Twi\u2019lek", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":3, "EXP":100},
+    {"book_species_id":11, "Species":"Wookiee", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":90},
+    {"book_species_id":12, "Species":"Hutt", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":70},
+    {"book_species_id":13, "Species":"Gank", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":1, "EXP":110},
+    {"book_species_id":14, "Species":"Nikto", "Brawn":3, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":1, "EXP":100},
+    {"book_species_id":15, "Species":"Aqualish", "Brawn":3, "Agility":2, "Int":1, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":16, "Species":"Klatooinian", "Brawn":2, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
+    {"book_species_id":17, "Species":"Weequay", "Brawn":3, "Agility":2, "Int":1, "Cun":3, "Will":2, "Presence":1, "EXP":90},
+    {"book_species_id":18, "Species":"Arcona", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
+    {"book_species_id":19, "Species":"Chevin", "Brawn":3, "Agility":1, "Int":2, "Cun":3, "Will":2, "Presence":1, "EXP":80},
+    {"book_species_id":20, "Species":"Gran", "Brawn":2, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":3, "EXP":100},
+    {"book_species_id":21, "Species":"Falleen", "Brawn":2, "Agility":1, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":22, "Species":"Gotal", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
+    {"book_species_id":23, "Species":"Quarren", "Brawn":2, "Agility":2, "Int":1, "Cun":2, "Will":3, "Presence":2, "EXP":95},
+    {"book_species_id":24, "Species":"Gran", "Brawn":2, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":3, "EXP":100},
+    {"book_species_id":25, "Species":"Ithorian", "Brawn":2, "Agility":1, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":90},
+    {"book_species_id":26, "Species":"Mon Calamari", "Brawn":2, "Agility":2, "Int":3, "Cun":1, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":27, "Species":"Sullustan", "Brawn":2, "Agility":3, "Int":2, "Cun":1, "Will":2, "Presence":2, "EXP":110},
+    {"book_species_id":28, "Species":"Chadra-fan", "Brawn":1, "Agility":3, "Int":3, "Cun":2, "Will":1, "Presence":2, "EXP":90},
+    {"book_species_id":29, "Species":"Dressellian", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":110},
+    {"book_species_id":30, "Species":"Xexto", "Brawn":1, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":85},
+    {"book_species_id":31, "Species":"Cerean", "Brawn":2, "Agility":1, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":90},
+    {"book_species_id":32, "Species":"Kel Dor", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
+    {"book_species_id":33, "Species":"Mirialan", "Brawn":2, "Agility":3, "Int":2, "Cun":1, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":34, "Species":"Nautolan", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
+    {"book_species_id":35, "Species":"Togruta", "Brawn":1, "Agility":2, "Int":2, "Cun":3, "Will":2, "Presence":2, "EXP":100},
+    {"book_species_id":36, "Species":"Zabrak", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":100}];
+function getCharacters(){
     //TODO:GET CHARACTERS
 }
 
-function findSpeciesObjByName(name) {
+function findSpeciesObjByName (name){
     var find = null;
-    $.each(speciesList, function (key, obj) {
-        console.log(obj.Species);
-        if (name.toLowerCase() === obj.Species.toLowerCase()) {
+        $.each(speciesList, function(key, obj){
+        //console.log(obj.Species);
+        if(name.toLowerCase() === obj.Species.toLowerCase()){
             find = obj;
         }
     });
@@ -426,14 +66,14 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
-        console.log('Connected: ' + frame);
+        //console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/character', function (character) {
             showCharacter(character);
         });
         stompClient.subscribe('/topic/update', function (character) {
-            if (character.name == CURVAR.name)
+            if(character.name == CURVAR.name)
                 console.warn("UPDATE!!!!");
-            updateCharacter(character);
+                updateCharacter(character);
         });
     });
 }
@@ -454,9 +94,8 @@ function updateCharacter(character) {
 }
 
 function sendCharacter(character) {
-    console.warn("Sending Characters");
-    $.post("/player/new", character, function (response) {
-    }, 'json');
+    //console.warn("Sending Characters");
+    $.post("/player/new", character, function(response){}, 'json');
 }
 function transferVisuals(character) {
     CURVAR = character;
@@ -466,7 +105,7 @@ function transferVisuals(character) {
 
 function showCharacter(message) {
     var Character = JSON.parse(message.body);
-    console.info(Character);
+    //console.info(Character);
     $("#greetings").append("<tr><td>" + Character + "</td></tr>");
     //add to the screen if it isn't null
     if (Character != null) {
@@ -7874,8 +7513,9 @@ Modernizr.addTest("mobile", function () {
 }(window, window.angular);
 var self;
 var App = angular.module("empire", ["ngTouch", "ngSanitize"]);
+
 var EmpireController = function ($scope, $http, $timeout, $sce) {
-        $scope.HOST = "http://magic-assemble.herokuapp.com/api/";
+        $scope.HOST = "";
         $scope.cache = new Cache;
         $scope.login;
         $scope.password;
@@ -7918,7 +7558,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             }
         };
         $scope.selectCharacter = function (index) {
-            console.log(index);
+            //console.log(index);
             $scope.currentCharacter = $scope.characters[index];
             if ($scope.currentCharacter) {
                 $scope.onMainMenu = false;
@@ -7937,7 +7577,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             try {
                 $scope.checkAchievements();
                 var json = JSON.stringify($scope.characters);
-                console.warn(json.toString());
+                //.warn(json.toString());
                 $http.post('/updateCharList', json);
                 localStorage.setItem("characters", json)
             } catch (e) {
@@ -7958,7 +7598,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             }
             $scope.currentCharacter = null;
             $scope.onSelectedCharacter = false;
-            $scope.currentSpecies = null;
+        $scope.currentSpecies = null;
             $scope.onMainMenu = true;
             angular.element($scope.gid("mainScreenContainer")).removeClass("fadeIn fadeOut");
             angular.element($scope.gid("mainScreenContainer")).addClass("fadeIn");
@@ -7977,7 +7617,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                 $scope.currentCharacter.credits = credits;
             }
         };
-    $scope.changeStrain = function (strain) {
+        $scope.changeStrain = function (strain){
             if (strain != null) {
                 if (strain > $scope.currentCharacter.currentStrain) {
                     $scope.toast("Gain of strain", "You gained " + strain - $scope.currentCharacter.currentStrain + " strain");
@@ -7988,7 +7628,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             }
         };
 
-    $scope.changeWounds = function (wounds) {
+        $scope.changeWounds = function (wounds){
             if (wounds != null) {
                 if (wounds > $scope.currentCharacter.currentWounds) {
                     $scope.toast("Gain of wounds", "You gained " + wounds - $scope.currentCharacter.currentWounds + " wounds");
@@ -7998,27 +7638,27 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                 $scope.currentCharacter.wounds = wounds;
             }
         };
-    $scope.changedXP = function () {
+        $scope.changedXP = function(){
             $scope.toast("Hey, I know your xp!")
         };
 
-    $scope.changeXP = function (newXP) {
+        $scope.changeXP = function (newXP){
             if (newXP != null) {
                 if (newXP > $scope.currentCharacter.totalXP) {
-                    $scope.toast("GAINED " + newXP - $scope.currentCharacter.totalXP + " XP!")
+                   $scope.toast("GAINED "+newXP-$scope.currentCharacter.totalXP+" XP!")
                 } else {
-                    $scope.toast("OOPS! " + newXP - $scope.currentCharacter.totalXP + " XP!")
+                    $scope.toast("OOPS! "+newXP-$scope.currentCharacter.totalXP+" XP!")
                 }
                 $scope.currentCharacter.totalXP = newXP;
             }
         };
 
-    $scope.changeAge = function (age) {
-        if (age != null) {
+        $scope.changeAge = function(age){
+            if (age!= null) {
                 if (age > $scope.currentCharacter.age) {
-                    $scope.toast("GAINED " + age - $scope.currentCharacter.totalXP + " years!")
+                    $scope.toast("GAINED "+age-$scope.currentCharacter.totalXP+" years!")
                 } else {
-                    $scope.toast("LOST " + age - $scope.currentCharacter.totalXP + " years!")
+                    $scope.toast("LOST "+age-$scope.currentCharacter.totalXP+" years!")
                 }
                 $scope.currentCharacter.age = age;
             }
@@ -8047,6 +7687,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
 
         };
     var baseCharacter = {
+        id: 0,
         name: "",
         species: "",
         career: "",
@@ -8083,8 +7724,8 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         encumbrance: "",
         force: 0
     }
-    $scope.addCharacter = function () {
-        $scope.currentCharacter = baseCharacter;
+        $scope.addCharacter = function () {
+            $scope.currentCharacter = baseCharacter;
             $scope.characters.push($scope.currentCharacter);
             $scope.selectCharacter($scope.characters.length - 1)
         };
@@ -8379,9 +8020,9 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             if (window.console) console.log('Save Character');
             //send to server
             var character = $scope.characters;
-            if (character) {
-                var i = 0;
-                for (i = 0; i < character.length; i++) {
+            if(character){
+                var i=0;
+                for(i=0; i<character.length; i++){
                     $http.post('/newChar', character[i]);
                 }
             }
@@ -8490,7 +8131,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             var password = $scope.randomKey();
             $http.get("/register?login=" + login + "&password=" + password).success(function (data) {
                 data = data.result.toLowerCase();
-                console.log(data);
+                //console.log(data);
                 if (data === "failure") {
                     $scope.toastError()
                 } else if (data === "already taken") {
@@ -8666,20 +8307,41 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             var data = null;
             if (type == "species") {
                 e = $scope.gid("infoSpecies");
+                //data = $.getJSON("/species")
+                //console.log(data);
+                if(!data)
                 data = species
             } else if (type == "careers") {
                 e = $scope.gid("infoCareer");
+                //data = $.getJSON("/career")
+                //console.log(data);
+                if(!data)
                 data = careers
             } else if (type == "skills") {
                 e = $scope.gid("skillName");
+                //data = $.getJSON("/skills")
+                //console.log(data);
+                if(!data)
                 data = skills
-            } else if (type == "weapons") {
+            } else if (type == "weaponsSkill") {
                 e = $scope.gid("weaponSkill");
+                //data = $.getJSON("/skills")
+                //console.log(data);
+                if(!data)
+                data = skills;
+            } else if (type == "weaponsName") {
+                e = $scope.gid("weaponName");
+                data = weaponNames;
+
+                if(data == null || data.length<=0)
                 data = skills
-            } else if (type == "specializations") {
+            }else if (type == "specializations") {
                 e = $scope.gid("infoSpecialization");
+                //data = $.getJSON("/specializations")
+                if(!data)
                 data = specializations
             }
+            console.log(data);
             var value = e.value;
             if (value.length >= 1 && data) {
                 $scope.currentAuto = type;
@@ -8690,26 +8352,42 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             }
         };
         $scope.selectChoice = function (type, choice) {
+            console.log(type, choice);
             if (type == "species") {
                 $scope.currentCharacter.species = choice.name
                 var speciesObj = findSpeciesObjByName($scope.currentCharacter.species);
-                if (speciesObj) {
+                if(speciesObj){
                     //set all the basics
-                    $scope.currentCharacter.agility = speciesObj.Agility;
-                    $scope.currentCharacter.brawn = speciesObj.Brawn;
-                    $scope.currentCharacter.currentXP = speciesObj.EXP;
-                    $scope.currentCharacter.totalXP = speciesObj.EXP;
-                    $scope.currentCharacter.intellect = speciesObj.Int;
-                    $scope.currentCharacter.cunning = speciesObj.Cun;
-                    $scope.currentCharacter.willpower = speciesObj.Will;
-                    $scope.currentCharacter.presence = speciesObj.Presence;
+                    $scope.currentCharacter.agility=speciesObj.Agility;
+                    $scope.currentCharacter.brawn=speciesObj.Brawn;
+                    $scope.currentCharacter.currentXP=speciesObj.EXP;
+                    $scope.currentCharacter.totalXP=speciesObj.EXP;
+                    $scope.currentCharacter.intellect=speciesObj.Int;
+                    $scope.currentCharacter.cunning=speciesObj.Cun;
+                    $scope.currentCharacter.willpower=speciesObj.Will;
+                    $scope.currentCharacter.presence=speciesObj.Presence;
                 }
             } else if (type == "careers") {
                 $scope.currentCharacter.career = choice.name
             } else if (type == "skills") {
                 $scope.currentSkill.name = choice.name
-            } else if (type == "weapons") {
+            } else if (type == "weaponsName") {
+                $scope.currentWeapon.name = choice.name
+                var weaponObj;
+                $.getJSON("/weapon?name="+$scope.currentWeapon.name , function(weaponObj){
+                    //$scope.currentCharacter.currentWeapon
+                    console.log(weaponObj);
+                    console.log($scope.currentWeapon.name = weaponObj.weaponName);
+                    console.log($scope.currentWeapon.critique = weaponObj.critical);
+                    console.log($scope.currentWeapon.damages = weaponObj.damage);
+                    console.log($scope.currentWeapon.HP = weaponObj.hp);
+                    console.log($scope.currentWeapon.range = weaponObj.wepRange);
+                    console.log($scope.currentWeapon.skill = weaponObj.skill);
+                    console.log($scope.currentWeapon.special = weaponObj.special);
+                });
+            }else if (type == "weaponsSkill") {
                 $scope.currentWeapon.skill = choice.name
+                //var weaponObj = findWeaponSkillByName(choice.name)
             } else if (type == "specializations") {
                 $scope.currentCharacter.specializationTrees = choice.name
             }
@@ -8721,6 +8399,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             var choices = [];
             for (var i = 0; len = data.length, i < len; i++) {
                 if (data[i].substr(0, needle.length).toLowerCase() == needle) {
+                   //console.log(data[i]);
                     choices.push({
                         name: data[i]
                     })
@@ -8866,10 +8545,14 @@ window.onpopstate = function (e) {
         self.backToCharacters()
     }
 };
-var species = ["Chiss", "Duros", "Toydarian", "Bothan", "Droid", "Gand", "Human", "Rodian", "Trandoshan", "Twi’lek", "Wookiee", "Hutt", "Gank", "Nikto", "Aqualish", "Klatooinian", "Weequay", "Arcona", "Chevin", "Gran", "Falleen", "Gotal", "Quarren", "Gran", "Ithorian", "MonCalamari", "Sullustan", "Chadra-fan", "Dressellian", "Xexto", "Cerean", "KelDor", "Mirialan", "Nautolan", "Togruta", "Zabrak"];
+var species = ["Chiss","Duros","Toydarian","Bothan","Droid","Gand","Human","Rodian","Trandoshan","Twi’lek","Wookiee","Hutt","Gank","Nikto","Aqualish","Klatooinian","Weequay","Arcona","Chevin","Gran","Falleen","Gotal","Quarren","Gran","Ithorian","MonCalamari","Sullustan","Chadra-fan","Dressellian","Xexto","Cerean","KelDor","Mirialan","Nautolan","Togruta","Zabrak"];
 var skills = ["Astrogation (Int)", "Athletics (Br)", "Charm (Pr)", "Coercion (Will)", "Computers (Int)", "Cool (Pr)", "Coordination (Ag)", "Deception (Cun)", "Discipline (Will)", "Knowledge (Int)", "Leadership (Pr)", "Mechanics (Int)", "Medicine (Int)", "Negotiation (Pr)", "Perception (Cun)", "Piloting - Planetary (Ag)", "Piloting - Space (Ag)", "Resilience (Br)", "Skulduggery (Cun)", "Stealth (Ag)", "Streetwise (Cun)", "Survival (Cun)", "Vigilance (Will)", "Brawl (Br)", "Gunnery (Ag)", "Melee (Br)", "Ranged - Light (Ag)", "Ranged - Heavy (Ag)", "Core Worlds (Int)", "Education (Int)", "Lore (Int)", "Outer Rim (Int)", "Underworld (Int)", "Xenology (Int)"];
 var careers = ["Smuggler", "Bounty Hunter", "Colonist", "Technician", "Hired gun", "Explorer", "Jedi", "Sith", "Soldier", "Ace", "Commander", "Diplomat", "Engineer", "Soldier", "Spy", "Universal", "Consular", "Guardian", "Mystic", "Seeker", "Sentinel", "Warrior"];
 var specializations = ["Assassin", "Gadgeteer", "Survivalist", "Doctor", "Politico", "Scholar", "Fringer", "Scout", "Trader", "Bodyguard", "Marauder", "Mercenary Soldier", "Pilot", "Scoundrel", "Thief", "Mechanic", "Outlaw tech", "Slicer", "Force Sensitive Emergent", " Recruit", "Beast Rider", " Hotshot", " Rigger", "Advocate", " Analyst", " or Propagandist", "Commando", " Medic", " Sharpshooter", "Mechanic", " Saboteur", " Scientist", "Agitator", " Ambassador", " Quartermaster", "Commodore", " Squad leader", " Tactician", "Driver", " Gunner", " Pilot", "Infiltrator", " Scout", " Slicer", "Healer", " Niman Disciple", " Sage", "Agressor", " Shii-Cho Knight", " Starfighter Ace", "Artisan", " Shadow", " Shien Expert", "Ataru Striker", " Hunter", " Pathfinder", "Advisor", " Makashi Duelist", " Seer", "Peace Keeper", " Defender", " Soresu Defender", "Warleaders", " Armorers", " Warden", "Exicutioner", " Hermit", " Navigator"];
+var weaponNames;
+$.getJSON("/weaponsName", function(result) {
+    weaponNames = result;
+});
 var Cache = function () {
     var self = this;
     self.isLocalStorageSupported = function () {
