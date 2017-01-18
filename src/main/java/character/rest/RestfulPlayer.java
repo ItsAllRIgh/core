@@ -39,7 +39,8 @@ public class RestfulPlayer {
     @Autowired
     BookWeaponsRepository bookWeaponsRepository;
 
-    @Autowired
+
+   @Autowired
     UserRepository userRepository;
 
     @RequestMapping(value = "/map", method = RequestMethod.GET)

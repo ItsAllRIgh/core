@@ -1,13 +1,7 @@
 package character.rest;
 
-import character.model.BookArmorEntity;
-import character.model.BookWeaponsEntity;
-import character.model.GearEntity;
-import character.model.Player;
-import character.repository.BookArmorRepository;
-import character.repository.BookWeaponsRepository;
-import character.repository.GearRepository;
-import character.repository.PlayerRepository;
+import character.model.*;
+import character.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,6 +29,9 @@ public class RestfulGM {
 
     @Autowired
     BookWeaponsRepository bookWeaponsRepository;
+
+    @Autowired
+    CreatureRepository creatureRepository;
 
     /*public restfulGM(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
@@ -102,15 +99,27 @@ public class RestfulGM {
    @RequestMapping("/gm/gear")
    @ModelAttribute("gears")
    public List<GearEntity> gear() {
-      if (gearRepository != null) {
-         System.out.println("Nice Repo");
-         return gearRepository.findAll();
+       if (gearRepository != null) {
+           System.out.println("Nice Repo");
+           return gearRepository.findAll();
 
-      }else {
-         System.err.println("BAD Repo");
-         return null;
-      }
+       }else {
+           System.err.println("BAD Repo");
+           return null;
+       }
    }
+
+    @RequestMapping("/gm/creatures")
+    @ModelAttribute("creatures")
+    public List<CreaturesEntity> creatures() {
+        if (creatureRepository != null) {
+            System.out.println("Nice Repo");
+            return creatureRepository.findAll();
+        } else {
+            System.err.println("BAD Repo");
+            return null;
+        }
+    }
 
     @RequestMapping("/weapon/{id}")
     @ModelAttribute("weapon")

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class CreaturesEntity {
    private int creaturesId;
    private String creatureName;
-   private String creaturarmoreLvl;
+    private String creatureArmor;
    private String skills;
    private String talents;
    private String abilities;
@@ -39,12 +39,12 @@ public class CreaturesEntity {
 
    @Basic
    @Column(name = "creaturarmore_lvl", nullable = true, insertable = true, updatable = true, length = 12)
-   public String getCreaturarmoreLvl() {
-      return creaturarmoreLvl;
+   public String getCreatureArmor() {
+       return creatureArmor;
    }
 
-   public void setCreaturarmoreLvl(String creaturarmoreLvl) {
-      this.creaturarmoreLvl = creaturarmoreLvl;
+    public void setCreatureArmor(String creatureArmor) {
+        this.creatureArmor = creatureArmor;
    }
 
    @Basic
@@ -107,21 +107,19 @@ public class CreaturesEntity {
       if (creaturesId != that.creaturesId) return false;
       if (abilities != null ? !abilities.equals(that.abilities) : that.abilities != null) return false;
       if (bookIndex != null ? !bookIndex.equals(that.bookIndex) : that.bookIndex != null) return false;
-      if (creaturarmoreLvl != null ? !creaturarmoreLvl.equals(that.creaturarmoreLvl) : that.creaturarmoreLvl != null)
+       if (creatureArmor != null ? !creatureArmor.equals(that.creatureArmor) : that.creatureArmor != null)
          return false;
       if (creatureName != null ? !creatureName.equals(that.creatureName) : that.creatureName != null) return false;
       if (equipment != null ? !equipment.equals(that.equipment) : that.equipment != null) return false;
       if (skills != null ? !skills.equals(that.skills) : that.skills != null) return false;
-      if (talents != null ? !talents.equals(that.talents) : that.talents != null) return false;
-
-      return true;
+       return talents != null ? talents.equals(that.talents) : that.talents == null;
    }
 
    @Override
    public int hashCode() {
       int result = creaturesId;
       result = 31 * result + (creatureName != null ? creatureName.hashCode() : 0);
-      result = 31 * result + (creaturarmoreLvl != null ? creaturarmoreLvl.hashCode() : 0);
+       result = 31 * result + (creatureArmor != null ? creatureArmor.hashCode() : 0);
       result = 31 * result + (skills != null ? skills.hashCode() : 0);
       result = 31 * result + (talents != null ? talents.hashCode() : 0);
       result = 31 * result + (abilities != null ? abilities.hashCode() : 0);
