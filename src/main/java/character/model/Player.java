@@ -38,14 +38,14 @@ public class Player implements Serializable {
     public int totalWounds = 0;
     public int currentStrain = 0;
     public int totalStrain = 0;
-    public int defense = 0;
+    public String defense = String.valueOf(0);
     public int brawn = 3;
     public int agility = 3;
     public int intellect = 3;
     public int cunning = 3;
     public int willpower = 3;
     public int presence = 3;
-    public int gender = 0;
+    public String gender = String.valueOf(0);
     public int age = 18;
     public String height = "";
     public String eyes = "";
@@ -60,6 +60,10 @@ public class Player implements Serializable {
     public List<Player_Weapon> playerWeapons= new ArrayList<>();
     @OneToMany(cascade=CascadeType.ALL)
     public List<Talent> talents= new ArrayList<>();
+    @OneToMany(cascade=CascadeType.ALL)
+    public List<Armor> armor = new ArrayList<>();
+    @OneToMany(cascade=CascadeType.ALL)
+    public List<Gear> gear = new ArrayList<>();
     public int encumbrance=0;
     @Column(name = "FORCE_POWERS")
     public int force=0;
@@ -116,7 +120,7 @@ public class Player implements Serializable {
         this.motivations = them.motivations;
     }
 
-    public Player(String name, String userName, Species species, String career, String specialization, String avatar, int currentXP, int totalXP, int soak, int currentWounds, int totalWounds, int currentStrain, int totalStrain, int defense, int brawn, int agility, int intellect, int cunning, int willpower, int presence, int gender, int age, String height, String eyes, String hair, String other, int credits, String equipments, List<Skill> skills, List<Player_Weapon> playerWeapons, List<Talent> talents, int encumbrance, int force, String hashKey, String background, String obligations, String motivations, String achievements, int selectedAchievement, String world, String webhash) {
+    public Player(String name, String userName, Species species, String career, String specialization, String avatar, int currentXP, int totalXP, int soak, int currentWounds, int totalWounds, int currentStrain, int totalStrain, String defense, int brawn, int agility, int intellect, int cunning, int willpower, int presence, String gender, int age, String height, String eyes, String hair, String other, int credits, String equipments, List<Skill> skills, List<Player_Weapon> playerWeapons, List<Talent> talents, int encumbrance, int force, String hashKey, String background, String obligations, String motivations, String achievements, int selectedAchievement, String world, String webhash) {
         this.name = name;
         this.userName = userName;
         this.species = species;
@@ -263,11 +267,11 @@ public class Player implements Serializable {
         this.totalStrain = totalStrain;
     }
 
-    public int getDefense() {
+    public String getDefense() {
         return defense;
     }
 
-    public void setDefense(int defense) {
+    public void setDefense(String defense) {
         this.defense = defense;
     }
 
@@ -319,11 +323,11 @@ public class Player implements Serializable {
         this.presence = presence;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -562,9 +566,7 @@ public class Player implements Serializable {
       if (species != null ? !species.equals(player.species) : player.species != null) return false;
       if (talents != null ? !talents.equals(player.talents) : player.talents != null) return false;
       if (userName != null ? !userName.equals(player.userName) : player.userName != null) return false;
-      if (world != null ? !world.equals(player.world) : player.world != null) return false;
-
-      return true;
+       return world != null ? world.equals(player.world) : player.world == null;
    }
 
    @Override
@@ -582,14 +584,14 @@ public class Player implements Serializable {
       result = 31 * result + totalWounds;
       result = 31 * result + currentStrain;
       result = 31 * result + totalStrain;
-      result = 31 * result + defense;
+      result = Integer.parseInt(31 * result + defense);
       result = 31 * result + brawn;
       result = 31 * result + agility;
       result = 31 * result + intellect;
       result = 31 * result + cunning;
       result = 31 * result + willpower;
       result = 31 * result + presence;
-      result = 31 * result + gender;
+      result = 31 * result + (gender != null ? gender.hashCode() : 0);
       result = 31 * result + age;
       result = 31 * result + (height != null ? height.hashCode() : 0);
       result = 31 * result + (eyes != null ? eyes.hashCode() : 0);

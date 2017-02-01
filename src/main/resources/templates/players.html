@@ -10,7 +10,15 @@
         <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="/main.css" rel="stylesheet"/>
         <frame-options policy="SAMEORIGIN"/>
-        <script src="/webjars/jquery/jquery.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
         <title>Empire Legends</title>
@@ -47,16 +55,17 @@
 <body>
 <div class ="container">
     <div class="row">
-<h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+<h3 id="user" hidden="true" th:inline="text">[[${#httpServletRequest.remoteUser}]]</h3>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
-
-        <div class="col-md-6"><a class="btn btn-default" href="/character.html" role="button">Create Characters</a> </div>
+        <div class="col-md-6"><a class="btn btn-default" href="/registration.html" role="button">Register</a> </div>
+        <div class="col-md-6"><a class="btn btn-default" href="" role="button"></a> </div>
+        <div class="col-md-6"><a class="btn btn-default" href="/player/character.html" role="button">Create Characters</a> </div>
         <div class="col-md-6"><a class="btn btn-default" href="/player/choose.html" role="button">Join a Session</a> </div>
-    </div>
 </div>
-
+</div>
 </body>
-<script>$.ajax()</script>
+<script>var user = $('#user').html(); console.log(user)</script>
+
 </html>

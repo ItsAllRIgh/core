@@ -6275,7 +6275,7 @@ Modernizr.addTest("mobile", function () {
                     if (totalY > totalX) {
                         active = false;
                         eventHandlers["cancel"] && eventHandlers["cancel"](event);
-                        return
+
                     } else {
                         event.preventDefault();
                         eventHandlers["move"] && eventHandlers["move"](coords, event)
@@ -7550,7 +7550,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             try {
                 var json = localStorage.getItem("characters");
                 if (json) {
-                    $scope.characters = JSON.parse(json)
+                    $scope.characters = JSON.parse(json);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     console.log($scope.characters[0])
                 }
             } catch (e) {
@@ -7723,7 +7723,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         world: "",
         encumbrance: "",
         force: 0
-    }
+    };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         $scope.addCharacter = function () {
             $scope.currentCharacter = baseCharacter;
             $scope.characters.push($scope.currentCharacter);
@@ -7864,15 +7864,31 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                 for (var i = 0; i < dicesCount; i++) {
                     html += '<img alt="' + skill.name + '" src="';
                     if (i < dicesCount - upgradedDices) {
-                        html += "public/gfx/UI/green_skill.png"
+                        html += "../public/gfx/UI/green_skill.png"
                     } else {
-                        html += "public/gfx/UI/yellow_skill.png"
+                        html += "../public/gfx/UI/yellow_skill.png"
                     }
                     html += '" class="skillImage" />'
                 }
             }
             return $sce.trustAsHtml(html)
         };
+        $scope.addArmor = function () {
+            $scope.currentArmor = {
+                armorName:"",
+                defense:0,
+                soak:0,
+                price:0,
+                encum:0,
+                hp:0,
+                rarity:0,
+                bookIndex:0,
+                restricted:0,
+                mods:""
+            };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            $scope.isAddingArmor = true;
+            $scope.openDialog("armorDialog")
+        };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         $scope.addWeapon = function () {
             $scope.currentWeapon = {
                 name: "",
@@ -7880,7 +7896,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                 special: "",
                 range: "",
                 damages: 2,
-                critique: 0,
+                critical: 0,
                 HP: 0,
                 mods: ""
             };
@@ -7918,6 +7934,39 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                 }
             }
         };
+    $scope.selectArmor = function (index) {
+        $scope.currentArmor = $scope.currentCharacter.Armors[index];
+        $scope.isAddingArmor = false;
+        $scope.openDialog("ArmorsDialog")
+    };
+    $scope.submitAddArmor = function (e) {
+        if ($scope.currentCharacter && $scope.currentArmor && $scope.currentArmor.name) {
+            if (!$scope.currentCharacter.Armors)
+                $scope.currentCharacter.Armors = [];
+            $scope.currentCharacter.armors.push($scope.currentArmor);
+            $scope.isAddingArmor = false;
+            $scope.closeDialog(e.srcElement.parentNode);
+            $scope.checkAchievemensArmors($scope.currentArmor);
+            $scope.saveCharacters()
+        } else {
+            console.log($scope.currentCharacter +"'"+ $scope.currentArmor +"'"+ $scope.currentArmor.name);
+            $scope.toast(":(", "You should at least provide a name for your Armor")
+        }
+    };
+    $scope.deleteArmor = function (e) {
+        if (!$scope.isAddingArmor && $scope.currentArmor) {
+            for (var i = 0; len = $scope.currentCharacter.Armors.length, i < len; i++) {
+                if ($scope.currentCharacter.Armors[i].name == $scope.currentArmor.name && $scope.currentCharacter.Armors[i].damages == $scope.currentArmor.damages) {
+                    $scope.toast("Information", "We have removed your " + $scope.currentArmor.name + " from your Armors");
+                    $scope.currentCharacter.Armors.remove(i);
+                    $scope.currentArmor = null;
+                    $scope.closeDialog(e.srcElement.parentNode);
+                    $scope.saveCharacters();
+                    return
+                }
+            }
+        }
+    };
         $scope.checkAchievemensWeapons = function (weapon) {
             if ($scope.currentCharacter) {
                 if (weapon.damages >= 9) {
@@ -8354,7 +8403,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         $scope.selectChoice = function (type, choice) {
             console.log(type, choice);
             if (type == "species") {
-                $scope.currentCharacter.species = choice.name
+                $scope.currentCharacter.species = choice.name;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                 var speciesObj = findSpeciesObjByName($scope.currentCharacter.species);
                 if(speciesObj){
                     //set all the basics
@@ -8366,19 +8415,22 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                     $scope.currentCharacter.cunning=speciesObj.Cun;
                     $scope.currentCharacter.willpower=speciesObj.Will;
                     $scope.currentCharacter.presence=speciesObj.Presence;
+                    $scope.currentCharacter.encumbrance=speciesObj.Brawn+5;
+                    $scope.currentCharacter.totalWounds = 9 + speciesObj.Brawn;
+                    $scope.currentCharacter.totalStrain = 9 + speciesObj.Will;
                 }
             } else if (type == "careers") {
                 $scope.currentCharacter.career = choice.name
             } else if (type == "skills") {
                 $scope.currentSkill.name = choice.name
             } else if (type == "weaponsName") {
-                $scope.currentWeapon.name = choice.name
+                $scope.currentWeapon.name = choice.name;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                 var weaponObj;
                 $.getJSON("/weapon?name="+$scope.currentWeapon.name , function(weaponObj){
                     //$scope.currentCharacter.currentWeapon
                     console.log(weaponObj);
                     console.log($scope.currentWeapon.name = weaponObj.weaponName);
-                    console.log($scope.currentWeapon.critique = weaponObj.critical);
+                    console.log($scope.currentWeapon.critical = weaponObj.critical);
                     console.log($scope.currentWeapon.damages = weaponObj.damage);
                     console.log($scope.currentWeapon.HP = weaponObj.hp);
                     console.log($scope.currentWeapon.range = weaponObj.wepRange);
@@ -8386,7 +8438,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                     console.log($scope.currentWeapon.special = weaponObj.special);
                 });
             }else if (type == "weaponsSkill") {
-                $scope.currentWeapon.skill = choice.name
+                $scope.currentWeapon.skill = choice.name;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                 //var weaponObj = findWeaponSkillByName(choice.name)
             } else if (type == "specializations") {
                 $scope.currentCharacter.specializationTrees = choice.name

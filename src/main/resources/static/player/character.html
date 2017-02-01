@@ -356,7 +356,7 @@
                     <li ng-click="selectWeapon($index)"><h4>{{weapon.name}}</h4><br/>
                         Damages: <span class="brown">{{weapon.damages}}</span><br/>
                         <em>{{weapon.skill}}</em><br/><br/>
-                        Critique: <span class="brown">{{weapon.critique}}</span><br/>
+                        Critical: <span class="brown">{{weapon.critical}}</span><br/>
                         Range: <span class="brown">{{weapon.range}}</span><br/>
                         HP: <span class="brown">{{weapon.HP}}</span><br/>
                         Mods: <span class="brown">{{weapon.mods}}</span><br/>
@@ -366,6 +366,22 @@
                 </ul>
                 <br/>
                 <button ng-click="addWeapon();">Add a weapon</button>
+            </div>
+            <div class="characterGroupItem  transition" ng-show="currentCharacter">
+                <h2>Armors</h2>
+                <br/>
+                <ul ng-repeat="armor in currentCharacter.armor  track by $index">
+                    <li ng-click="selectWeapon($index)"><h4>{{armor.name}}</h4><br/>
+                        Defense: <span class="brown">{{armor.defense}}</span><br/>
+                        Soak: <span class="brown">{{armor.soak}}</span><br/>
+                        Encum: <span class="brown">{{armor.encum}}</span><br/>
+                        HP: <span class="brown">{{armor.HP}}</span><br/>
+                        Mods: <span class="brown">{{armor.mods}}</span><br/>
+                        <hr/>
+                    </li>
+                </ul>
+                <br/>
+                <button ng-click="addArmor();">Add an Armor</button>
             </div>
             <div class="characterGroupItem  transition" ng-show="currentCharacter">
                 <h2>Equipments</h2>
@@ -526,8 +542,8 @@
         </p>
 
         <p>
-            <label for="weaponCrit">Critique</label><br/>
-            <input type="number" id="weaponCrit" placeholder="Critique" ng-model="currentWeapon.critique"/>
+            <label for="weaponCrit">critical</label><br/>
+            <input type="number" id="weaponCrit" placeholder="critical" ng-model="currentWeapon.critical"/>
         </p>
 
         <p>
@@ -703,6 +719,68 @@
         <p class="license">
             Legal jargon goes here.
 
+        </p>
+    </div>
+</div>
+<div class="dialog" id="armorDialog" accesskey="a">
+    <header>armor<span class="dialogClose" ng-click="closeDialog($event); saveCharacters(); ">X</span></header><div style="float: right"></div>
+    <div>
+        <p>
+            <label for="armorName">Name</label><br/>
+            <input type="text" id="armorName" placeholder="Name" ng-change="autoComplete('armorName');" ng-model="currentarmor.name"/>
+        <div id="armorNameAutocomplete" class="autocompleteBox" ng-show="autoChoices && currentAuto == 'armorName'">
+            <ul ng-repeat="choice in autoChoices">
+                <li ng-click="selectChoice('armorName', choice);">{{choice.name}}</li>
+            </ul>
+        </div>
+        </p>
+
+        <p>
+            <label for="armorskill">Skill</label><br/>
+            <input type="text" id="armorskill" placeholder="Skill" ng-change="autoComplete('armorSkill');"
+                   ng-model="currentarmor.skill"/>
+
+        <div id="armorSkillAutocomplete" class="autocompleteBox" ng-show="autoChoices && currentAuto == 'armorSkill'">
+            <ul ng-repeat="choice in autoChoices">
+                <li ng-click="selectChoice('armorSkill', choice);">{{choice.name}}</li>
+            </ul>
+        </div>
+        </p>
+        <p>
+            <label for="armorSoak">Soak</label><br/>
+            <input type="number" id="armorSoak" placeholder="Soak" ng-model="currentArmor.soak"/>
+        </p>
+
+        <p>
+            <label for="armorDef">Defense</label><br/>
+            <input type="number" id="armorDef" placeholder="Defense" ng-model="currentArmor.defense"/>
+        </p>
+
+        <p>
+            <label for="armorEncum">Encumbrance</label><br/>
+            <input type="number" id="armorEncum" placeholder="Encum" ng-model="currentArmor.encum"/>
+        </p>
+
+        <p>
+            <label for="armorHP">HP</label><br/>
+            <input type="number" id="armorHP" placeholder="HP" ng-model="currentArmor.HP"/>
+        </p>
+
+        <p>
+            <label for="armorMods">Mods</label><br/>
+            <input type="text" id="armorMods" placeholder="Mods" ng-model="currentArmor.mods"/>
+        </p>
+
+        <p>
+            <label for="armorpecial">Special</label><br/>
+            <input type="text" id="armorpecial" placeholder="Special" ng-model="currentArmor.special"/>
+        </p>
+
+        <p>
+            <button ng-click="submitAddArmor($event);" ng-show="isAddingArmor">Validate</button>
+        </p>
+        <p>
+            <button ng-click="deleteArmor($event);" ng-hide="isAddingArmor">Remove</button>
         </p>
     </div>
 </div>

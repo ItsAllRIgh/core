@@ -98,7 +98,7 @@ public class RestfulPlayer {
       }
 
       // Find the new one/update all entries
-      if(null != group || group.length<1){
+      if(null != group || group.length>0){
          Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
          String username = null;
          if (principal instanceof UserDetails) {
@@ -111,8 +111,34 @@ public class RestfulPlayer {
          if(username != null){
             User activeUser = userRepository.findByUserName(username);
             if(activeUser != null){
+               for(Player p : group){
+                  if(p.id != null){
+                     p.id = null;
+                  }
+               }
                list = new ArrayList<Player>(Arrays.asList(group));
                List<Player> currentList = activeUser.getPlayers();
+               playerRepository.save(list);
+               if(currentList.size()>0){
+                  for(Player player: group){
+                     //player.userName = activeUser.userName;
+                     activeUser.getPlayers().add(player);
+                  }
+                  System.out.print("Found a player: "+ currentList.get(0));
+                  if(currentList.size()>1){
+                     System.out.print("trixy hobbitesess");
+                  }
+                  if(userRepository != null) {
+                     userRepository.save(activeUser);
+                  }
+               }else{
+                  currentList.addAll(list);
+                  if(userRepository != null){
+                     if(list != null)
+                     userRepository.save(activeUser);
+                  }
+               }
+
             }
          }
       }

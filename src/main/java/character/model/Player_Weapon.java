@@ -26,7 +26,7 @@ public class Player_Weapon implements Serializable {
     @Column(name = "WEP_RANGE")
     String range = "";
     int damages = 2;
-    @JsonProperty(value = "critique")
+    @JsonProperty(value = "critical")
     int crit = 0;
     @JsonProperty(value = "HP")
     int HP = 0;
