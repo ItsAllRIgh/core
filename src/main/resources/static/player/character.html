@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- May the Force be with You     -->
-<html class="ng-app" ng-app="empire" manifest="manifest.appcache" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html class="ng-app" ng-app="empire" manifest="manifest.appcache" xmlns="http://www.w3.org/1999/xhtml"
+>
 <headers>
     <frame-options
-            policy="SAMEORIGIN" />
+            policy="SAMEORIGIN"/>
 </headers>
 <head>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,8 +60,8 @@
                  ng-click="backToCharacters()"/>
 
             <h3>Empire Legends</h3>
-            <div  alt="Share" class="actionbarIcon transition fright"
-                  ng-click="shareExploit()"></div>
+            <div alt="Share" class="actionbarIcon transition fright"
+                 ng-click="shareExploit()"></div>
         </header>
         <div class="twoBlocksLeft">
             <div id="characterBasicsDiv" class="characterGroupItem  transition">
@@ -430,6 +430,14 @@
                     {{ currentCharacter.obligations }}
                     <br/>
 
+                    <h3>Duties</h3>
+                    {{ currentCharacter.duty }}
+                    <br/>
+
+                    <h3>Morality</h3>
+                    {{ currentCharacter.morality }}
+                    <br/>
+
                     <h3>Motivations</h3>
                     {{ currentCharacter.motivations }}
                 </div>
@@ -443,6 +451,16 @@
                         <p>
                             <label for="obligationsText">Obligations</label><br/>
                             <textarea id="obligationsText" ng-model="currentCharacter.obligations"></textarea>
+                        </p>
+
+                        <p>
+                            <label for="dutiesText">Duties</label><br/>
+                            <textarea id="dutiesText" ng-model="currentCharacter.duties"></textarea>
+                        </p>
+
+                        <p>
+                            <label for="moralityText">Morality</label><br/>
+                            <textarea id="moralityText" ng-model="currentCharacter.morality"></textarea>
                         </p>
 
                         <p>
@@ -542,8 +560,8 @@
         </p>
 
         <p>
-            <label for="weaponCrit">critical</label><br/>
-            <input type="number" id="weaponCrit" placeholder="critical" ng-model="currentWeapon.critical"/>
+            <label for="weaponCrit">Critical</label><br/>
+            <input type="number" id="weaponCrit" placeholder="Critical" ng-model="currentWeapon.critical"/>
         </p>
 
         <p>
@@ -571,6 +589,53 @@
         </p>
         <p>
             <button ng-click="deleteWeapon($event);" ng-hide="isAddingWeapon">Remove</button>
+        </p>
+    </div>
+</div>
+<div class="dialog" id="armorDialog" accesskey="a">
+    <header>Armors<span class="dialogClose" ng-click="closeDialog($event); saveCharacters(); ">X</span></header>
+    <div>
+        <p>
+            <label for="armorName">Name</label><br/>
+            <input type="text" id="armorName" placeholder="Name" ng-model="currentArmor.name"/>
+        </p>
+
+        </p>
+        <p>
+            <label for="armorDamages">Soak</label><br/>
+            <input type="number" id="armorDamages" placeholder="Soak" ng-model="currentArmor.soak"/>
+        </p>
+
+        <p>
+            <label for="armorDef">Defense</label><br/>
+            <input type="number" id="armorDef" placeholder="Defense" ng-model="currentArmor.defense"/>
+        </p>
+
+        <p>
+            <label for="armorRange">Range</label><br/>
+            <input type="number" id="armorRange" placeholder="Encum" ng-model="currentArmor.range"/>
+        </p>
+
+        <p>
+            <label for="armorHP">HP</label><br/>
+            <input type="number" id="armorHP" placeholder="HP" ng-model="currentArmor.HP"/>
+        </p>
+
+        <p>
+            <label for="armorMods">Mods</label><br/>
+            <input type="text" id="armorMods" placeholder="Mods" ng-model="currentArmor.mods"/>
+        </p>
+
+        <p>
+            <label for="armorSpecial">Special</label><br/>
+            <input type="text" id="armorSpecial" placeholder="Special" ng-model="currentArmor.special"/>
+        </p>
+
+        <p>
+            <button ng-click="submitAddArmor($event);" ng-show="isAddingArmor">Validate</button>
+        </p>
+        <p>
+            <button ng-click="deleteArmor($event);" ng-hide="isAddingArmor">Remove</button>
         </p>
     </div>
 </div>
@@ -681,6 +746,7 @@
             <strong>Quick Access</strong><br/>
             <span class="brown">Alt+S</span> skills<br/>
             <span class="brown">Alt+W</span> &nbsp;weapons<br/>
+            <span class="brown">Alt+A</span> &nbsp;armor<br/>
             <span class="brown">Alt+T</span> talents<br/>
             <span class="brown">Alt+H</span> share an exploit<br/>
         </p>
@@ -719,68 +785,6 @@
         <p class="license">
             Legal jargon goes here.
 
-        </p>
-    </div>
-</div>
-<div class="dialog" id="armorDialog" accesskey="a">
-    <header>armor<span class="dialogClose" ng-click="closeDialog($event); saveCharacters(); ">X</span></header><div style="float: right"></div>
-    <div>
-        <p>
-            <label for="armorName">Name</label><br/>
-            <input type="text" id="armorName" placeholder="Name" ng-change="autoComplete('armorName');" ng-model="currentarmor.name"/>
-        <div id="armorNameAutocomplete" class="autocompleteBox" ng-show="autoChoices && currentAuto == 'armorName'">
-            <ul ng-repeat="choice in autoChoices">
-                <li ng-click="selectChoice('armorName', choice);">{{choice.name}}</li>
-            </ul>
-        </div>
-        </p>
-
-        <p>
-            <label for="armorskill">Skill</label><br/>
-            <input type="text" id="armorskill" placeholder="Skill" ng-change="autoComplete('armorSkill');"
-                   ng-model="currentarmor.skill"/>
-
-        <div id="armorSkillAutocomplete" class="autocompleteBox" ng-show="autoChoices && currentAuto == 'armorSkill'">
-            <ul ng-repeat="choice in autoChoices">
-                <li ng-click="selectChoice('armorSkill', choice);">{{choice.name}}</li>
-            </ul>
-        </div>
-        </p>
-        <p>
-            <label for="armorSoak">Soak</label><br/>
-            <input type="number" id="armorSoak" placeholder="Soak" ng-model="currentArmor.soak"/>
-        </p>
-
-        <p>
-            <label for="armorDef">Defense</label><br/>
-            <input type="number" id="armorDef" placeholder="Defense" ng-model="currentArmor.defense"/>
-        </p>
-
-        <p>
-            <label for="armorEncum">Encumbrance</label><br/>
-            <input type="number" id="armorEncum" placeholder="Encum" ng-model="currentArmor.encum"/>
-        </p>
-
-        <p>
-            <label for="armorHP">HP</label><br/>
-            <input type="number" id="armorHP" placeholder="HP" ng-model="currentArmor.HP"/>
-        </p>
-
-        <p>
-            <label for="armorMods">Mods</label><br/>
-            <input type="text" id="armorMods" placeholder="Mods" ng-model="currentArmor.mods"/>
-        </p>
-
-        <p>
-            <label for="armorpecial">Special</label><br/>
-            <input type="text" id="armorpecial" placeholder="Special" ng-model="currentArmor.special"/>
-        </p>
-
-        <p>
-            <button ng-click="submitAddArmor($event);" ng-show="isAddingArmor">Validate</button>
-        </p>
-        <p>
-            <button ng-click="deleteArmor($event);" ng-hide="isAddingArmor">Remove</button>
         </p>
     </div>
 </div>

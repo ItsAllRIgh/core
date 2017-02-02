@@ -7686,6 +7686,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             }
 
         };
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     var baseCharacter = {
         id: 0,
         name: "",
@@ -7708,22 +7709,111 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         willpower: 3,
         presence: 3,
         gender: "",
-        age: 18,
+        age: 0,
         height: "",
         eyes: "",
         hair: "",
         other: "",
-        credits: 0,
+        credits: 500,
         equipments: "",
         skills: [],
         weapons: [],
         talents: [],
+        gear: [],
+        armor: [],
         achievements: "21-",
         selectedAchievement: 0,
         world: "",
-        encumbrance: "",
+        encumbrance: 0,
         force: 0
-    };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    };
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
+    ;
         $scope.addCharacter = function () {
             $scope.currentCharacter = baseCharacter;
             $scope.characters.push($scope.currentCharacter);

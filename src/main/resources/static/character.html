@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!-- May the Force be with You     -->
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      class="ng-app" ng-app="empire" manifest="manifest.appcache"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html
+        class="ng-app" ng-app="empire" manifest="manifest.appcache"
+        xmlns="http://www.w3.org/1999/xhtml">
 <headers>
     <frame-options
             policy="SAMEORIGIN"/>
@@ -417,6 +417,14 @@
                     {{ currentCharacter.obligations }}
                     <br/>
 
+                    <h3>Duties</h3>
+                    {{ currentCharacter.duty }}
+                    <br/>
+
+                    <h3>Morality</h3>
+                    {{ currentCharacter.morality }}
+                    <br/>
+
                     <h3>Motivations</h3>
                     {{ currentCharacter.motivations }}
                 </div>
@@ -430,6 +438,16 @@
                         <p>
                             <label for="obligationsText">Obligations</label><br/>
                             <textarea id="obligationsText" ng-model="currentCharacter.obligations"></textarea>
+                        </p>
+
+                        <p>
+                            <label for="dutiesText">Duties</label><br/>
+                            <textarea id="dutiesText" ng-model="currentCharacter.duties"></textarea>
+                        </p>
+
+                        <p>
+                            <label for="moralityText">Morality</label><br/>
+                            <textarea id="moralityText" ng-model="currentCharacter.morality"></textarea>
                         </p>
 
                         <p>
@@ -556,6 +574,53 @@
         </p>
     </div>
 </div>
+<div class="dialog" id="armorDialog" accesskey="w">
+    <header>Armors<span class="dialogClose" ng-click="closeDialog($event); saveCharacters(); ">X</span></header>
+    <div>
+        <p>
+            <label for="armorName">Name</label><br/>
+            <input type="text" id="armorName" placeholder="Name" ng-model="currentArmor.name"/>
+        </p>
+
+        </p>
+        <p>
+            <label for="armorDamages">Soak</label><br/>
+            <input type="number" id="armorDamages" placeholder="Soak" ng-model="currentArmor.soak"/>
+        </p>
+
+        <p>
+            <label for="armorDef">Defense</label><br/>
+            <input type="number" id="armorDef" placeholder="Defense" ng-model="currentArmor.defense"/>
+        </p>
+
+        <p>
+            <label for="armorRange">Range</label><br/>
+            <input type="number" id="armorRange" placeholder="Encum" ng-model="currentArmor.range"/>
+        </p>
+
+        <p>
+            <label for="armorHP">HP</label><br/>
+            <input type="number" id="armorHP" placeholder="HP" ng-model="currentArmor.HP"/>
+        </p>
+
+        <p>
+            <label for="armorMods">Mods</label><br/>
+            <input type="text" id="armorMods" placeholder="Mods" ng-model="currentArmor.mods"/>
+        </p>
+
+        <p>
+            <label for="armorSpecial">Special</label><br/>
+            <input type="text" id="armorSpecial" placeholder="Special" ng-model="currentArmor.special"/>
+        </p>
+
+        <p>
+            <button ng-click="submitAddArmor($event);" ng-show="isAddingArmor">Validate</button>
+        </p>
+        <p>
+            <button ng-click="deleteArmor($event);" ng-hide="isAddingArmor">Remove</button>
+        </p>
+    </div>
+</div>
 <div class="dialog" id="talentsDialog" accesskey="t">
     <header>Talents<span class="dialogClose" ng-click="closeDialog($event); saveCharacters();">X</span></header>
     <div>
@@ -663,6 +728,7 @@
             <strong>Quick Access</strong><br/>
             <span class="brown">Alt+S</span> skills<br/>
             <span class="brown">Alt+W</span> &nbsp;weapons<br/>
+            <span class="brown">Alt+A</span> &nbsp;armor<br/>
             <span class="brown">Alt+T</span> talents<br/>
             <span class="brown">Alt+H</span> share an exploit<br/>
         </p>

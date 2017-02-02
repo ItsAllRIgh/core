@@ -70,6 +70,8 @@ public class Player implements Serializable {
     public String hashKey="006";
     public String background="BACKGROUND";
     public String obligations="OBLIGATIONS";
+    public String morality = "DUTY";
+    public String duty = "DUTY";
     public String motivations="MOTIVATIONS";
     @Transient
     public String achievements;
@@ -233,6 +235,38 @@ public class Player implements Serializable {
 
     public void setSoak(int soak) {
         this.soak = soak;
+    }
+
+    public List<Armor> getArmor() {
+        return armor;
+    }
+
+    public void setArmor(List<Armor> armor) {
+        this.armor = armor;
+    }
+
+    public List<Gear> getGear() {
+        return gear;
+    }
+
+    public void setGear(List<Gear> gear) {
+        this.gear = gear;
+    }
+
+    public String getMorality() {
+        return morality;
+    }
+
+    public void setMorality(String morality) {
+        this.morality = morality;
+    }
+
+    public String getDuty() {
+        return duty;
+    }
+
+    public void setDuty(String duty) {
+        this.duty = duty;
     }
 
     public int getCurrentWounds() {
