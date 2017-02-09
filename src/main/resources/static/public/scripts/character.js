@@ -7546,13 +7546,30 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                 $scope.openDialog("CGUDialog")
             }
         };
+    $scope.synchList = {};
         $scope.loadCharacters = function () {
             try {
                 var json = localStorage.getItem("characters");
                 if (json) {
-                    $scope.characters = JSON.parse(json);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                    console.log($scope.characters[0])
+                    console.log("HERE IS WHEN YOU GET FROM SERVER");
+                    var jdata = [];
+                    $.getJSON("/getMyChars", function (data) {
+                        jdata = data;
+                        console.log(data);
+                    });
+                } else {
+                    $.getJSON("/getMyChars", function (data) {
+                        json = data;
+                        console.log(json);
+                        if (json)
+                            $scope.characters = [json];
+                    });
                 }
+                if (json) {
+                    $scope.characters = [json];
+                    console.log($scope.characters)
+                }
+                console.log(jdata);
             } catch (e) {
                 $scope.toast("Disturbance", "Our droids are not able to retrieve your characters")
             }
@@ -7693,7 +7710,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         species: "",
         career: "",
         specializationTrees: "",
-        avatar: "http://empire-legends.herokuapp.com/public/gfx/pash.png",
+        avatar: "",
         currentXP: 0,
         totalXP: 0,
         soak: 0,
@@ -7702,12 +7719,12 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         currentStrain: 0,
         totalStrain: 0,
         defense: 0,
-        brawn: 3,
-        agility: 3,
-        intellect: 3,
-        cunning: 3,
-        willpower: 3,
-        presence: 3,
+        brawn: 0,
+        agility: 0,
+        intellect: 0,
+        cunning: 0,
+        willpower: 0,
+        presence: 0,
         gender: "",
         age: 0,
         height: "",
@@ -7721,101 +7738,15 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         talents: [],
         gear: [],
         armor: [],
-        achievements: "21-",
+        achievements: "",
         selectedAchievement: 0,
         world: "",
         encumbrance: 0,
         force: 0
     };
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-    ;
-        $scope.addCharacter = function () {
+    $scope.addCharacter = function () {
             $scope.currentCharacter = baseCharacter;
+        console.log($scope.characters);
             $scope.characters.push($scope.currentCharacter);
             $scope.selectCharacter($scope.characters.length - 1)
         };
@@ -7975,11 +7906,11 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                 bookIndex:0,
                 restricted:0,
                 mods:""
-            };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            };
             $scope.isAddingArmor = true;
             $scope.openDialog("armorDialog")
-        };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        $scope.addWeapon = function () {
+        };
+    $scope.addWeapon = function () {
             $scope.currentWeapon = {
                 name: "",
                 skill: "",
@@ -8335,7 +8266,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         };
         $scope.loadAchievements = function () {
             var achievementsFromCache = $scope.cache.getItem("achievements"),
-                url = "public/data/achievements.json";
+                url = "../public/data/achievements.json";
             if (achievementsFromCache === null) {
                 $http.get(url).success(function (data) {
                     if (typeof data !== "undefined") {
@@ -8493,7 +8424,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         $scope.selectChoice = function (type, choice) {
             console.log(type, choice);
             if (type == "species") {
-                $scope.currentCharacter.species = choice.name;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                $scope.currentCharacter.species = choice.name;
                 var speciesObj = findSpeciesObjByName($scope.currentCharacter.species);
                 if(speciesObj){
                     //set all the basics
@@ -8514,7 +8445,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             } else if (type == "skills") {
                 $scope.currentSkill.name = choice.name
             } else if (type == "weaponsName") {
-                $scope.currentWeapon.name = choice.name;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                $scope.currentWeapon.name = choice.name;
                 var weaponObj;
                 $.getJSON("/weapon?name="+$scope.currentWeapon.name , function(weaponObj){
                     //$scope.currentCharacter.currentWeapon
@@ -8528,7 +8459,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                     console.log($scope.currentWeapon.special = weaponObj.special);
                 });
             }else if (type == "weaponsSkill") {
-                $scope.currentWeapon.skill = choice.name;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                $scope.currentWeapon.skill = choice.name;
                 //var weaponObj = findWeaponSkillByName(choice.name)
             } else if (type == "specializations") {
                 $scope.currentCharacter.specializationTrees = choice.name

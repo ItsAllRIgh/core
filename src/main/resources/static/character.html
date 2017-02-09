@@ -41,7 +41,7 @@
                 <span class="fleft"><h3>Create a character</h3>And may the Force be with them . . .</span>
             </div>
             <!-- ngRepeat: character in characters -->
-            <ul ng-repeat="character in characters">
+            <ul ng-repeat="character in characters  track by $index">
                 <li ng-click="selectCharacter($index)"><img ng-src="{{character.avatar}}"
                                                             alt="{{character.name}}" class="avatar"/>
 

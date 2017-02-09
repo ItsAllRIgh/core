@@ -6,19 +6,17 @@ import character.model.Player;
 import character.model.User;
 import character.repository.BookArmorRepository;
 import character.repository.BookWeaponsRepository;
-import character.repository.UserRepository;
 import character.repository.PlayerRepository;
+import character.repository.UserRepository;
+import character.util.PlayerBo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -58,6 +56,16 @@ public class RestfulPlayer {
       }
 
       return null;
+   }
+
+   @RequestMapping(value = "/player/synch", method = RequestMethod.POST)
+   public List<Player> synchMyChars(@RequestBody List<Player> players, Principal user) {
+      if (user != null) {
+         User internalUser = userRepository.findByUserName(user.getName());
+         System.err.println("CREATING BO!");
+         PlayerBo playerBo = new PlayerBo(internalUser);
+      }
+      return players;
    }
 
    @RequestMapping(value="/newChar", method = RequestMethod.POST)

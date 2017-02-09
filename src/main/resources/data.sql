@@ -28,34 +28,38 @@ INSERT INTO legends.user_role (user_id, role_id) VALUES ('GM', 2);
 INSERT INTO legends.species (agility, brawn, cun, exp, intellect, presence, strain, will, wound, name) VALUES (1, 1, 1, 175, 1, 1, 1, 1, 1, 'Droid');
 INSERT INTO legends.user (username, character_service, has_authorities, starfish, password_confirm, password) VALUES ('Soappopotamus', NULL, 0, '$2a$10$JxHEX7a7k/JGhIMmCTHO2e6rl5YXwfEqoy9LQ74iea/B/7oxQpIPa', 'Abrakadabra1!', 'f2f399b2-4074-4660-8221-742d5dd0849d');
 INSERT INTO legends.user_role (user_id, role_id) VALUES ('Soappopotamus', 1);
-INSERT INTO legends.user_character (age, agility, avatar, background, brawn, career, credits, cunning, current_strain, current_wounds, currentxp, defense, encumbrance, equipments, eyes, force_powers, gender, hair, hash_key, height, intellect, motivations, name, obligations, other, presence, soak, specialization, total_strain, total_wounds, totalxp, user_name, willpower, species_id) VALUES (37, 3, 'http://empire-legends.herokuapp.com/public/gfx/pash.png', 'BACKGROUND', 2, 'Soldier', 1149, 1, 0, 0, 0, '0', 0, 'Riot Armor (Built In) +2 Soak
+INSERT INTO legends.user_character (age, agility, avatar, background, brawn, career, credits, cunning, current_strain, current_wounds, currentxp, defense, encumbrance, equipments, eyes, force_powers, gender, hair, hash_key, height, intellect, motivations, name, obligations, other, presence, soak, specialization, total_strain, total_wounds, totalxp, user_name, willpower, duty, morality)
+VALUES
+  (37, 3, 'http://empire-legends.herokuapp.com/public/gfx/pash.png', 'BACKGROUND', 2, 'Soldier', 1149, 1, 0, 0, 0, '0',
+                                                                                                                   0, 'Riot Armor (Built In) +2 Soak
 Stimpack x2
 Emergency Repair patch x2
 Handheld Comlink (built in)
 Med Pack', 'Yes', 0, 'Robit', 'Metal', '006', '6''6"', 3, 'Quest: Vengeance', 'SR-02', 'Dutybound: 50
 
-Duty: Personell', '', 1, 5, 'Medic', 12, 12, 195, '', 2, 1);
+Duty: Personell', '', 1, 5, 'Medic', 12, 12, 195, '', 2, 'DUTY', 'yeah');
+
 INSERT INTO legends.skill (id, career, name, rank) VALUES (1, true, 'Computers (Int)', 2);
 INSERT INTO legends.skill (id, career, name, rank) VALUES (2, true, 'Medicine (Int)', 2);
 INSERT INTO legends.skill (id, career, name, rank) VALUES (3, true, 'Vigilance (Will)', 1);
 INSERT INTO legends.skill (id, career, name, rank) VALUES (4, true, 'Ranged - Light (Ag)', 1);
 INSERT INTO legends.skill (id, career, name, rank) VALUES (5, true, 'Ranged - Heavy (Ag)', 1);
 INSERT INTO legends.skill (id, career, name, rank) VALUES (6, true, 'Knowledge GCW(Int)', 1);
-INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (6, 1);
-INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (6, 2);
-INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (6, 3);
-INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (6, 4);
-INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (6, 5);
-INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (6, 6);
+INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (1, 1);
+INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (1, 2);
+INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (1, 3);
+INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (1, 4);
+INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (1, 5);
+INSERT INTO legends.user_character_skills (player_id, skills_id) VALUES (1, 6);
 INSERT INTO legends.talent (id, name, summary) VALUES (1, 'Enduring', '+1 Soak');
 INSERT INTO legends.talent (id, name, summary) VALUES (2, 'Forager', 'Remove 2 black to find food/water/shelter. Survival checks take 1/2 time');
 INSERT INTO legends.talent (id, name, summary) VALUES (3, 'Toughened', '+2 Wounds');
 INSERT INTO legends.talent (id, name, summary) VALUES (4, 'Well Rounded', '2 skills become class skills (computers & Mechanic)');
 INSERT INTO legends.talent (id, name, summary) VALUES (5, 'Stimpack Specialization', 'Stimpack heals +1');
 INSERT INTO legends.talent (id, name, summary) VALUES (6, 'Surgeon', 'Medicine check +1 wound healed');
-INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (6, 1);
-INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (6, 2);
-INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (6, 3);
-INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (6, 4);
-INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (6, 5);
-INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (6, 6);
+INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (1, 1);
+INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (1, 2);
+INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (1, 3);
+INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (1, 4);
+INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (1, 5);
+INSERT INTO legends.user_character_talents (player_id, talents_id) VALUES (1, 6);
