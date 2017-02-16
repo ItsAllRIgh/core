@@ -1,48 +1,410 @@
-var speciesList = [{"book_species_id":1, "Species":"Chiss", "Brawn":2, "Agility":2, "Int":3, "Cun":2, "Will":2, "Presence":1, "EXP":100},
-    {"book_species_id":2, "Species":"Duros", "Brawn":1, "Agility":2, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":100},
-    {"book_species_id":3, "Species":"Toydarian", "Brawn":1, "Agility":1, "Int":2, "Cun":2, "Will":3, "Presence":3, "EXP":90},
-    {"book_species_id":4, "Species":"Bothan", "Brawn":1, "Agility":2, "Int":2, "Cun":3, "Will":2, "Presence":2, "EXP":100},
-    {"book_species_id":5, "Species":"Droid", "Brawn":1, "Agility":1, "Int":1, "Cun":1, "Will":1, "Presence":1, "EXP":175},
-    {"book_species_id":6, "Species":"Gand", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":100},
-    {"book_species_id":7, "Species":"Human", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":2, "EXP":110},
-    {"book_species_id":8, "Species":"Rodian", "Brawn":2, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
-    {"book_species_id":9, "Species":"Trandoshan", "Brawn":3, "Agility":1, "Int":2, "Cun":2, "Will":2, "Presence":2, "EXP":90},
-    {"book_species_id":10, "Species":"Twi\u2019lek", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":3, "EXP":100},
-    {"book_species_id":11, "Species":"Wookiee", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":90},
-    {"book_species_id":12, "Species":"Hutt", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":70},
-    {"book_species_id":13, "Species":"Gank", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":2, "Presence":1, "EXP":110},
-    {"book_species_id":14, "Species":"Nikto", "Brawn":3, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":1, "EXP":100},
-    {"book_species_id":15, "Species":"Aqualish", "Brawn":3, "Agility":2, "Int":1, "Cun":2, "Will":2, "Presence":2, "EXP":90},
-    {"book_species_id":16, "Species":"Klatooinian", "Brawn":2, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
-    {"book_species_id":17, "Species":"Weequay", "Brawn":3, "Agility":2, "Int":1, "Cun":3, "Will":2, "Presence":1, "EXP":90},
-    {"book_species_id":18, "Species":"Arcona", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
-    {"book_species_id":19, "Species":"Chevin", "Brawn":3, "Agility":1, "Int":2, "Cun":3, "Will":2, "Presence":1, "EXP":80},
-    {"book_species_id":20, "Species":"Gran", "Brawn":2, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":3, "EXP":100},
-    {"book_species_id":21, "Species":"Falleen", "Brawn":2, "Agility":1, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":90},
-    {"book_species_id":22, "Species":"Gotal", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
-    {"book_species_id":23, "Species":"Quarren", "Brawn":2, "Agility":2, "Int":1, "Cun":2, "Will":3, "Presence":2, "EXP":95},
-    {"book_species_id":24, "Species":"Gran", "Brawn":2, "Agility":2, "Int":2, "Cun":1, "Will":2, "Presence":3, "EXP":100},
-    {"book_species_id":25, "Species":"Ithorian", "Brawn":2, "Agility":1, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":90},
-    {"book_species_id":26, "Species":"Mon Calamari", "Brawn":2, "Agility":2, "Int":3, "Cun":1, "Will":2, "Presence":2, "EXP":100},
-    {"book_species_id":27, "Species":"Sullustan", "Brawn":2, "Agility":3, "Int":2, "Cun":1, "Will":2, "Presence":2, "EXP":110},
-    {"book_species_id":28, "Species":"Chadra-fan", "Brawn":1, "Agility":3, "Int":3, "Cun":2, "Will":1, "Presence":2, "EXP":90},
-    {"book_species_id":29, "Species":"Dressellian", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":110},
-    {"book_species_id":30, "Species":"Xexto", "Brawn":1, "Agility":3, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":85},
-    {"book_species_id":31, "Species":"Cerean", "Brawn":2, "Agility":1, "Int":3, "Cun":2, "Will":2, "Presence":2, "EXP":90},
-    {"book_species_id":32, "Species":"Kel Dor", "Brawn":1, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":2, "EXP":100},
-    {"book_species_id":33, "Species":"Mirialan", "Brawn":2, "Agility":3, "Int":2, "Cun":1, "Will":2, "Presence":2, "EXP":100},
-    {"book_species_id":34, "Species":"Nautolan", "Brawn":3, "Agility":2, "Int":2, "Cun":2, "Will":1, "Presence":2, "EXP":100},
-    {"book_species_id":35, "Species":"Togruta", "Brawn":1, "Agility":2, "Int":2, "Cun":3, "Will":2, "Presence":2, "EXP":100},
-    {"book_species_id":36, "Species":"Zabrak", "Brawn":2, "Agility":2, "Int":2, "Cun":2, "Will":3, "Presence":1, "EXP":100}];
-function getCharacters(){
+var CharList = [];
+
+var speciesList = [{
+    "book_species_id": 1,
+    "Species": "Chiss",
+    "Brawn": 2,
+    "Agility": 2,
+    "Int": 3,
+    "Cun": 2,
+    "Will": 2,
+    "Presence": 1,
+    "EXP": 100
+},
+    {
+        "book_species_id": 2,
+        "Species": "Duros",
+        "Brawn": 1,
+        "Agility": 2,
+        "Int": 3,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 3,
+        "Species": "Toydarian",
+        "Brawn": 1,
+        "Agility": 1,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 3,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 4,
+        "Species": "Bothan",
+        "Brawn": 1,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 3,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 5,
+        "Species": "Droid",
+        "Brawn": 1,
+        "Agility": 1,
+        "Int": 1,
+        "Cun": 1,
+        "Will": 1,
+        "Presence": 1,
+        "EXP": 175
+    },
+    {
+        "book_species_id": 6,
+        "Species": "Gand",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 1,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 7,
+        "Species": "Human",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 110
+    },
+    {
+        "book_species_id": 8,
+        "Species": "Rodian",
+        "Brawn": 2,
+        "Agility": 3,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 1,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 9,
+        "Species": "Trandoshan",
+        "Brawn": 3,
+        "Agility": 1,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 10,
+        "Species": "Twi\u2019lek",
+        "Brawn": 1,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 3,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 11,
+        "Species": "Wookiee",
+        "Brawn": 3,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 1,
+        "Presence": 2,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 12,
+        "Species": "Hutt",
+        "Brawn": 3,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 2,
+        "EXP": 70
+    },
+    {
+        "book_species_id": 13,
+        "Species": "Gank",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 1,
+        "EXP": 110
+    },
+    {
+        "book_species_id": 14,
+        "Species": "Nikto",
+        "Brawn": 3,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 1,
+        "Will": 2,
+        "Presence": 1,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 15,
+        "Species": "Aqualish",
+        "Brawn": 3,
+        "Agility": 2,
+        "Int": 1,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 16,
+        "Species": "Klatooinian",
+        "Brawn": 2,
+        "Agility": 3,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 1,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 17,
+        "Species": "Weequay",
+        "Brawn": 3,
+        "Agility": 2,
+        "Int": 1,
+        "Cun": 3,
+        "Will": 2,
+        "Presence": 1,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 18,
+        "Species": "Arcona",
+        "Brawn": 1,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 19,
+        "Species": "Chevin",
+        "Brawn": 3,
+        "Agility": 1,
+        "Int": 2,
+        "Cun": 3,
+        "Will": 2,
+        "Presence": 1,
+        "EXP": 80
+    },
+    {
+        "book_species_id": 20,
+        "Species": "Gran",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 1,
+        "Will": 2,
+        "Presence": 3,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 21,
+        "Species": "Falleen",
+        "Brawn": 2,
+        "Agility": 1,
+        "Int": 3,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 22,
+        "Species": "Gotal",
+        "Brawn": 1,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 23,
+        "Species": "Quarren",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 1,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 2,
+        "EXP": 95
+    },
+    {
+        "book_species_id": 24,
+        "Species": "Gran",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 1,
+        "Will": 2,
+        "Presence": 3,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 25,
+        "Species": "Ithorian",
+        "Brawn": 2,
+        "Agility": 1,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 2,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 26,
+        "Species": "Mon Calamari",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 3,
+        "Cun": 1,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 27,
+        "Species": "Sullustan",
+        "Brawn": 2,
+        "Agility": 3,
+        "Int": 2,
+        "Cun": 1,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 110
+    },
+    {
+        "book_species_id": 28,
+        "Species": "Chadra-fan",
+        "Brawn": 1,
+        "Agility": 3,
+        "Int": 3,
+        "Cun": 2,
+        "Will": 1,
+        "Presence": 2,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 29,
+        "Species": "Dressellian",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 1,
+        "EXP": 110
+    },
+    {
+        "book_species_id": 30,
+        "Species": "Xexto",
+        "Brawn": 1,
+        "Agility": 3,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 1,
+        "Presence": 2,
+        "EXP": 85
+    },
+    {
+        "book_species_id": 31,
+        "Species": "Cerean",
+        "Brawn": 2,
+        "Agility": 1,
+        "Int": 3,
+        "Cun": 2,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 90
+    },
+    {
+        "book_species_id": 32,
+        "Species": "Kel Dor",
+        "Brawn": 1,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 33,
+        "Species": "Mirialan",
+        "Brawn": 2,
+        "Agility": 3,
+        "Int": 2,
+        "Cun": 1,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 34,
+        "Species": "Nautolan",
+        "Brawn": 3,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 1,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 35,
+        "Species": "Togruta",
+        "Brawn": 1,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 3,
+        "Will": 2,
+        "Presence": 2,
+        "EXP": 100
+    },
+    {
+        "book_species_id": 36,
+        "Species": "Zabrak",
+        "Brawn": 2,
+        "Agility": 2,
+        "Int": 2,
+        "Cun": 2,
+        "Will": 3,
+        "Presence": 1,
+        "EXP": 100
+    }];
+function getCharacters() {
     //TODO:GET CHARACTERS
 }
 
-function findSpeciesObjByName (name){
+function findSpeciesObjByName(name) {
     var find = null;
-        $.each(speciesList, function(key, obj){
+    $.each(speciesList, function (key, obj) {
         //console.log(obj.Species);
-        if(name.toLowerCase() === obj.Species.toLowerCase()){
+        if (name.toLowerCase() === obj.Species.toLowerCase()) {
             find = obj;
         }
     });
@@ -71,9 +433,9 @@ function connect() {
             showCharacter(character);
         });
         stompClient.subscribe('/topic/update', function (character) {
-            if(character.name == CURVAR.name)
+            if (character.name == CURVAR.name)
                 console.warn("UPDATE!!!!");
-                updateCharacter(character);
+            updateCharacter(character);
         });
     });
 }
@@ -95,7 +457,8 @@ function updateCharacter(character) {
 
 function sendCharacter(character) {
     //console.warn("Sending Characters");
-    $.post("/player/new", character, function(response){}, 'json');
+    $.post("/player/new", character, function (response) {
+    }, 'json');
 }
 function transferVisuals(character) {
     CURVAR = character;
@@ -7515,194 +7878,210 @@ var self;
 var App = angular.module("empire", ["ngTouch", "ngSanitize"]);
 
 var EmpireController = function ($scope, $http, $timeout, $sce) {
-        $scope.HOST = "";
-        $scope.cache = new Cache;
-        $scope.login;
-        $scope.password;
-        $scope.currentCharacter;
-        $scope.characters = [];
-        $scope.currentSkill;
-        $scope.currentWeapon;
-        $scope.currentTalent;
-        $scope.isAddingSkill = false;
-        $scope.isAddingWeapon = false;
-        $scope.isAddingTalent = false;
-        $scope.debug = false;
-        $scope.achievements = [];
-        self = $scope;
-        $scope.init = function () {
-            $scope.gid("mainContainer").style.display = "block";
-            console.log("TEST CHANGE");
-            $scope.displayLoadingIndicator();
-            $scope.loadCharacters();
-            $scope.loadCredentials();
-            $scope.loadAchievements();
-            if (window.location.hash.indexOf("character") != -1) {
-                var index = window.location.hash.replace(/#character/g, "");
-                $scope.selectCharacter(parseInt(index) - 1)
-            }
-            $scope.hideLoadingIndicator();
-            if (window.location.href.indexOf("#cgu") !== -1) {
-                $scope.openDialog("CGUDialog")
-            }
-        };
-    $scope.synchList = {};
-        $scope.loadCharacters = function () {
-            try {
-                var json = localStorage.getItem("characters");
-                if (json) {
-                    console.log("HERE IS WHEN YOU GET FROM SERVER");
-                    var jdata = [];
-                    $.getJSON("/getMyChars", function (data) {
-                        jdata = data;
-                        console.log(data);
-                    });
-                } else {
-                    $.getJSON("/getMyChars", function (data) {
-                        json = data;
-                        console.log(json);
-                        if (json)
-                            $scope.characters = [json];
-                    });
-                }
-                if (json) {
-                    $scope.characters = [json];
-                    console.log($scope.characters)
-                }
-                console.log(jdata);
-            } catch (e) {
-                $scope.toast("Disturbance", "Our droids are not able to retrieve your characters")
-            }
-        };
-        $scope.selectCharacter = function (index) {
-            //console.log(index);
-            $scope.currentCharacter = $scope.characters[index];
-            if ($scope.currentCharacter) {
-                $scope.onMainMenu = false;
-                $scope.onSelectedCharacter = true;
-                window.scrollTo(0, 0);
-                history.pushState({
-                    page: index
-                }, "Character", "#character" + (index + 1))
-            }
-            if (!angular.element(document.body.parentNode).hasClass("mobile")) {
-                $scope.openCharacterMenu()
-            }
-        };
-        $scope.saveCharacters = function () {
-            if ($scope.currentCharacter && $scope.currentCharacter.name && $scope.currentCharacter.name.length < 2) return;
-            try {
-                $scope.checkAchievements();
-                var json = JSON.stringify($scope.characters);
-                //.warn(json.toString());
-                $http.post('/updateCharList', json);
-                localStorage.setItem("characters", json)
-            } catch (e) {
-                $scope.toast("Disturbance", "Our droids have some problems to save your characters");
-                console.log("Error on save: " + e)
-            }
-        };
-        $scope.backToCharacters = function () {
-            if ($scope.currentCharacter && $scope.currentCharacter.name.length < 2) {
-                var index = -1;
-                for (var i = 0; len = $scope.characters.length, i < len; i++) {
-                    if ($scope.characters[i] && $scope.currentCharacter.name == $scope.characters[i].name) {
-                        index = i;
-                        break
+    $scope.HOST = "";
+    $scope.cache = new Cache;
+    $scope.login;
+    $scope.password;
+    $scope.currentCharacter;
+    $scope.characters = [];
+    $scope.currentSkill;
+    $scope.currentWeapon;
+    $scope.currentTalent;
+    $scope.isAddingSkill = false;
+    $scope.isAddingWeapon = false;
+    $scope.isAddingTalent = false;
+    $scope.debug = false;
+    $scope.achievements = [];
+    self = $scope;
+    $scope.init = function () {
+        $scope.gid("mainContainer").style.display = "block";
+        console.log("TEST CHANGE");
+        $scope.displayLoadingIndicator();
+        $scope.loadCharacters();
+        $scope.loadCredentials();
+        $scope.loadAchievements();
+        if (window.location.hash.indexOf("character") != -1) {
+            var index = window.location.hash.replace(/#character/g, "");
+            $scope.selectCharacter(parseInt(index) - 1)
+        }
+        $scope.hideLoadingIndicator();
+        if (window.location.href.indexOf("#cgu") !== -1) {
+            $scope.openDialog("CGUDialog")
+        }
+    };
+    $scope.synchList = CharList;
+    $scope.loadCharacters = function () {
+        try {
+            var json = localStorage.getItem("characters");
+            if (json) {
+                console.log("HERE IS WHEN YOU GET FROM SERVER");
+                var jdata = [];
+                $.getJSON("/getMyChars", function (data) {
+                    CharList = data;
+                    console.log(data);
+                }).done(function () {
+                    console.log("second success");
+                    if (json) {
+                        console.log(CharList);
+                        if (CharList) {
+                            $scope.characters = CharList;
+                        } else {
+                            $scope.characters = json;
+                        }
                     }
-                }
-                $scope.characters.remove(index)
+                });
+            } else {
+                $.getJSON("/getMyChars", function (data) {
+                    CharList = data;
+                    console.log(data);
+                }).done(function () {
+                    console.log("second success");
+                    if (json) {
+                        console.log(CharList);
+                        if (CharList) {
+                            $scope.characters = CharList;
+                        } else {
+                            $scope.characters = json;
+                        }
+                    }
+                });
             }
-            $scope.currentCharacter = null;
-            $scope.onSelectedCharacter = false;
+        } catch (e) {
+            $scope.toast("Disturbance", "Our droids are not able to retrieve your characters");
+            return false;
+        }
+        console.log($scope.synchList);
+        return true;
+    };
+    $scope.selectCharacter = function (index) {
+        //console.log(index);
+        $scope.currentCharacter = $scope.characters[index];
+        if ($scope.currentCharacter) {
+            $scope.onMainMenu = false;
+            $scope.onSelectedCharacter = true;
+            window.scrollTo(0, 0);
+            history.pushState({
+                page: index
+            }, "Character", "#character" + (index + 1))
+        }
+        if (!angular.element(document.body.parentNode).hasClass("mobile")) {
+            $scope.openCharacterMenu()
+        }
+    };
+    $scope.saveCharacters = function () {
+        if ($scope.currentCharacter && $scope.currentCharacter.name && $scope.currentCharacter.name.length < 2) return;
+        try {
+            $scope.checkAchievements();
+            var json = JSON.stringify($scope.characters);
+            //.warn(json.toString());
+            $http.post('/updateCharList', json);
+            localStorage.setItem("characters", json)
+        } catch (e) {
+            $scope.toast("Disturbance", "Our droids have some problems to save your characters");
+            console.log("Error on save: " + e)
+        }
+    };
+    $scope.backToCharacters = function () {
+        if ($scope.currentCharacter && $scope.currentCharacter.name.length < 2) {
+            var index = -1;
+            for (var i = 0; len = $scope.characters.length, i < len; i++) {
+                if ($scope.characters[i] && $scope.currentCharacter.name == $scope.characters[i].name) {
+                    index = i;
+                    break
+                }
+            }
+            $scope.characters.remove(index)
+        }
+        $scope.currentCharacter = null;
+        $scope.onSelectedCharacter = false;
         $scope.currentSpecies = null;
-            $scope.onMainMenu = true;
-            angular.element($scope.gid("mainScreenContainer")).removeClass("fadeIn fadeOut");
-            angular.element($scope.gid("mainScreenContainer")).addClass("fadeIn");
-            if ($scope.isMenuOpen) {
-                $scope.openCharacterMenu()
+        $scope.onMainMenu = true;
+        angular.element($scope.gid("mainScreenContainer")).removeClass("fadeIn fadeOut");
+        angular.element($scope.gid("mainScreenContainer")).addClass("fadeIn");
+        if ($scope.isMenuOpen) {
+            $scope.openCharacterMenu()
+        }
+        window.location.hash = ""
+    };
+    $scope.changeCredits = function (credits) {
+        if (credits != null) {
+            if (credits > $scope.currentCharacter.credits) {
+                $scope.toast("Gain of credits", "You gained " + credits - $scope.currentCharacter.credits + " credits");
+            } else {
+                $scope.toast("Loss of credits", "You lose " + $scope.currentCharacter.credits - credits + " credits");
             }
-            window.location.hash = ""
-        };
-        $scope.changeCredits = function (credits) {
-            if (credits != null) {
-                if (credits > $scope.currentCharacter.credits) {
-                    $scope.toast("Gain of credits", "You gained " + credits - $scope.currentCharacter.credits + " credits");
-                } else {
-                    $scope.toast("Loss of credits", "You lose " + $scope.currentCharacter.credits - credits + " credits");
-                }
-                $scope.currentCharacter.credits = credits;
+            $scope.currentCharacter.credits = credits;
+        }
+    };
+    $scope.changeStrain = function (strain) {
+        if (strain != null) {
+            if (strain > $scope.currentCharacter.currentStrain) {
+                $scope.toast("Gain of strain", "You gained " + strain - $scope.currentCharacter.currentStrain + " strain");
+            } else {
+                $scope.toast("Loss of strain", "You lose " + $scope.currentCharacter.currentStrain - strain + " strain");
             }
-        };
-        $scope.changeStrain = function (strain){
-            if (strain != null) {
-                if (strain > $scope.currentCharacter.currentStrain) {
-                    $scope.toast("Gain of strain", "You gained " + strain - $scope.currentCharacter.currentStrain + " strain");
-                } else {
-                    $scope.toast("Loss of strain", "You lose " + $scope.currentCharacter.currentStrain - strain + " strain");
-                }
-                $scope.currentCharacter.strain = strain;
-            }
-        };
+            $scope.currentCharacter.strain = strain;
+        }
+    };
 
-        $scope.changeWounds = function (wounds){
-            if (wounds != null) {
-                if (wounds > $scope.currentCharacter.currentWounds) {
-                    $scope.toast("Gain of wounds", "You gained " + wounds - $scope.currentCharacter.currentWounds + " wounds");
-                } else {
-                    $scope.toast("Loss of wounds", "You lose " + $scope.currentCharacter.currentWounds - wounds + " wounds");
-                }
-                $scope.currentCharacter.wounds = wounds;
+    $scope.changeWounds = function (wounds) {
+        if (wounds != null) {
+            if (wounds > $scope.currentCharacter.currentWounds) {
+                $scope.toast("Gain of wounds", "You gained " + wounds - $scope.currentCharacter.currentWounds + " wounds");
+            } else {
+                $scope.toast("Loss of wounds", "You lose " + $scope.currentCharacter.currentWounds - wounds + " wounds");
             }
-        };
-        $scope.changedXP = function(){
-            $scope.toast("Hey, I know your xp!")
-        };
+            $scope.currentCharacter.wounds = wounds;
+        }
+    };
+    $scope.changedXP = function () {
+        $scope.toast("Hey, I know your xp!")
+    };
 
-        $scope.changeXP = function (newXP){
-            if (newXP != null) {
-                if (newXP > $scope.currentCharacter.totalXP) {
-                   $scope.toast("GAINED "+newXP-$scope.currentCharacter.totalXP+" XP!")
-                } else {
-                    $scope.toast("OOPS! "+newXP-$scope.currentCharacter.totalXP+" XP!")
-                }
-                $scope.currentCharacter.totalXP = newXP;
+    $scope.changeXP = function (newXP) {
+        if (newXP != null) {
+            if (newXP > $scope.currentCharacter.totalXP) {
+                $scope.toast("GAINED " + newXP - $scope.currentCharacter.totalXP + " XP!")
+            } else {
+                $scope.toast("OOPS! " + newXP - $scope.currentCharacter.totalXP + " XP!")
             }
-        };
+            $scope.currentCharacter.totalXP = newXP;
+        }
+    };
 
-        $scope.changeAge = function(age){
-            if (age!= null) {
-                if (age > $scope.currentCharacter.age) {
-                    $scope.toast("GAINED "+age-$scope.currentCharacter.totalXP+" years!")
-                } else {
-                    $scope.toast("LOST "+age-$scope.currentCharacter.totalXP+" years!")
-                }
-                $scope.currentCharacter.age = age;
+    $scope.changeAge = function (age) {
+        if (age != null) {
+            if (age > $scope.currentCharacter.age) {
+                $scope.toast("GAINED " + age - $scope.currentCharacter.totalXP + " years!")
+            } else {
+                $scope.toast("LOST " + age - $scope.currentCharacter.totalXP + " years!")
             }
-        };
-        $scope.updateCharacter = function () {
-            console.log(CURVAR);
-            if (CURVAR.age != $scope.currentCharacter.age) {
-                // age changed . . . you got old
-                $scope.changeAge(CURVAR.age);
-            }
-            if (CURVAR.credits != $scope.currentCharacter.credits) {
-                $scope.changeCredits(CURVAR.credits);
-            }
-            if (CURVAR.currentStrain != $scope.currentCharacter.currentStrain) {
-                $scope.changeStrain(CURVAR.currentStrain);
-            }
-            if (CURVAR.currentWounds != $scope.currentCharacter.currentWounds) {
-                $scope.changeWounds(CURVAR.currentStrain);
-            }
-            if (CURVAR.currentXP != $scope.currentCharacter.currentXP) {
-                $scope.changedXP();
-            }
-            if (CURVAR.totalXP != $scope.currentCharacter.totalXP) {
-                $scope.changeXP(CURVAR.totalXP);
-            }
+            $scope.currentCharacter.age = age;
+        }
+    };
+    $scope.updateCharacter = function () {
+        console.log(CURVAR);
+        if (CURVAR.age != $scope.currentCharacter.age) {
+            // age changed . . . you got old
+            $scope.changeAge(CURVAR.age);
+        }
+        if (CURVAR.credits != $scope.currentCharacter.credits) {
+            $scope.changeCredits(CURVAR.credits);
+        }
+        if (CURVAR.currentStrain != $scope.currentCharacter.currentStrain) {
+            $scope.changeStrain(CURVAR.currentStrain);
+        }
+        if (CURVAR.currentWounds != $scope.currentCharacter.currentWounds) {
+            $scope.changeWounds(CURVAR.currentStrain);
+        }
+        if (CURVAR.currentXP != $scope.currentCharacter.currentXP) {
+            $scope.changedXP();
+        }
+        if (CURVAR.totalXP != $scope.currentCharacter.totalXP) {
+            $scope.changeXP(CURVAR.totalXP);
+        }
 
-        };
+    };
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     var baseCharacter = {
         id: 0,
@@ -7745,216 +8124,216 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
         force: 0
     };
     $scope.addCharacter = function () {
-            $scope.currentCharacter = baseCharacter;
+        $scope.currentCharacter = baseCharacter;
         console.log($scope.characters);
-            $scope.characters.push($scope.currentCharacter);
-            $scope.selectCharacter($scope.characters.length - 1)
-        };
-        $scope.removeCharacter = function () {
-            if ($scope.currentCharacter) {
-                $scope.gid("deleteName").value = "";
-                $scope.openDialog("deleteDialog")
-            }
-        };
-        $scope.confirmDeleteCharacter = function () {
-            var deleteName = $scope.gid("deleteName").value;
-            if ($scope.currentCharacter && $scope.currentCharacter.name == deleteName) {
-                var index = -1;
-                for (var i = 0; len = $scope.characters.length, i < len; i++) {
-                    if ($scope.characters[i] && $scope.currentCharacter.name == $scope.characters[i].name) {
-                        index = i;
-                        break
-                    }
-                }
-                $scope.characters.remove(index);
-                $scope.gid("deleteDialog").style.display = "none";
-                $scope.saveCharacters();
-                $scope.backToCharacters();
-                $scope.$apply();
-                $scope.toast("He's dead Jim", "Your character has been deleted. <br/>May the Force be with him forever.")
-            } else {
-                $scope.toast("Droid error", "Sounds like names are not corresponding.")
-            }
-        };
-        $scope.endEdit = function (editor) {
-        };
-        $scope.addSkill = function () {
-            $scope.isAddingSkill = true;
-            $scope.currentSkill = {
-                name: "",
-                career: false,
-                rank: 0
-            };
-            $scope.openDialog("skillsDialog")
-        };
-        $scope.submitAddSkill = function (e) {
-            $scope.currentSkill.rank = parseInt($scope.currentSkill.rank);
-            if ($scope.currentSkill && $scope.currentSkill.name && $scope.currentSkill.rank >= 0 && $scope.currentCharacter) {
-                if (!$scope.currentCharacter.skills) $scope.currentCharacter.skills = [];
-                $scope.currentCharacter.skills.push($scope.currentSkill);
-                $scope.isAddingSkill = false;
-                $scope.closeDialog(e.srcElement.parentNode);
-                $scope.checkAchievementsSkills($scope.currentSkill);
-                $scope.saveCharacters()
-            } else {
-                $scope.toast(":(", "You should at least provide a name and a non negative rank for your rank")
-            }
-        };
-        $scope.selectSkill = function (index) {
-            $scope.currentSkill = $scope.currentCharacter.skills[index];
-            $scope.openDialog("skillsDialog")
-        };
-        $scope.deleteSkill = function (e) {
-            if (!$scope.isAddingSkill && $scope.currentSkill) {
-                for (var i = 0; len = $scope.currentCharacter.skills.length, i < len; i++) {
-                    if ($scope.currentCharacter.skills[i].name == $scope.currentSkill.name) {
-                        $scope.toast("Information", "We have removed " + $scope.currentSkill.name + " from your skills");
-                        $scope.currentCharacter.skills.remove(i);
-                        $scope.currentSkill = null;
-                        $scope.closeDialog(e.srcElement.parentNode);
-                        $scope.saveCharacters();
-                        return
-                    }
+        $scope.characters.push($scope.currentCharacter);
+        $scope.selectCharacter($scope.characters.length - 1)
+    };
+    $scope.removeCharacter = function () {
+        if ($scope.currentCharacter) {
+            $scope.gid("deleteName").value = "";
+            $scope.openDialog("deleteDialog")
+        }
+    };
+    $scope.confirmDeleteCharacter = function () {
+        var deleteName = $scope.gid("deleteName").value;
+        if ($scope.currentCharacter && $scope.currentCharacter.name == deleteName) {
+            var index = -1;
+            for (var i = 0; len = $scope.characters.length, i < len; i++) {
+                if ($scope.characters[i] && $scope.currentCharacter.name == $scope.characters[i].name) {
+                    index = i;
+                    break
                 }
             }
+            $scope.characters.remove(index);
+            $scope.gid("deleteDialog").style.display = "none";
+            $scope.saveCharacters();
+            $scope.backToCharacters();
+            $scope.$apply();
+            $scope.toast("He's dead Jim", "Your character has been deleted. <br/>May the Force be with him forever.")
+        } else {
+            $scope.toast("Droid error", "Sounds like names are not corresponding.")
+        }
+    };
+    $scope.endEdit = function (editor) {
+    };
+    $scope.addSkill = function () {
+        $scope.isAddingSkill = true;
+        $scope.currentSkill = {
+            name: "",
+            career: false,
+            rank: 0
         };
-        $scope.checkAchievementsSkills = function (skill) {
-            if ($scope.currentCharacter) {
-                var skillName = skill.name.toLowerCase();
-                if (skillName.indexOf("ranged") !== -1 && skill.rank >= 2) {
-                    if ($scope.currentCharacter.career.toLowerCase() === "smuggler") {
-                        $scope.unlockAchievement(4)
-                    }
-                    if (skill.rank >= 3) {
-                        $scope.unlockAchievement(5)
-                    }
-                } else if (skillName.indexOf("brawl") !== -1 && skill.rank >= 3) {
-                    $scope.unlockAchievement(6)
-                } else if (skillName.indexOf("gunnery") !== -1 && skill.rank >= 3) {
-                    $scope.unlockAchievement(7)
-                } else if (skillName.indexOf("pilot") !== -1 && skill.rank >= 3) {
-                    $scope.unlockAchievement(8)
-                } else if (skillName.indexOf("knowledge") !== -1 && skill.rank >= 3) {
-                    $scope.unlockAchievement(9);
-                    if (skill.rank >= 5) {
-                        $scope.unlockAchievement(16)
-                    }
-                } else if (skillName.indexOf("cool") !== -1 && skill.rank >= 3) {
-                    $scope.unlockAchievement(11)
-                } else if (skillName.indexOf("outer rim") !== -1 && skill.rank >= 3) {
-                    $scope.unlockAchievement(18)
-                } else if (skillName.indexOf("stealth") !== -1 && skill.rank >= 3) {
-                    $scope.unlockAchievement(25)
+        $scope.openDialog("skillsDialog")
+    };
+    $scope.submitAddSkill = function (e) {
+        $scope.currentSkill.rank = parseInt($scope.currentSkill.rank);
+        if ($scope.currentSkill && $scope.currentSkill.name && $scope.currentSkill.rank >= 0 && $scope.currentCharacter) {
+            if (!$scope.currentCharacter.skills) $scope.currentCharacter.skills = [];
+            $scope.currentCharacter.skills.push($scope.currentSkill);
+            $scope.isAddingSkill = false;
+            $scope.closeDialog(e.srcElement.parentNode);
+            $scope.checkAchievementsSkills($scope.currentSkill);
+            $scope.saveCharacters()
+        } else {
+            $scope.toast(":(", "You should at least provide a name and a non negative rank for your rank")
+        }
+    };
+    $scope.selectSkill = function (index) {
+        $scope.currentSkill = $scope.currentCharacter.skills[index];
+        $scope.openDialog("skillsDialog")
+    };
+    $scope.deleteSkill = function (e) {
+        if (!$scope.isAddingSkill && $scope.currentSkill) {
+            for (var i = 0; len = $scope.currentCharacter.skills.length, i < len; i++) {
+                if ($scope.currentCharacter.skills[i].name == $scope.currentSkill.name) {
+                    $scope.toast("Information", "We have removed " + $scope.currentSkill.name + " from your skills");
+                    $scope.currentCharacter.skills.remove(i);
+                    $scope.currentSkill = null;
+                    $scope.closeDialog(e.srcElement.parentNode);
+                    $scope.saveCharacters();
+                    return
                 }
             }
-        };
-        $scope.getCharacFromSkill = function (skillName) {
-            if (!$scope.currentCharacter) {
-                return null
+        }
+    };
+    $scope.checkAchievementsSkills = function (skill) {
+        if ($scope.currentCharacter) {
+            var skillName = skill.name.toLowerCase();
+            if (skillName.indexOf("ranged") !== -1 && skill.rank >= 2) {
+                if ($scope.currentCharacter.career.toLowerCase() === "smuggler") {
+                    $scope.unlockAchievement(4)
+                }
+                if (skill.rank >= 3) {
+                    $scope.unlockAchievement(5)
+                }
+            } else if (skillName.indexOf("brawl") !== -1 && skill.rank >= 3) {
+                $scope.unlockAchievement(6)
+            } else if (skillName.indexOf("gunnery") !== -1 && skill.rank >= 3) {
+                $scope.unlockAchievement(7)
+            } else if (skillName.indexOf("pilot") !== -1 && skill.rank >= 3) {
+                $scope.unlockAchievement(8)
+            } else if (skillName.indexOf("knowledge") !== -1 && skill.rank >= 3) {
+                $scope.unlockAchievement(9);
+                if (skill.rank >= 5) {
+                    $scope.unlockAchievement(16)
+                }
+            } else if (skillName.indexOf("cool") !== -1 && skill.rank >= 3) {
+                $scope.unlockAchievement(11)
+            } else if (skillName.indexOf("outer rim") !== -1 && skill.rank >= 3) {
+                $scope.unlockAchievement(18)
+            } else if (skillName.indexOf("stealth") !== -1 && skill.rank >= 3) {
+                $scope.unlockAchievement(25)
             }
-            skillName = skillName.toLowerCase();
-            if (skillName.indexOf("(ag)") !== -1) {
-                return $scope.currentCharacter.agility
-            } else if (skillName.indexOf("(br)") !== -1) {
-                return $scope.currentCharacter.brawn
-            } else if (skillName.indexOf("(int)") !== -1) {
-                return $scope.currentCharacter.intellect
-            } else if (skillName.indexOf("(cun)") !== -1) {
-                return $scope.currentCharacter.cunning
-            } else if (skillName.indexOf("(will)") !== -1) {
-                return $scope.currentCharacter.willpower
-            } else if (skillName.indexOf("(pr)") !== -1) {
-                return $scope.currentCharacter.presence
-            }
+        }
+    };
+    $scope.getCharacFromSkill = function (skillName) {
+        if (!$scope.currentCharacter) {
             return null
-        };
-        $scope.getSkillImage = function (skill) {
-            var html = "";
-            var dicesCount = 0;
-            var upgradedDices = 0;
-            var carac = $scope.getCharacFromSkill(skill.name);
-            var rank = skill.rank;
-            if (carac > rank) {
-                dicesCount = carac;
-                upgradedDices = rank
-            } else {
-                dicesCount = rank;
-                upgradedDices = carac
-            }
-            if (dicesCount > 0) {
-                for (var i = 0; i < dicesCount; i++) {
-                    html += '<img alt="' + skill.name + '" src="';
-                    if (i < dicesCount - upgradedDices) {
-                        html += "../public/gfx/UI/green_skill.png"
-                    } else {
-                        html += "../public/gfx/UI/yellow_skill.png"
-                    }
-                    html += '" class="skillImage" />'
+        }
+        skillName = skillName.toLowerCase();
+        if (skillName.indexOf("(ag)") !== -1) {
+            return $scope.currentCharacter.agility
+        } else if (skillName.indexOf("(br)") !== -1) {
+            return $scope.currentCharacter.brawn
+        } else if (skillName.indexOf("(int)") !== -1) {
+            return $scope.currentCharacter.intellect
+        } else if (skillName.indexOf("(cun)") !== -1) {
+            return $scope.currentCharacter.cunning
+        } else if (skillName.indexOf("(will)") !== -1) {
+            return $scope.currentCharacter.willpower
+        } else if (skillName.indexOf("(pr)") !== -1) {
+            return $scope.currentCharacter.presence
+        }
+        return null
+    };
+    $scope.getSkillImage = function (skill) {
+        var html = "";
+        var dicesCount = 0;
+        var upgradedDices = 0;
+        var carac = $scope.getCharacFromSkill(skill.name);
+        var rank = skill.rank;
+        if (carac > rank) {
+            dicesCount = carac;
+            upgradedDices = rank
+        } else {
+            dicesCount = rank;
+            upgradedDices = carac
+        }
+        if (dicesCount > 0) {
+            for (var i = 0; i < dicesCount; i++) {
+                html += '<img alt="' + skill.name + '" src="';
+                if (i < dicesCount - upgradedDices) {
+                    html += "../public/gfx/UI/green_skill.png"
+                } else {
+                    html += "../public/gfx/UI/yellow_skill.png"
                 }
+                html += '" class="skillImage" />'
             }
-            return $sce.trustAsHtml(html)
+        }
+        return $sce.trustAsHtml(html)
+    };
+    $scope.addArmor = function () {
+        $scope.currentArmor = {
+            armorName: "",
+            defense: 0,
+            soak: 0,
+            price: 0,
+            encum: 0,
+            hp: 0,
+            rarity: 0,
+            bookIndex: 0,
+            restricted: 0,
+            mods: ""
         };
-        $scope.addArmor = function () {
-            $scope.currentArmor = {
-                armorName:"",
-                defense:0,
-                soak:0,
-                price:0,
-                encum:0,
-                hp:0,
-                rarity:0,
-                bookIndex:0,
-                restricted:0,
-                mods:""
-            };
-            $scope.isAddingArmor = true;
-            $scope.openDialog("armorDialog")
-        };
+        $scope.isAddingArmor = true;
+        $scope.openDialog("armorDialog")
+    };
     $scope.addWeapon = function () {
-            $scope.currentWeapon = {
-                name: "",
-                skill: "",
-                special: "",
-                range: "",
-                damages: 2,
-                critical: 0,
-                HP: 0,
-                mods: ""
-            };
-            $scope.isAddingWeapon = true;
-            $scope.openDialog("weaponsDialog")
+        $scope.currentWeapon = {
+            name: "",
+            skill: "",
+            special: "",
+            range: "",
+            damages: 2,
+            critical: 0,
+            HP: 0,
+            mods: ""
         };
-        $scope.selectWeapon = function (index) {
-            $scope.currentWeapon = $scope.currentCharacter.weapons[index];
+        $scope.isAddingWeapon = true;
+        $scope.openDialog("weaponsDialog")
+    };
+    $scope.selectWeapon = function (index) {
+        $scope.currentWeapon = $scope.currentCharacter.weapons[index];
+        $scope.isAddingWeapon = false;
+        $scope.openDialog("weaponsDialog")
+    };
+    $scope.submitAddWeapon = function (e) {
+        if ($scope.currentCharacter && $scope.currentWeapon && $scope.currentWeapon.name) {
+            if (!$scope.currentCharacter.weapons) $scope.currentCharacter.weapons = [];
+            $scope.currentCharacter.weapons.push($scope.currentWeapon);
             $scope.isAddingWeapon = false;
-            $scope.openDialog("weaponsDialog")
-        };
-        $scope.submitAddWeapon = function (e) {
-            if ($scope.currentCharacter && $scope.currentWeapon && $scope.currentWeapon.name) {
-                if (!$scope.currentCharacter.weapons) $scope.currentCharacter.weapons = [];
-                $scope.currentCharacter.weapons.push($scope.currentWeapon);
-                $scope.isAddingWeapon = false;
-                $scope.closeDialog(e.srcElement.parentNode);
-                $scope.checkAchievemensWeapons($scope.currentWeapon);
-                $scope.saveCharacters()
-            } else {
-                $scope.toast(":(", "You should at least provide a name for your weapon")
-            }
-        };
-        $scope.deleteWeapon = function (e) {
-            if (!$scope.isAddingWeapon && $scope.currentWeapon) {
-                for (var i = 0; len = $scope.currentCharacter.weapons.length, i < len; i++) {
-                    if ($scope.currentCharacter.weapons[i].name == $scope.currentWeapon.name && $scope.currentCharacter.weapons[i].damages == $scope.currentWeapon.damages) {
-                        $scope.toast("Information", "We have removed your " + $scope.currentWeapon.name + " from your weapons");
-                        $scope.currentCharacter.weapons.remove(i);
-                        $scope.currentWeapon = null;
-                        $scope.closeDialog(e.srcElement.parentNode);
-                        $scope.saveCharacters();
-                        return
-                    }
+            $scope.closeDialog(e.srcElement.parentNode);
+            $scope.checkAchievemensWeapons($scope.currentWeapon);
+            $scope.saveCharacters()
+        } else {
+            $scope.toast(":(", "You should at least provide a name for your weapon")
+        }
+    };
+    $scope.deleteWeapon = function (e) {
+        if (!$scope.isAddingWeapon && $scope.currentWeapon) {
+            for (var i = 0; len = $scope.currentCharacter.weapons.length, i < len; i++) {
+                if ($scope.currentCharacter.weapons[i].name == $scope.currentWeapon.name && $scope.currentCharacter.weapons[i].damages == $scope.currentWeapon.damages) {
+                    $scope.toast("Information", "We have removed your " + $scope.currentWeapon.name + " from your weapons");
+                    $scope.currentCharacter.weapons.remove(i);
+                    $scope.currentWeapon = null;
+                    $scope.closeDialog(e.srcElement.parentNode);
+                    $scope.saveCharacters();
+                    return
                 }
             }
-        };
+        }
+    };
     $scope.selectArmor = function (index) {
         $scope.currentArmor = $scope.currentCharacter.Armors[index];
         $scope.isAddingArmor = false;
@@ -7970,7 +8349,7 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             $scope.checkAchievemensArmors($scope.currentArmor);
             $scope.saveCharacters()
         } else {
-            console.log($scope.currentCharacter +"'"+ $scope.currentArmor +"'"+ $scope.currentArmor.name);
+            console.log($scope.currentCharacter + "'" + $scope.currentArmor + "'" + $scope.currentArmor.name);
             $scope.toast(":(", "You should at least provide a name for your Armor")
         }
     };
@@ -7988,607 +8367,607 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
             }
         }
     };
-        $scope.checkAchievemensWeapons = function (weapon) {
-            if ($scope.currentCharacter) {
-                if (weapon.damages >= 9) {
-                    $scope.unlockAchievement(15)
-                }
-                if ($scope.currentCharacter.weapons.length >= 3) {
-                    $scope.unlockAchievement(13)
+    $scope.checkAchievemensWeapons = function (weapon) {
+        if ($scope.currentCharacter) {
+            if (weapon.damages >= 9) {
+                $scope.unlockAchievement(15)
+            }
+            if ($scope.currentCharacter.weapons.length >= 3) {
+                $scope.unlockAchievement(13)
+            }
+        }
+    };
+    $scope.addTalent = function () {
+        $scope.isAddingTalent = true;
+        $scope.currentTalent = {
+            name: "",
+            summary: ""
+        };
+        $scope.openDialog("talentsDialog")
+    };
+    $scope.submitAddTalent = function (e) {
+        if ($scope.currentTalent && $scope.currentTalent.name && $scope.currentCharacter) {
+            if (!$scope.currentCharacter.talents) $scope.currentCharacter.talents = [];
+            $scope.currentCharacter.talents.push($scope.currentTalent);
+            $scope.isAddingTalent = false;
+            $scope.closeDialog(e.srcElement.parentNode);
+            $scope.saveCharacters()
+        } else {
+            $scope.toast(":(", "You should at least provide a name for your talent")
+        }
+    };
+    $scope.selectTalent = function (index) {
+        $scope.currentTalent = $scope.currentCharacter.talents[index];
+        $scope.openDialog("talentsDialog")
+    };
+    $scope.deleteTalent = function (e) {
+        if (!$scope.isAddingTalent && $scope.currentTalent) {
+            for (var i = 0; len = $scope.currentCharacter.talents.length, i < len; i++) {
+                if ($scope.currentCharacter.talents[i].name == $scope.currentTalent.name) {
+                    $scope.toast("Information", "We have removed " + $scope.currentTalent.name + " from your talents");
+                    $scope.currentCharacter.talents.remove(i);
+                    $scope.currentTalent = null;
+                    $scope.closeDialog(e.srcElement.parentNode);
+                    $scope.saveCharacters();
+                    return
                 }
             }
+        }
+    };
+    $scope.lastOpenDialog = null;
+    $scope.openDialog = function (id) {
+        $scope.gid(id).style.display = "block";
+        angular.element($scope.gid(id)).removeClass("animated scaleAndFadeIn fadeOut ");
+        angular.element($scope.gid(id)).addClass("animated scaleAndFadeIn");
+        $scope.lastOpenDialog = $scope.gid(id);
+        var referenceDiv = null;
+        if (id === "stateDialog") {
+            referenceDiv = "characterStateDiv"
+        } else if (id === "characteristicsDialog") {
+            referenceDiv = "characterCharacteristicsDiv"
+        } else if (id === "descriptionDialog") {
+            referenceDiv = "characterDescriptionDiv"
+        }
+        if (referenceDiv !== null) {
+            $scope.gid(id).style.top = $scope.gid(referenceDiv).getBoundingClientRect().top
+        }
+    };
+    $scope.closeDialog = function (e) {
+        $scope.closeDialog(e, false)
+    };
+    $scope.closeDialog = function (e, isParent) {
+        var parent;
+        if (!isParent) {
+            if (e.srcElement) e = e.srcElement;
+            else if (e.target) e = e.target;
+            parent = e.parentNode.parentNode
+        } else {
+            parent = e
+        }
+        if ($scope.isFirefoxOS()) {
+            parent.style.display = "none";
+            return
+        }
+        angular.element(parent).removeClass("scaleAndFadeIn");
+        angular.element(parent).addClass("fadeOut");
+        $timeout(function () {
+            parent.style.display = "none";
+            $scope.lastOpenDialog = null
+        }, getAnimationTimeout())
+    };
+    $scope.closeDialogById = function (id) {
+        angular.element($scope.gid(id)).removeClass("scaleAndFadeIn");
+        angular.element($scope.gid(id)).addClass("fadeOut");
+        $timeout(function () {
+            $scope.gid(id).style.display = "none";
+            $scope.lastOpenDialog = null
+        }, getAnimationTimeout())
+    };
+    $scope.textToShare = "";
+    $scope.shareExploit = function () {
+        //$scope.openDialog("shareDialog")
+        if (window.console) console.log('Save Character');
+        //send to server
+        var character = $scope.characters;
+        if (character) {
+            var i = 0;
+            for (i = 0; i < character.length; i++) {
+                $http.post('/newChar', character[i]);
+            }
+        }
+    };
+    $scope.isDisplayingToast = false;
+    $scope.toast = function (title, message) {
+        $scope.isDisplayingToast = true;
+        title = title.toLowerCase();
+        var html = '<div class="toast animated fadeIn" onclick="closeToast(this);"><img src="public/gfx/logo.png" alt="Empire Legends" class="fleft" /><span class="fleft m16"><h3>' + title + "</h3>" + message + '</span><span class="gc"></span></div>';
+        $scope.gid("toastsContainer").innerHTML += html;
+        $timeout(function () {
+            $scope.closeToast($scope.gid("toastsContainer").childNodes[$scope.gid("toastsContainer").childNodes.length - 1])
+        }, 3500)
+    };
+    $scope.closeToast = function (e) {
+        angular.element(e).addClass("fadeOut");
+        $timeout(function () {
+            e.parentNode.removeChild(e)
+        }, getAnimationTimeout())
+    };
+    $scope.toastConnexion = function () {
+        $scope.toast("Beeep", "Sounds like your galactic connection is not working. Can you check it?")
+    };
+    $scope.toastError = function () {
+        $scope.toast("Beeep", "We have a bad feeling about what is happening on our holocrons. Maybe you should retry later.")
+    };
+    $scope.isMenuOpen = false;
+    $scope.openCharacterMenu = function () {
+        if (!$scope.isMenuOpen) {
+            $scope.isMenuOpen = true;
+            angular.element($scope.gid("cornerMenuGuardian")).addClass("blur");
+            angular.element($scope.gid("gameMenu")).removeClass("fadeInRight fadeOutRight");
+            angular.element($scope.gid("gameMenu")).addClass("fadeInRight")
+        } else {
+            angular.element($scope.gid("cornerMenuGuardian")).removeClass("blur");
+            angular.element($scope.gid("gameMenu")).removeClass("fadeInRight fadeOutRight");
+            angular.element($scope.gid("gameMenu")).addClass("fadeOutRight");
+            $timeout(function () {
+                $scope.isMenuOpen = false
+            }, getAnimationTimeout())
+        }
+    };
+    $scope.saveOnServer = function () {
+        $scope.displayLoadingIndicator();
+        var dataForPOST = {
+            data: JSON.stringify($scope.characters)
         };
-        $scope.addTalent = function () {
-            $scope.isAddingTalent = true;
-            $scope.currentTalent = {
-                name: "",
-                summary: ""
-            };
-            $scope.openDialog("talentsDialog")
-        };
-        $scope.submitAddTalent = function (e) {
-            if ($scope.currentTalent && $scope.currentTalent.name && $scope.currentCharacter) {
-                if (!$scope.currentCharacter.talents) $scope.currentCharacter.talents = [];
-                $scope.currentCharacter.talents.push($scope.currentTalent);
-                $scope.isAddingTalent = false;
+        $http.post("/save?login=" + $scope.login + "&password=" + $scope.password, dataForPOST).success(function (data) {
+            data = data.result;
+            if (data == "bad request" || data == "login") {
+                $scope.toast("Beeep", "According to our droids, your provided information are not correct. Can you check them?")
+            } else {
+                $scope.toast("Beeep", "Your characters have been well saved on our holocrons");
+                $scope.closeDialog(e.srcElement.parentNode)
+            }
+            $scope.hideLoadingIndicator()
+        }).error(function (e) {
+            console.log(e);
+            $scope.toastConnexion();
+            $scope.hideLoadingIndicator()
+        })
+    };
+    $scope.loadFromServer = function (e) {
+        $scope.displayLoadingIndicator();
+        $http.get("/load?login=" + $scope.login + "&password=" + $scope.password).success(function (data) {
+            if (data == "bad request" || data == "login") {
+                $scope.toast("Beeep", "According to our droids, your provided information are not correct. Can you check them?")
+            } else {
+                $scope.characters = data;
+                $scope.saveCharacters();
+                document.getElementById("askForProfileDialog").style.display = "none";
+                document.getElementById("consultProfileDialog").style.display = "none"
+            }
+            $scope.hideLoadingIndicator()
+        }).error(function (e) {
+            console.log(e);
+            $scope.toastConnexion();
+            $scope.hideLoadingIndicator()
+        })
+    };
+    $scope.displayLoadingIndicator = function () {
+        $scope.isLoading = true;
+        angular.element($scope.gid("loadingIndicator")).removeClass("bounceInLeft");
+        angular.element($scope.gid("loadingIndicator")).addClass("bounceInLeft")
+    };
+    $scope.hideLoadingIndicator = function () {
+        angular.element($scope.gid("loadingIndicator")).removeClass("bounceOutLeft");
+        angular.element($scope.gid("loadingIndicator")).addClass("bounceOutLeft");
+        $timeout(function () {
+            $scope.isLoading = false
+        }, getAnimationTimeout())
+    };
+    $scope.profileClick = function () {
+        if (!$scope.login || !$scope.password) {
+            $scope.openDialog("askForProfileDialog")
+        } else {
+            $scope.openDialog("consultProfileDialog")
+        }
+    };
+    $scope.confirmProfileCreation = function (login, e) {
+        $scope.displayLoadingIndicator();
+        if (!login || login.length < 2) {
+            $scope.toast("Beeep", "The Force cannot be with a such short profile name");
+            return
+        }
+        var password = $scope.randomKey();
+        $http.get("/register?login=" + login + "&password=" + password).success(function (data) {
+            data = data.result.toLowerCase();
+            //console.log(data);
+            if (data === "failure") {
+                $scope.toastError()
+            } else if (data === "already taken") {
+                $scope.toast("Beeep", "Another Jedi has this login. Can you choose a different one please?")
+            } else if (data === "ok") {
+                $scope.toast("Welcome Master", "You are now a member of our order. Thank you.");
+                $scope.login = login;
+                $scope.password = password;
                 $scope.closeDialog(e.srcElement.parentNode);
-                $scope.saveCharacters()
-            } else {
-                $scope.toast(":(", "You should at least provide a name for your talent")
+                $scope.saveCredentials(login, password)
             }
-        };
-        $scope.selectTalent = function (index) {
-            $scope.currentTalent = $scope.currentCharacter.talents[index];
-            $scope.openDialog("talentsDialog")
-        };
-        $scope.deleteTalent = function (e) {
-            if (!$scope.isAddingTalent && $scope.currentTalent) {
-                for (var i = 0; len = $scope.currentCharacter.talents.length, i < len; i++) {
-                    if ($scope.currentCharacter.talents[i].name == $scope.currentTalent.name) {
-                        $scope.toast("Information", "We have removed " + $scope.currentTalent.name + " from your talents");
-                        $scope.currentCharacter.talents.remove(i);
-                        $scope.currentTalent = null;
-                        $scope.closeDialog(e.srcElement.parentNode);
-                        $scope.saveCharacters();
-                        return
-                    }
-                }
-            }
-        };
-        $scope.lastOpenDialog = null;
-        $scope.openDialog = function (id) {
-            $scope.gid(id).style.display = "block";
-            angular.element($scope.gid(id)).removeClass("animated scaleAndFadeIn fadeOut ");
-            angular.element($scope.gid(id)).addClass("animated scaleAndFadeIn");
-            $scope.lastOpenDialog = $scope.gid(id);
-            var referenceDiv = null;
-            if (id === "stateDialog") {
-                referenceDiv = "characterStateDiv"
-            } else if (id === "characteristicsDialog") {
-                referenceDiv = "characterCharacteristicsDiv"
-            } else if (id === "descriptionDialog") {
-                referenceDiv = "characterDescriptionDiv"
-            }
-            if (referenceDiv !== null) {
-                $scope.gid(id).style.top = $scope.gid(referenceDiv).getBoundingClientRect().top
-            }
-        };
-        $scope.closeDialog = function (e) {
-            $scope.closeDialog(e, false)
-        };
-        $scope.closeDialog = function (e, isParent) {
-            var parent;
-            if (!isParent) {
-                if (e.srcElement) e = e.srcElement;
-                else if (e.target) e = e.target;
-                parent = e.parentNode.parentNode
-            } else {
-                parent = e
-            }
-            if ($scope.isFirefoxOS()) {
-                parent.style.display = "none";
-                return
-            }
-            angular.element(parent).removeClass("scaleAndFadeIn");
-            angular.element(parent).addClass("fadeOut");
-            $timeout(function () {
-                parent.style.display = "none";
-                $scope.lastOpenDialog = null
-            }, getAnimationTimeout())
-        };
-        $scope.closeDialogById = function (id) {
-            angular.element($scope.gid(id)).removeClass("scaleAndFadeIn");
-            angular.element($scope.gid(id)).addClass("fadeOut");
-            $timeout(function () {
-                $scope.gid(id).style.display = "none";
-                $scope.lastOpenDialog = null
-            }, getAnimationTimeout())
-        };
-        $scope.textToShare = "";
-        $scope.shareExploit = function () {
-            //$scope.openDialog("shareDialog")
-            if (window.console) console.log('Save Character');
-            //send to server
-            var character = $scope.characters;
-            if(character){
-                var i=0;
-                for(i=0; i<character.length; i++){
-                    $http.post('/newChar', character[i]);
-                }
-            }
-        };
-        $scope.isDisplayingToast = false;
-        $scope.toast = function (title, message) {
-            $scope.isDisplayingToast = true;
-            title = title.toLowerCase();
-            var html = '<div class="toast animated fadeIn" onclick="closeToast(this);"><img src="public/gfx/logo.png" alt="Empire Legends" class="fleft" /><span class="fleft m16"><h3>' + title + "</h3>" + message + '</span><span class="gc"></span></div>';
-            $scope.gid("toastsContainer").innerHTML += html;
-            $timeout(function () {
-                $scope.closeToast($scope.gid("toastsContainer").childNodes[$scope.gid("toastsContainer").childNodes.length - 1])
-            }, 3500)
-        };
-        $scope.closeToast = function (e) {
-            angular.element(e).addClass("fadeOut");
-            $timeout(function () {
-                e.parentNode.removeChild(e)
-            }, getAnimationTimeout())
-        };
-        $scope.toastConnexion = function () {
-            $scope.toast("Beeep", "Sounds like your galactic connection is not working. Can you check it?")
-        };
-        $scope.toastError = function () {
-            $scope.toast("Beeep", "We have a bad feeling about what is happening on our holocrons. Maybe you should retry later.")
-        };
-        $scope.isMenuOpen = false;
-        $scope.openCharacterMenu = function () {
-            if (!$scope.isMenuOpen) {
-                $scope.isMenuOpen = true;
-                angular.element($scope.gid("cornerMenuGuardian")).addClass("blur");
-                angular.element($scope.gid("gameMenu")).removeClass("fadeInRight fadeOutRight");
-                angular.element($scope.gid("gameMenu")).addClass("fadeInRight")
-            } else {
-                angular.element($scope.gid("cornerMenuGuardian")).removeClass("blur");
-                angular.element($scope.gid("gameMenu")).removeClass("fadeInRight fadeOutRight");
-                angular.element($scope.gid("gameMenu")).addClass("fadeOutRight");
-                $timeout(function () {
-                    $scope.isMenuOpen = false
-                }, getAnimationTimeout())
-            }
-        };
-        $scope.saveOnServer = function () {
-            $scope.displayLoadingIndicator();
-            var dataForPOST = {
-                data: JSON.stringify($scope.characters)
-            };
-            $http.post("/save?login=" + $scope.login + "&password=" + $scope.password, dataForPOST).success(function (data) {
+        }).error(function (e) {
+            console.log(e);
+            $scope.toastConnexion()
+        })
+    };
+    $scope.saveCredentials = function (login, password) {
+        localStorage.setItem("credentials", login + "|" + password)
+    };
+    $scope.loadCredentials = function () {
+        var credentials = localStorage.getItem("credentials");
+        if (credentials && credentials.indexOf("|") != -1) {
+            var splitCred = credentials.split("|");
+            $scope.login = splitCred[0];
+            $scope.password = splitCred[1]
+        }
+    };
+    $scope.validateLogin = function (login, password, e) {
+        if (login && password) {
+            $http.get("/load?login=" + login + "&password=" + password).success(function (data) {
                 data = data.result;
                 if (data == "bad request" || data == "login") {
                     $scope.toast("Beeep", "According to our droids, your provided information are not correct. Can you check them?")
                 } else {
-                    $scope.toast("Beeep", "Your characters have been well saved on our holocrons");
-                    $scope.closeDialog(e.srcElement.parentNode)
-                }
-                $scope.hideLoadingIndicator()
-            }).error(function (e) {
-                console.log(e);
-                $scope.toastConnexion();
-                $scope.hideLoadingIndicator()
-            })
-        };
-        $scope.loadFromServer = function (e) {
-            $scope.displayLoadingIndicator();
-            $http.get("/load?login=" + $scope.login + "&password=" + $scope.password).success(function (data) {
-                if (data == "bad request" || data == "login") {
-                    $scope.toast("Beeep", "According to our droids, your provided information are not correct. Can you check them?")
-                } else {
-                    $scope.characters = data;
-                    $scope.saveCharacters();
-                    document.getElementById("askForProfileDialog").style.display = "none";
-                    document.getElementById("consultProfileDialog").style.display = "none"
-                }
-                $scope.hideLoadingIndicator()
-            }).error(function (e) {
-                console.log(e);
-                $scope.toastConnexion();
-                $scope.hideLoadingIndicator()
-            })
-        };
-        $scope.displayLoadingIndicator = function () {
-            $scope.isLoading = true;
-            angular.element($scope.gid("loadingIndicator")).removeClass("bounceInLeft");
-            angular.element($scope.gid("loadingIndicator")).addClass("bounceInLeft")
-        };
-        $scope.hideLoadingIndicator = function () {
-            angular.element($scope.gid("loadingIndicator")).removeClass("bounceOutLeft");
-            angular.element($scope.gid("loadingIndicator")).addClass("bounceOutLeft");
-            $timeout(function () {
-                $scope.isLoading = false
-            }, getAnimationTimeout())
-        };
-        $scope.profileClick = function () {
-            if (!$scope.login || !$scope.password) {
-                $scope.openDialog("askForProfileDialog")
-            } else {
-                $scope.openDialog("consultProfileDialog")
-            }
-        };
-        $scope.confirmProfileCreation = function (login, e) {
-            $scope.displayLoadingIndicator();
-            if (!login || login.length < 2) {
-                $scope.toast("Beeep", "The Force cannot be with a such short profile name");
-                return
-            }
-            var password = $scope.randomKey();
-            $http.get("/register?login=" + login + "&password=" + password).success(function (data) {
-                data = data.result.toLowerCase();
-                //console.log(data);
-                if (data === "failure") {
-                    $scope.toastError()
-                } else if (data === "already taken") {
-                    $scope.toast("Beeep", "Another Jedi has this login. Can you choose a different one please?")
-                } else if (data === "ok") {
-                    $scope.toast("Welcome Master", "You are now a member of our order. Thank you.");
                     $scope.login = login;
                     $scope.password = password;
-                    $scope.closeDialog(e.srcElement.parentNode);
-                    $scope.saveCredentials(login, password)
+                    $scope.saveCredentials(login, password);
+                    $scope.toast("Beeep", "Welcome back Master");
+                    $scope.closeDialogById("connectProfileDialog")
                 }
             }).error(function (e) {
                 console.log(e);
                 $scope.toastConnexion()
             })
-        };
-        $scope.saveCredentials = function (login, password) {
-            localStorage.setItem("credentials", login + "|" + password)
-        };
-        $scope.loadCredentials = function () {
-            var credentials = localStorage.getItem("credentials");
-            if (credentials && credentials.indexOf("|") != -1) {
-                var splitCred = credentials.split("|");
-                $scope.login = splitCred[0];
-                $scope.password = splitCred[1]
-            }
-        };
-        $scope.validateLogin = function (login, password, e) {
-            if (login && password) {
-                $http.get("/load?login=" + login + "&password=" + password).success(function (data) {
-                    data = data.result;
-                    if (data == "bad request" || data == "login") {
-                        $scope.toast("Beeep", "According to our droids, your provided information are not correct. Can you check them?")
-                    } else {
-                        $scope.login = login;
-                        $scope.password = password;
-                        $scope.saveCredentials(login, password);
-                        $scope.toast("Beeep", "Welcome back Master");
-                        $scope.closeDialogById("connectProfileDialog")
-                    }
-                }).error(function (e) {
-                    console.log(e);
-                    $scope.toastConnexion()
-                })
-            }
-        };
-        $scope.importFromMail = function (e) {
-            $scope.openDialog("importCharacterDialog")
-        };
-        $scope.validateImportCharacter = function (data) {
-            var characterAsJSON = Base64.decode(data);
-            var newCharacter = JSON.parse(characterAsJSON);
-            $scope.characters.push(newCharacter);
-            $scope.toast(newCharacter.name, "Our droids have imported your character");
-            $scope.closeDialogById("importCharacterDialog")
-        };
-        $scope.isDisplayingAchievements = false;
-        $scope.displayAchievements = function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            $scope.openDialog("achievementsDialog")
-        };
-        $scope.loadAchievements = function () {
-            var achievementsFromCache = $scope.cache.getItem("achievements"),
-                url = "../public/data/achievements.json";
-            if (achievementsFromCache === null) {
-                $http.get(url).success(function (data) {
-                    if (typeof data !== "undefined") {
-                        $scope.achievements = data;
-                        console.log($scope.achievements[0].name);
-                        $scope.cache.setItem("achievements", JSON.stringify(data), 1e6)
-                    }
-                }).error(function (e) {
-                    console.log(e)
-                })
-            } else {
-                $scope.achievements = JSON.parse(achievementsFromCache)
-            }
-        };
-        $scope.unlockAchievement = function (index) {
-            var splittedAchievements = $scope.currentCharacter.achievements.split("-");
-            for (var i = 0, len = splittedAchievements.length; i < len; i++) {
-                if (parseInt(splittedAchievements[i], 10) === index) {
-                    return false
+        }
+    };
+    $scope.importFromMail = function (e) {
+        $scope.openDialog("importCharacterDialog")
+    };
+    $scope.validateImportCharacter = function (data) {
+        var characterAsJSON = Base64.decode(data);
+        var newCharacter = JSON.parse(characterAsJSON);
+        $scope.characters.push(newCharacter);
+        $scope.toast(newCharacter.name, "Our droids have imported your character");
+        $scope.closeDialogById("importCharacterDialog")
+    };
+    $scope.isDisplayingAchievements = false;
+    $scope.displayAchievements = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.openDialog("achievementsDialog")
+    };
+    $scope.loadAchievements = function () {
+        var achievementsFromCache = $scope.cache.getItem("achievements"),
+            url = "../public/data/achievements.json";
+        if (achievementsFromCache === null) {
+            $http.get(url).success(function (data) {
+                if (typeof data !== "undefined") {
+                    $scope.achievements = data;
+                    console.log($scope.achievements[0].name);
+                    $scope.cache.setItem("achievements", JSON.stringify(data), 1e6)
                 }
-            }
-            $scope.currentCharacter.achievements += index + "-";
-            return true
-        };
-        $scope.selectAchievement = function (index) {
-            $scope.currentCharacter.selectedAchievement = index;
-            $scope.saveCharacters()
-        };
-        $scope.getAchievementTitle = function (character) {
-            if (character && !character.selectedAchievement) {
-                character.selectedAchievement = 0
-            }
-            if (character && character.selectedAchievement >= 0) {
-                var achievement = $scope.achievements[character.selectedAchievement];
-                if (achievement && achievement.name) {
-                    return achievement.name
-                } else {
-                    return ""
-                }
-            }
-            return ""
-        };
-        $scope.isUnlocked = function (achievement) {
-            if (!$scope.currentCharacter) {
+            }).error(function (e) {
+                console.log(e)
+            })
+        } else {
+            $scope.achievements = JSON.parse(achievementsFromCache)
+        }
+    };
+    $scope.unlockAchievement = function (index) {
+        var splittedAchievements = $scope.currentCharacter.achievements.split("-");
+        for (var i = 0, len = splittedAchievements.length; i < len; i++) {
+            if (parseInt(splittedAchievements[i], 10) === index) {
                 return false
             }
-            if (!$scope.currentCharacter.achievements) {
-                $scope.currentCharacter.achievements = "21-"
-            }
-            return $scope.currentCharacter.achievements.split("-").indexOf(achievement.id.toString()) !== -1
-        };
-        $scope.checkAchievements = function () {
-            if (!$scope.currentCharacter) {
-                return
-            }
-            try {
-                var specializations = $scope.currentCharacter.specializationTrees,
-                    xp = $scope.currentCharacter.totalXP,
-                    species = $scope.currentCharacter.species,
-                    money = $scope.currentCharacter.credits;
-                if (species) {
-                    species = species.toLowerCase()
-                }
-                if (specializations) {
-                    specializations = specializations.toLowerCase()
-                }
-                if (specializations.indexOf("force") !== -1 || specializations.indexOf("jedi") !== -1) {
-                    $scope.unlockAchievement(0);
-                    if (xp >= 1e3) {
-                        $scope.unlockAchievement(1);
-                        if (xp >= 5e3) {
-                            $scope.unlockAchievement(2)
-                        }
-                    }
-                } else if (specializations.indexOf("sith") !== -1) {
-                    $scope.unlockAchievement(3)
-                }
-                if ($scope.currentCharacter.world) {
-                    var world = $scope.currentCharacter.world.toLowerCase();
-                    if (world === "kessel") {
-                        $scope.unlockAchievement(10)
-                    } else if (world === "coruscant") {
-                        $scope.unlockAchievement(22)
-                    } else if (world === "corellia") {
-                        $scope.unlockAchievement(23)
-                    }
-                    if (xp >= 2e3 && money >= 1e4) {
-                        $scope.unlockAchievement(19)
-                    }
-                }
-                if ($scope.currentCharacter.brawn >= 5) {
-                    $scope.unlockAchievement(14)
-                }
-                if ($scope.currentCharacter.willpower >= 5) {
-                    $scope.unlockAchievement(20)
-                }
-                if (species === "droid" && specializations.indexOf("assassin") !== -1) {
-                    $scope.unlockAchievement(12)
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        };
-        $scope.autoChoices = null;
-        $scope.currentAuto = null;
-        $scope.autoComplete = function (type) {
-            var e = null;
-            var data = null;
-            if (type == "species") {
-                e = $scope.gid("infoSpecies");
-                //data = $.getJSON("/species")
-                //console.log(data);
-                if(!data)
-                data = species
-            } else if (type == "careers") {
-                e = $scope.gid("infoCareer");
-                //data = $.getJSON("/career")
-                //console.log(data);
-                if(!data)
-                data = careers
-            } else if (type == "skills") {
-                e = $scope.gid("skillName");
-                //data = $.getJSON("/skills")
-                //console.log(data);
-                if(!data)
-                data = skills
-            } else if (type == "weaponsSkill") {
-                e = $scope.gid("weaponSkill");
-                //data = $.getJSON("/skills")
-                //console.log(data);
-                if(!data)
-                data = skills;
-            } else if (type == "weaponsName") {
-                e = $scope.gid("weaponName");
-                data = weaponNames;
-
-                if(data == null || data.length<=0)
-                data = skills
-            }else if (type == "specializations") {
-                e = $scope.gid("infoSpecialization");
-                //data = $.getJSON("/specializations")
-                if(!data)
-                data = specializations
-            }
-            console.log(data);
-            var value = e.value;
-            if (value.length >= 1 && data) {
-                $scope.currentAuto = type;
-                $scope.filter(data, value)
+        }
+        $scope.currentCharacter.achievements += index + "-";
+        return true
+    };
+    $scope.selectAchievement = function (index) {
+        $scope.currentCharacter.selectedAchievement = index;
+        $scope.saveCharacters()
+    };
+    $scope.getAchievementTitle = function (character) {
+        if (character && !character.selectedAchievement) {
+            character.selectedAchievement = 0
+        }
+        if (character && character.selectedAchievement >= 0) {
+            var achievement = $scope.achievements[character.selectedAchievement];
+            if (achievement && achievement.name) {
+                return achievement.name
             } else {
-                $scope.autoChoices = null;
-                $scope.currentAuto = null
+                return ""
             }
-        };
-        $scope.selectChoice = function (type, choice) {
-            console.log(type, choice);
-            if (type == "species") {
-                $scope.currentCharacter.species = choice.name;
-                var speciesObj = findSpeciesObjByName($scope.currentCharacter.species);
-                if(speciesObj){
-                    //set all the basics
-                    $scope.currentCharacter.agility=speciesObj.Agility;
-                    $scope.currentCharacter.brawn=speciesObj.Brawn;
-                    $scope.currentCharacter.currentXP=speciesObj.EXP;
-                    $scope.currentCharacter.totalXP=speciesObj.EXP;
-                    $scope.currentCharacter.intellect=speciesObj.Int;
-                    $scope.currentCharacter.cunning=speciesObj.Cun;
-                    $scope.currentCharacter.willpower=speciesObj.Will;
-                    $scope.currentCharacter.presence=speciesObj.Presence;
-                    $scope.currentCharacter.encumbrance=speciesObj.Brawn+5;
-                    $scope.currentCharacter.totalWounds = 9 + speciesObj.Brawn;
-                    $scope.currentCharacter.totalStrain = 9 + speciesObj.Will;
+        }
+        return ""
+    };
+    $scope.isUnlocked = function (achievement) {
+        if (!$scope.currentCharacter) {
+            return false
+        }
+        if (!$scope.currentCharacter.achievements) {
+            $scope.currentCharacter.achievements = "21-"
+        }
+        return $scope.currentCharacter.achievements.split("-").indexOf(achievement.id.toString()) !== -1
+    };
+    $scope.checkAchievements = function () {
+        if (!$scope.currentCharacter) {
+            return
+        }
+        try {
+            var specializations = $scope.currentCharacter.specializationTrees,
+                xp = $scope.currentCharacter.totalXP,
+                species = $scope.currentCharacter.species,
+                money = $scope.currentCharacter.credits;
+            if (species) {
+                species = species.toLowerCase()
+            }
+            if (specializations) {
+                specializations = specializations.toLowerCase()
+            }
+            if (specializations.indexOf("force") !== -1 || specializations.indexOf("jedi") !== -1) {
+                $scope.unlockAchievement(0);
+                if (xp >= 1e3) {
+                    $scope.unlockAchievement(1);
+                    if (xp >= 5e3) {
+                        $scope.unlockAchievement(2)
+                    }
                 }
-            } else if (type == "careers") {
-                $scope.currentCharacter.career = choice.name
-            } else if (type == "skills") {
-                $scope.currentSkill.name = choice.name
-            } else if (type == "weaponsName") {
-                $scope.currentWeapon.name = choice.name;
-                var weaponObj;
-                $.getJSON("/weapon?name="+$scope.currentWeapon.name , function(weaponObj){
-                    //$scope.currentCharacter.currentWeapon
-                    console.log(weaponObj);
-                    console.log($scope.currentWeapon.name = weaponObj.weaponName);
-                    console.log($scope.currentWeapon.critical = weaponObj.critical);
-                    console.log($scope.currentWeapon.damages = weaponObj.damage);
-                    console.log($scope.currentWeapon.HP = weaponObj.hp);
-                    console.log($scope.currentWeapon.range = weaponObj.wepRange);
-                    console.log($scope.currentWeapon.skill = weaponObj.skill);
-                    console.log($scope.currentWeapon.special = weaponObj.special);
-                });
-            }else if (type == "weaponsSkill") {
-                $scope.currentWeapon.skill = choice.name;
-                //var weaponObj = findWeaponSkillByName(choice.name)
-            } else if (type == "specializations") {
-                $scope.currentCharacter.specializationTrees = choice.name
+            } else if (specializations.indexOf("sith") !== -1) {
+                $scope.unlockAchievement(3)
             }
+            if ($scope.currentCharacter.world) {
+                var world = $scope.currentCharacter.world.toLowerCase();
+                if (world === "kessel") {
+                    $scope.unlockAchievement(10)
+                } else if (world === "coruscant") {
+                    $scope.unlockAchievement(22)
+                } else if (world === "corellia") {
+                    $scope.unlockAchievement(23)
+                }
+                if (xp >= 2e3 && money >= 1e4) {
+                    $scope.unlockAchievement(19)
+                }
+            }
+            if ($scope.currentCharacter.brawn >= 5) {
+                $scope.unlockAchievement(14)
+            }
+            if ($scope.currentCharacter.willpower >= 5) {
+                $scope.unlockAchievement(20)
+            }
+            if (species === "droid" && specializations.indexOf("assassin") !== -1) {
+                $scope.unlockAchievement(12)
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    };
+    $scope.autoChoices = null;
+    $scope.currentAuto = null;
+    $scope.autoComplete = function (type) {
+        var e = null;
+        var data = null;
+        if (type == "species") {
+            e = $scope.gid("infoSpecies");
+            //data = $.getJSON("/species")
+            //console.log(data);
+            if (!data)
+                data = species
+        } else if (type == "careers") {
+            e = $scope.gid("infoCareer");
+            //data = $.getJSON("/career")
+            //console.log(data);
+            if (!data)
+                data = careers
+        } else if (type == "skills") {
+            e = $scope.gid("skillName");
+            //data = $.getJSON("/skills")
+            //console.log(data);
+            if (!data)
+                data = skills
+        } else if (type == "weaponsSkill") {
+            e = $scope.gid("weaponSkill");
+            //data = $.getJSON("/skills")
+            //console.log(data);
+            if (!data)
+                data = skills;
+        } else if (type == "weaponsName") {
+            e = $scope.gid("weaponName");
+            data = weaponNames;
+
+            if (data == null || data.length <= 0)
+                data = skills
+        } else if (type == "specializations") {
+            e = $scope.gid("infoSpecialization");
+            //data = $.getJSON("/specializations")
+            if (!data)
+                data = specializations
+        }
+        console.log(data);
+        var value = e.value;
+        if (value.length >= 1 && data) {
+            $scope.currentAuto = type;
+            $scope.filter(data, value)
+        } else {
             $scope.autoChoices = null;
             $scope.currentAuto = null
-        };
-        $scope.filter = function (data, needle) {
-            needle = needle.toLowerCase();
-            var choices = [];
-            for (var i = 0; len = data.length, i < len; i++) {
-                if (data[i].substr(0, needle.length).toLowerCase() == needle) {
-                   //console.log(data[i]);
-                    choices.push({
-                        name: data[i]
-                    })
-                }
+        }
+    };
+    $scope.selectChoice = function (type, choice) {
+        console.log(type, choice);
+        if (type == "species") {
+            $scope.currentCharacter.species = choice.name;
+            var speciesObj = findSpeciesObjByName($scope.currentCharacter.species);
+            if (speciesObj) {
+                //set all the basics
+                $scope.currentCharacter.agility = speciesObj.Agility;
+                $scope.currentCharacter.brawn = speciesObj.Brawn;
+                $scope.currentCharacter.currentXP = speciesObj.EXP;
+                $scope.currentCharacter.totalXP = speciesObj.EXP;
+                $scope.currentCharacter.intellect = speciesObj.Int;
+                $scope.currentCharacter.cunning = speciesObj.Cun;
+                $scope.currentCharacter.willpower = speciesObj.Will;
+                $scope.currentCharacter.presence = speciesObj.Presence;
+                $scope.currentCharacter.encumbrance = speciesObj.Brawn + 5;
+                $scope.currentCharacter.totalWounds = 9 + speciesObj.Brawn;
+                $scope.currentCharacter.totalStrain = 9 + speciesObj.Will;
             }
-            if (choices.length > 0) {
-                $scope.autoChoices = choices
+        } else if (type == "careers") {
+            $scope.currentCharacter.career = choice.name
+        } else if (type == "skills") {
+            $scope.currentSkill.name = choice.name
+        } else if (type == "weaponsName") {
+            $scope.currentWeapon.name = choice.name;
+            var weaponObj;
+            $.getJSON("/weapon?name=" + $scope.currentWeapon.name, function (weaponObj) {
+                //$scope.currentCharacter.currentWeapon
+                console.log(weaponObj);
+                console.log($scope.currentWeapon.name = weaponObj.weaponName);
+                console.log($scope.currentWeapon.critical = weaponObj.critical);
+                console.log($scope.currentWeapon.damages = weaponObj.damage);
+                console.log($scope.currentWeapon.HP = weaponObj.hp);
+                console.log($scope.currentWeapon.range = weaponObj.wepRange);
+                console.log($scope.currentWeapon.skill = weaponObj.skill);
+                console.log($scope.currentWeapon.special = weaponObj.special);
+            });
+        } else if (type == "weaponsSkill") {
+            $scope.currentWeapon.skill = choice.name;
+            //var weaponObj = findWeaponSkillByName(choice.name)
+        } else if (type == "specializations") {
+            $scope.currentCharacter.specializationTrees = choice.name
+        }
+        $scope.autoChoices = null;
+        $scope.currentAuto = null
+    };
+    $scope.filter = function (data, needle) {
+        needle = needle.toLowerCase();
+        var choices = [];
+        for (var i = 0; len = data.length, i < len; i++) {
+            if (data[i].substr(0, needle.length).toLowerCase() == needle) {
+                //console.log(data[i]);
+                choices.push({
+                    name: data[i]
+                })
             }
-        };
-        $scope.handleShortcuts = function (e) {
-            try {
-                e = e || window.event;
-                var k = e.keyCode || e.which;
-                var isAlt = e.altKey;
-                if (k == 27) {
-                    $scope.quitKey();
-                    return false
-                }
-                if (isAlt) {
-                    switch (k) {
-                        case 66:
-                            $scope.backToMain();
-                            break;
-                        case 72:
-                            if ($scope.currentCharacter) {
-                                $scope.shareExploit()
-                            }
-                            break;
-                        case 83:
-                            if ($scope.currentCharacter) {
-                                $scope.openDialog("skillsDialog")
-                            }
-                            break;
-                        case 87:
-                            if ($scope.currentCharacter) {
-                                $scope.openDialog("weaponsDialog")
-                            }
-                            break;
-                        case 75:
-                            if ($scope.currentCharacter && $scope.currentCharacter.currentWounds < $scope.currentCharacter.totalWounds) {
-                                $scope.currentCharacter.currentWounds++;
-                                return true
-                            }
-                            break;
-                        case 74:
-                            if ($scope.currentCharacter && $scope.currentCharacter.currentWounds > 0) {
-                                $scope.currentCharacter.currentWounds--;
-                                return true
-                            }
-                            break;
-                        case 79:
-                            if ($scope.currentCharacter && $scope.currentCharacter.currentStrain < $scope.currentCharacter.totalStrain) {
-                                $scope.currentCharacter.currentStrain++;
-                                return true
-                            }
-                            break;
-                        case 73:
-                            if ($scope.currentCharacter && $scope.currentCharacter.currentStrain > 0) {
-                                $scope.currentCharacter.currentStrain--;
-                                return true
-                            }
-                            break;
-                        case 84:
-                            if ($scope.currentCharacter) {
-                                $scope.openDialog("talentsDialog");
-                                return true
-                            }
-                            break
-                    }
-                    if (!$scope.currentCharacter && k >= 49 && k <= 57) {
-                        var index = k - 49;
-                        if ($scope.characters[index]) {
-                            $scope.selectCharacter(index)
+        }
+        if (choices.length > 0) {
+            $scope.autoChoices = choices
+        }
+    };
+    $scope.handleShortcuts = function (e) {
+        try {
+            e = e || window.event;
+            var k = e.keyCode || e.which;
+            var isAlt = e.altKey;
+            if (k == 27) {
+                $scope.quitKey();
+                return false
+            }
+            if (isAlt) {
+                switch (k) {
+                    case 66:
+                        $scope.backToMain();
+                        break;
+                    case 72:
+                        if ($scope.currentCharacter) {
+                            $scope.shareExploit()
                         }
+                        break;
+                    case 83:
+                        if ($scope.currentCharacter) {
+                            $scope.openDialog("skillsDialog")
+                        }
+                        break;
+                    case 87:
+                        if ($scope.currentCharacter) {
+                            $scope.openDialog("weaponsDialog")
+                        }
+                        break;
+                    case 75:
+                        if ($scope.currentCharacter && $scope.currentCharacter.currentWounds < $scope.currentCharacter.totalWounds) {
+                            $scope.currentCharacter.currentWounds++;
+                            return true
+                        }
+                        break;
+                    case 74:
+                        if ($scope.currentCharacter && $scope.currentCharacter.currentWounds > 0) {
+                            $scope.currentCharacter.currentWounds--;
+                            return true
+                        }
+                        break;
+                    case 79:
+                        if ($scope.currentCharacter && $scope.currentCharacter.currentStrain < $scope.currentCharacter.totalStrain) {
+                            $scope.currentCharacter.currentStrain++;
+                            return true
+                        }
+                        break;
+                    case 73:
+                        if ($scope.currentCharacter && $scope.currentCharacter.currentStrain > 0) {
+                            $scope.currentCharacter.currentStrain--;
+                            return true
+                        }
+                        break;
+                    case 84:
+                        if ($scope.currentCharacter) {
+                            $scope.openDialog("talentsDialog");
+                            return true
+                        }
+                        break
+                }
+                if (!$scope.currentCharacter && k >= 49 && k <= 57) {
+                    var index = k - 49;
+                    if ($scope.characters[index]) {
+                        $scope.selectCharacter(index)
                     }
                 }
-            } catch (ex) {
-                console.log("Keyboard: " + ex)
             }
-        };
-        $scope.quitKey = function () {
-            if ($scope.lastOpenDialog) {
-                $scope.closeDialog($scope.lastOpenDialog, true);
-                if ($scope.currentCharacter) {
-                    $scope.saveCharacters()
-                }
+        } catch (ex) {
+            console.log("Keyboard: " + ex)
+        }
+    };
+    $scope.quitKey = function () {
+        if ($scope.lastOpenDialog) {
+            $scope.closeDialog($scope.lastOpenDialog, true);
+            if ($scope.currentCharacter) {
+                $scope.saveCharacters()
             }
-        };
-        $scope.backToMain = function () {
-            if (!$scope.onMainMenu) {
-                $scope.backToCharacters()
-            }
-        };
-        $scope.gid = function (id) {
-            return document.getElementById(id)
-        };
-        $scope.randomKey = function () {
-            var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-            var max = 7;
-            var random = "";
-            for (var i = 0; i < max; i++) {
-                var rnum = Math.floor(Math.random() * chars.length);
-                random += chars.substring(rnum, rnum + 1)
-            }
-            return random
-        };
-        $scope.isFirefoxOS = function () {
-            return navigator.userAgent.match(/(Mobile)/) && navigator.userAgent.match(/(Firefox)/)
-        };
-        $scope.showFadeIn = function (divToFadeIn) {
-            angular.element($scope.gid(divToFadeIn)).removeClass("animated fadeIn fadeOut ");
-            angular.element($scope.gid(divToFadeIn)).addClass("animated fadeIn")
-        };
-        $scope.onMainMenu = true;
-        $scope.onSelectedCharacter = false;
-        $scope.init()
+        }
+    };
+    $scope.backToMain = function () {
+        if (!$scope.onMainMenu) {
+            $scope.backToCharacters()
+        }
+    };
+    $scope.gid = function (id) {
+        return document.getElementById(id)
+    };
+    $scope.randomKey = function () {
+        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        var max = 7;
+        var random = "";
+        for (var i = 0; i < max; i++) {
+            var rnum = Math.floor(Math.random() * chars.length);
+            random += chars.substring(rnum, rnum + 1)
+        }
+        return random
+    };
+    $scope.isFirefoxOS = function () {
+        return navigator.userAgent.match(/(Mobile)/) && navigator.userAgent.match(/(Firefox)/)
+    };
+    $scope.showFadeIn = function (divToFadeIn) {
+        angular.element($scope.gid(divToFadeIn)).removeClass("animated fadeIn fadeOut ");
+        angular.element($scope.gid(divToFadeIn)).addClass("animated fadeIn")
+    };
+    $scope.onMainMenu = true;
+    $scope.onSelectedCharacter = false;
+    $scope.init()
 };
 closeToast = function (e) {
     self.closeToast(e)
@@ -8618,12 +8997,12 @@ window.onpopstate = function (e) {
         self.backToCharacters()
     }
 };
-var species = ["Chiss","Duros","Toydarian","Bothan","Droid","Gand","Human","Rodian","Trandoshan","Twi’lek","Wookiee","Hutt","Gank","Nikto","Aqualish","Klatooinian","Weequay","Arcona","Chevin","Gran","Falleen","Gotal","Quarren","Gran","Ithorian","MonCalamari","Sullustan","Chadra-fan","Dressellian","Xexto","Cerean","KelDor","Mirialan","Nautolan","Togruta","Zabrak"];
+var species = ["Chiss", "Duros", "Toydarian", "Bothan", "Droid", "Gand", "Human", "Rodian", "Trandoshan", "Twi’lek", "Wookiee", "Hutt", "Gank", "Nikto", "Aqualish", "Klatooinian", "Weequay", "Arcona", "Chevin", "Gran", "Falleen", "Gotal", "Quarren", "Gran", "Ithorian", "MonCalamari", "Sullustan", "Chadra-fan", "Dressellian", "Xexto", "Cerean", "KelDor", "Mirialan", "Nautolan", "Togruta", "Zabrak"];
 var skills = ["Astrogation (Int)", "Athletics (Br)", "Charm (Pr)", "Coercion (Will)", "Computers (Int)", "Cool (Pr)", "Coordination (Ag)", "Deception (Cun)", "Discipline (Will)", "Knowledge (Int)", "Leadership (Pr)", "Mechanics (Int)", "Medicine (Int)", "Negotiation (Pr)", "Perception (Cun)", "Piloting - Planetary (Ag)", "Piloting - Space (Ag)", "Resilience (Br)", "Skulduggery (Cun)", "Stealth (Ag)", "Streetwise (Cun)", "Survival (Cun)", "Vigilance (Will)", "Brawl (Br)", "Gunnery (Ag)", "Melee (Br)", "Ranged - Light (Ag)", "Ranged - Heavy (Ag)", "Core Worlds (Int)", "Education (Int)", "Lore (Int)", "Outer Rim (Int)", "Underworld (Int)", "Xenology (Int)"];
 var careers = ["Smuggler", "Bounty Hunter", "Colonist", "Technician", "Hired gun", "Explorer", "Jedi", "Sith", "Soldier", "Ace", "Commander", "Diplomat", "Engineer", "Soldier", "Spy", "Universal", "Consular", "Guardian", "Mystic", "Seeker", "Sentinel", "Warrior"];
 var specializations = ["Assassin", "Gadgeteer", "Survivalist", "Doctor", "Politico", "Scholar", "Fringer", "Scout", "Trader", "Bodyguard", "Marauder", "Mercenary Soldier", "Pilot", "Scoundrel", "Thief", "Mechanic", "Outlaw tech", "Slicer", "Force Sensitive Emergent", " Recruit", "Beast Rider", " Hotshot", " Rigger", "Advocate", " Analyst", " or Propagandist", "Commando", " Medic", " Sharpshooter", "Mechanic", " Saboteur", " Scientist", "Agitator", " Ambassador", " Quartermaster", "Commodore", " Squad leader", " Tactician", "Driver", " Gunner", " Pilot", "Infiltrator", " Scout", " Slicer", "Healer", " Niman Disciple", " Sage", "Agressor", " Shii-Cho Knight", " Starfighter Ace", "Artisan", " Shadow", " Shien Expert", "Ataru Striker", " Hunter", " Pathfinder", "Advisor", " Makashi Duelist", " Seer", "Peace Keeper", " Defender", " Soresu Defender", "Warleaders", " Armorers", " Warden", "Exicutioner", " Hermit", " Navigator"];
 var weaponNames;
-$.getJSON("/weaponsName", function(result) {
+$.getJSON("/weaponsName", function (result) {
     weaponNames = result;
 });
 var Cache = function () {
