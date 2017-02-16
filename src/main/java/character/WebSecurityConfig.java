@@ -31,11 +31,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .failureUrl("/login")
+                .failureUrl("/player")
                 .and()
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/player")
        .and().headers().frameOptions().disable().and().csrf().disable();//sameOrigin();
     }
 

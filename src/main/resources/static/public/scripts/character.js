@@ -7928,6 +7928,8 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                         } else {
                             $scope.characters = json;
                         }
+                    } else if (CharList) {
+                        $scope.characters = CharList;
                     }
                 });
             } else {
@@ -7943,6 +7945,8 @@ var EmpireController = function ($scope, $http, $timeout, $sce) {
                         } else {
                             $scope.characters = json;
                         }
+                    } else if (CharList) {
+                        $scope.characters = CharList;
                     }
                 });
             }

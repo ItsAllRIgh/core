@@ -60,13 +60,16 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
-        <a href="registration.html">Registration</a>
-        <a href="/map">MAP TEST</a>
+        <div class="col-md-6"><a class="btn btn-default" href="/map" role="button">MAP</a></div>
         <div class="col-md-6"><a class="btn btn-default" href="/registration.html" role="button">Register</a> </div>
-        <div class="col-md-6"><a class="btn btn-default" href="" role="button"></a> </div>
+        <div class="col-md-6"><a class="btn btn-default" href="/login" role="button">LOGIN</a></div>
         <div class="col-md-6"><a class="btn btn-default" href="/player/character.html" role="button">Create Characters</a> </div>
         <div class="col-md-6"><a class="btn btn-default" href="/player/choose.html" role="button">Join a Session</a> </div>
-</div>
+        <div class="col-md-6"><a class="btn btn-default" href="/gm/armors.html" role="button">ARMOR</a></div>
+        <div class="col-md-6"><a class="btn btn-default" href="/gm/gear.html" role="button">GEAR</a></div>
+        <div class="col-md-6"><a class="btn btn-default" href="/gm/weapons.html" role="button">WEAPONS</a></div>
+
+    </div>
 </div>
 </body>
 <script>var user = $('#user').html(); console.log(user)</script>
