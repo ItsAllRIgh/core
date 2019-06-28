@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../public/style/all.min.css"/>
+    <script type="text/javascript" src="../public/scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/jquery.tablesorter.js"></script>
+    <meta http-equiv="Content-Type" content="../text/html; charset=UTF-8"/>
+
+    <title>Abilities</title>
+</head>
+<body style="overflow:scroll;">
+<div class="container">
+    <table style="background: #f5f5f5" id="myTable" class="tablesorter table table-striped  table-hover">
+        <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Index</th>
+        </thead>
+        <tr th:if="${armors.isEmpty()}">
+            <td colspan="4"> No Abilities Available</td>
+        </tr>
+        <tbody>
+        <tr th:each="armor : ${armors}">
+            <td th:text="${armor.armorId}">1</td>
+            <td th:text="${armor.name}">Name</td>
+            <td th:text="${armor.description}">0</td>
+            <td>
+            <td><p th:each="ref : ${armor.bookReferences}">
+                <b th:text="${ref.book.acronym}">1</b>:
+                <b th:text="${ref.pageNumber}">1</b>
+            </p>
+            </td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-6"><a class="btn btn-default" href="/armor/addAbility" role="button">New Ability</a></div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+
+            $('#myTable').tablesorter();
+        }
+    );
+
+</script>

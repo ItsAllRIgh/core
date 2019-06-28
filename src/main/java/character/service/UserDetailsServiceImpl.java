@@ -26,13 +26,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = null;
         try {
             user = userRepository.findByUserName(username);
-        }catch (org.springframework.dao.IncorrectResultSizeDataAccessException e){
+        } catch (org.springframework.dao.IncorrectResultSizeDataAccessException e) {
             e.printStackTrace();
         }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        if (user!=null) {
-            for (Role role : user.getRoles()){
+        if (user != null) {
+            for (Role role : user.getRoles()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
             }
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);

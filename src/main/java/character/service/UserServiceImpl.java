@@ -1,6 +1,5 @@
 package character.service;
 
-import character.model.Role;
 import character.model.User;
 import character.repository.RoleRepository;
 import character.repository.UserRepository;
@@ -9,8 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
 
 @Service
 public class UserServiceImpl implements UserService {

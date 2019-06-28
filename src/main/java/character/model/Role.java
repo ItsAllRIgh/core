@@ -9,11 +9,10 @@ import java.util.TreeSet;
 public class Role {
     private Long id;
     private String name;
+    private Set<User> users = new TreeSet<>();
 
     public Role() {
     }
-
-    private Set<User> users = new TreeSet<>();
 
     public Role(String name, Set<User> users) {
         this.name = name;

@@ -14,11 +14,12 @@ import java.util.List;
 @RestController
 public class PlayerController {
 
+    @Autowired
+    private PlayerRepository playerRepository;
+
     public PlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
-    @Autowired
-    private PlayerRepository playerRepository;
 
     public PlayerController() {
     }
@@ -32,8 +33,8 @@ public class PlayerController {
         List<Player> list = mapper.readValue(message,
                 TypeFactory.defaultInstance().constructCollectionType(List.class,
                         Player.class));
-        for(Player p: list){
-            if(p!=null)
+        for (Player p : list) {
+            if (p != null)
                 playerRepository.save(p);
         }
         Thread.sleep(1000); // simulated delay

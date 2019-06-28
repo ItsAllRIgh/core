@@ -3,7 +3,6 @@ package character.model;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-
 import java.util.*;
 
 /**
@@ -11,21 +10,21 @@ import java.util.*;
  */
 @Entity
 
-public class User implements Comparable{
+public class User implements Comparable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4681998842214743584L;
+     *
+     */
+    private static final long serialVersionUID = 4681998842214743584L;
 
     @Id
     @Column(name = "username")
     public String userName;
-    @Column (name = "starfish")
-    private String password;
-    @Column (name = "password")
-    private String publickey = UUID.randomUUID().toString();
     @OneToMany
     public List<Player> players;
+    @Column(name = "starfish")
+    private String password;
+    @Column(name = "password")
+    private String publickey = UUID.randomUUID().toString();
     @Column
     private boolean hasAuthorities;
     @Column(name = "characterService")
@@ -45,13 +44,30 @@ public class User implements Comparable{
         //super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
 
-    public User(){
+    public User() {
         //super("username", "password", new ArrayList<GrantedAuthority>());
     }
-    public Collection<GrantedAuthority> getAuthorities() {return authorities;}
-    public boolean isAccountNonExpired() { return false;}
-    public boolean isAccountNonLocked() { return false; }
-    public boolean isCredentialsNonExpired() {return false; }
+
+    public Collection<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(ArrayList<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
     public boolean isEnabled() {
         // We don't have an enabled/active field in our DB, all users are always enabled.
         return false;
@@ -60,6 +76,10 @@ public class User implements Comparable{
     public boolean isHasAuthorities() {
         this.hasAuthorities = !authorities.isEmpty();
         return hasAuthorities;
+    }
+
+    public void setHasAuthorities(boolean hasAuthorities) {
+        this.hasAuthorities = hasAuthorities;
     }
 
     public boolean hasAuthorities() {
@@ -74,23 +94,15 @@ public class User implements Comparable{
         this.auth = auth;
     }
 
-    public void setHasAuthorities(boolean hasAuthorities) {
-        this.hasAuthorities = hasAuthorities;
-    }
-
     public void setUserAuthorities(List<String> roles) {
-        List<String> listOfAuthorities = new ArrayList< String>();
+        List<String> listOfAuthorities = new ArrayList<String>();
         for (String role : roles) {
             listOfAuthorities.add(new String(role));
         }
         authorities = new ArrayList(listOfAuthorities);
     }
 
-
     public String getUserName() {
-        return userName;
-    }
-    public String getusername() {
         return userName;
     }
 
@@ -98,15 +110,20 @@ public class User implements Comparable{
         this.userName = userName;
     }
 
+    public String getusername() {
+        return userName;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public String getUsername() {
-        return userName;
-    }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return userName;
     }
 
     public List<Player> getPlayers() {
@@ -117,21 +134,12 @@ public class User implements Comparable{
         this.players = players;
     }
 
-
     public String getPublickey() {
         return publickey;
     }
 
     public void setPublickey(String publickey) {
         this.publickey = publickey;
-    }
-
-    public void setAuthorities(ArrayList<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     public Set<Role> getRoles() {
@@ -141,29 +149,34 @@ public class User implements Comparable{
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
     @Transient
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
 
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
     @Override
     public int compareTo(Object o) {
         User cast = null;
-        try{
-            cast = (User)o;
-        }catch (Exception e){
+        try {
+            cast = (User) o;
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
-        if(cast != null && this.userName != null && this.passwordConfirm != null){
-            if(!cast.getUsername().equals(this.userName)){
+        if (cast != null && this.userName != null && this.passwordConfirm != null) {
+            if (!cast.getUsername().equals(this.userName)) {
                 return -1;
             }
-            if(!cast.getPasswordConfirm().equals(this.passwordConfirm)){
+            if (!cast.getPasswordConfirm().equals(this.passwordConfirm)) {
                 return -1;
             }
             return 0;
-        }else{
+        } else {
             return 1;
         }
     }

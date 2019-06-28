@@ -27,16 +27,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/registration", "/registration.html", "/login", "/public/**", "/map").permitAll()
+                .antMatchers("/", "/notSignedIn", "/registration", "/registration.html", "/login", "/static/public/**", "/map").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .failureUrl("/player")
+                .failureUrl("/notSignedIn")
                 .and()
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/player")
-       .and().headers().frameOptions().disable().and().csrf().disable();//sameOrigin();
+                .and().headers().frameOptions().disable().and().csrf().disable();//sameOrigin();
     }
 
     @Autowired

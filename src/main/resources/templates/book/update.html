@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../public/style/all.min.css"/>
+    <script type="text/javascript" src="../public/scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/jquery.tablesorter.js"></script>
+    <meta http-equiv="Content-Type" content="../text/html; charset=UTF-8"/>
+
+    <title>Books</title>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <form th:object="${book}" th:action="@{'/book/{id}'(id=${book.bookId})}" th:method="put">
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Name"/>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Bad name</p>
+            <label for="system">System</label><select id="system" class="form-control" th:field="*{{system}}">
+            <option th:each="system : ${T(character.model.BookSystem).values()}"
+                    th:value="${{system}}"
+                    th:selected="${book.system == T(character.model.BookSystem)}"
+                    th:text="${system.toString()}">
+            </option>
+        </select>
+            <label for="acronym">Acronym</label>
+            <input type="text" th:field="*{acronym}" id="acronym" placeholder="XXX"/>
+            <p th:if=" ${#fields.hasErrors('acronym')}" th:errors="*{acronym}">Incorrect date</p>
+            <input type="submit" value="save"/>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+
+            $('#myTable').tablesorter();
+            /*<![CDATA[*/
+
+            var message = /*[[${book.system}]]*/ 'Custom';
+            console.log(message);
+            $('#system').select(message);
+            /*]]>*/
+        }
+    );
+
+</script>
+</html>

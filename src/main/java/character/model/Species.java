@@ -10,11 +10,11 @@ import java.io.Serializable;
 @Table(name = "species", schema = "", catalog = "legends")
 public class Species implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2257280953655899073L;
-	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+     *
+     */
+    private static final long serialVersionUID = -2257280953655899073L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String name;
     int Brawn;
@@ -31,16 +31,16 @@ public class Species implements Serializable {
     public Species() {
     }
 
+    public Species(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Species(String name) {
-        this.name = name;
     }
 
     public String getName() {

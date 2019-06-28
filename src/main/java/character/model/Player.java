@@ -17,15 +17,17 @@ import java.util.List;
 public class Player implements Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8634742315900681847L;
-	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+     *
+     */
+    private static final long serialVersionUID = 8634742315900681847L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
-    public String name= "NAME";
+    public String name = "NAME";
     public String userName = "";
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "character_species", joinColumns = {@JoinColumn(name = "characterId", nullable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn(name = "speciesId",
+            nullable = false, updatable = false)})
     public Species species;
     public String career = "CAREER";
     @JsonProperty(value = "specializationTrees")
@@ -53,26 +55,26 @@ public class Player implements Serializable {
     public String other = "";
     public int credits = 0;
     public String equipments = "";
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Skill> skills = new ArrayList<>();
-    @OneToMany (cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonProperty(value = "weapons")
-    public List<Player_Weapon> playerWeapons= new ArrayList<>();
-    @OneToMany(cascade=CascadeType.ALL)
-    public List<Talent> talents= new ArrayList<>();
-    @OneToMany(cascade=CascadeType.ALL)
-    public List<Armor> armor = new ArrayList<>();
-    @OneToMany(cascade=CascadeType.ALL)
+    public List<Player_Weapon> playerWeapons = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Talent> talents = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<PlayerArmorEntity> playerArmorEntity = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Gear> gear = new ArrayList<>();
-    public int encumbrance=0;
+    public int encumbrance = 0;
     @Column(name = "FORCE_POWERS")
-    public int force=0;
-    public String hashKey="006";
-    public String background="BACKGROUND";
-    public String obligations="OBLIGATIONS";
+    public int force = 0;
+    public String hashKey = "006";
+    public String background = "BACKGROUND";
+    public String obligations = "OBLIGATIONS";
     public String morality = "DUTY";
     public String duty = "DUTY";
-    public String motivations="MOTIVATIONS";
+    public String motivations = "MOTIVATIONS";
     @Transient
     public String achievements;
     @Transient
@@ -237,12 +239,12 @@ public class Player implements Serializable {
         this.soak = soak;
     }
 
-    public List<Armor> getArmor() {
-        return armor;
+    public List<PlayerArmorEntity> getPlayerArmorEntity() {
+        return playerArmorEntity;
     }
 
-    public void setArmor(List<Armor> armor) {
-        this.armor = armor;
+    public void setPlayerArmorEntity(List<PlayerArmorEntity> playerArmorEntity) {
+        this.playerArmorEntity = playerArmorEntity;
     }
 
     public List<Gear> getGear() {
@@ -552,100 +554,101 @@ public class Player implements Serializable {
                 '}';
     }
 
-   @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (!(o instanceof Player)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Player)) return false;
 
-      Player player = (Player) o;
+        Player player = (Player) o;
 
-      if (age != player.age) return false;
-      if (agility != player.agility) return false;
-      if (brawn != player.brawn) return false;
-      if (credits != player.credits) return false;
-      if (cunning != player.cunning) return false;
-      if (currentStrain != player.currentStrain) return false;
-      if (currentWounds != player.currentWounds) return false;
-      if (currentXP != player.currentXP) return false;
-      if (defense != player.defense) return false;
-      if (encumbrance != player.encumbrance) return false;
-      if (force != player.force) return false;
-      if (gender != player.gender) return false;
-      if (intellect != player.intellect) return false;
-      if (presence != player.presence) return false;
-      if (selectedAchievement != player.selectedAchievement) return false;
-      if (soak != player.soak) return false;
-      if (totalStrain != player.totalStrain) return false;
-      if (totalWounds != player.totalWounds) return false;
-      if (totalXP != player.totalXP) return false;
-      if (willpower != player.willpower) return false;
-      if (achievements != null ? !achievements.equals(player.achievements) : player.achievements != null) return false;
-      if (avatar != null ? !avatar.equals(player.avatar) : player.avatar != null) return false;
-      if (background != null ? !background.equals(player.background) : player.background != null) return false;
-      if (career != null ? !career.equals(player.career) : player.career != null) return false;
-      if (equipments != null ? !equipments.equals(player.equipments) : player.equipments != null) return false;
-      if (eyes != null ? !eyes.equals(player.eyes) : player.eyes != null) return false;
-      if (hair != null ? !hair.equals(player.hair) : player.hair != null) return false;
-      if (hashKey != null ? !hashKey.equals(player.hashKey) : player.hashKey != null) return false;
-      if (height != null ? !height.equals(player.height) : player.height != null) return false;
-      if (motivations != null ? !motivations.equals(player.motivations) : player.motivations != null) return false;
-      if (name != null ? !name.equals(player.name) : player.name != null) return false;
-      if (obligations != null ? !obligations.equals(player.obligations) : player.obligations != null) return false;
-      if (other != null ? !other.equals(player.other) : player.other != null) return false;
-      if (playerWeapons != null ? !playerWeapons.equals(player.playerWeapons) : player.playerWeapons != null)
-         return false;
-      if (skills != null ? !skills.equals(player.skills) : player.skills != null) return false;
-      if (specialization != null ? !specialization.equals(player.specialization) : player.specialization != null)
-         return false;
-      if (species != null ? !species.equals(player.species) : player.species != null) return false;
-      if (talents != null ? !talents.equals(player.talents) : player.talents != null) return false;
-      if (userName != null ? !userName.equals(player.userName) : player.userName != null) return false;
-       return world != null ? world.equals(player.world) : player.world == null;
-   }
+        if (age != player.age) return false;
+        if (agility != player.agility) return false;
+        if (brawn != player.brawn) return false;
+        if (credits != player.credits) return false;
+        if (cunning != player.cunning) return false;
+        if (currentStrain != player.currentStrain) return false;
+        if (currentWounds != player.currentWounds) return false;
+        if (currentXP != player.currentXP) return false;
+        if (defense != player.defense) return false;
+        if (encumbrance != player.encumbrance) return false;
+        if (force != player.force) return false;
+        if (gender != player.gender) return false;
+        if (intellect != player.intellect) return false;
+        if (presence != player.presence) return false;
+        if (selectedAchievement != player.selectedAchievement) return false;
+        if (soak != player.soak) return false;
+        if (totalStrain != player.totalStrain) return false;
+        if (totalWounds != player.totalWounds) return false;
+        if (totalXP != player.totalXP) return false;
+        if (willpower != player.willpower) return false;
+        if (achievements != null ? !achievements.equals(player.achievements) : player.achievements != null)
+            return false;
+        if (avatar != null ? !avatar.equals(player.avatar) : player.avatar != null) return false;
+        if (background != null ? !background.equals(player.background) : player.background != null) return false;
+        if (career != null ? !career.equals(player.career) : player.career != null) return false;
+        if (equipments != null ? !equipments.equals(player.equipments) : player.equipments != null) return false;
+        if (eyes != null ? !eyes.equals(player.eyes) : player.eyes != null) return false;
+        if (hair != null ? !hair.equals(player.hair) : player.hair != null) return false;
+        if (hashKey != null ? !hashKey.equals(player.hashKey) : player.hashKey != null) return false;
+        if (height != null ? !height.equals(player.height) : player.height != null) return false;
+        if (motivations != null ? !motivations.equals(player.motivations) : player.motivations != null) return false;
+        if (name != null ? !name.equals(player.name) : player.name != null) return false;
+        if (obligations != null ? !obligations.equals(player.obligations) : player.obligations != null) return false;
+        if (other != null ? !other.equals(player.other) : player.other != null) return false;
+        if (playerWeapons != null ? !playerWeapons.equals(player.playerWeapons) : player.playerWeapons != null)
+            return false;
+        if (skills != null ? !skills.equals(player.skills) : player.skills != null) return false;
+        if (specialization != null ? !specialization.equals(player.specialization) : player.specialization != null)
+            return false;
+        if (species != null ? !species.equals(player.species) : player.species != null) return false;
+        if (talents != null ? !talents.equals(player.talents) : player.talents != null) return false;
+        if (userName != null ? !userName.equals(player.userName) : player.userName != null) return false;
+        return world != null ? world.equals(player.world) : player.world == null;
+    }
 
-   @Override
-   public int hashCode() {
-      int result = name != null ? name.hashCode() : 0;
-      result = 31 * result + (userName != null ? userName.hashCode() : 0);
-      result = 31 * result + (species != null ? species.hashCode() : 0);
-      result = 31 * result + (career != null ? career.hashCode() : 0);
-      result = 31 * result + (specialization != null ? specialization.hashCode() : 0);
-      result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
-      result = 31 * result + currentXP;
-      result = 31 * result + totalXP;
-      result = 31 * result + soak;
-      result = 31 * result + currentWounds;
-      result = 31 * result + totalWounds;
-      result = 31 * result + currentStrain;
-      result = 31 * result + totalStrain;
-      result = Integer.parseInt(31 * result + defense);
-      result = 31 * result + brawn;
-      result = 31 * result + agility;
-      result = 31 * result + intellect;
-      result = 31 * result + cunning;
-      result = 31 * result + willpower;
-      result = 31 * result + presence;
-      result = 31 * result + (gender != null ? gender.hashCode() : 0);
-      result = 31 * result + age;
-      result = 31 * result + (height != null ? height.hashCode() : 0);
-      result = 31 * result + (eyes != null ? eyes.hashCode() : 0);
-      result = 31 * result + (hair != null ? hair.hashCode() : 0);
-      result = 31 * result + (other != null ? other.hashCode() : 0);
-      result = 31 * result + credits;
-      result = 31 * result + (equipments != null ? equipments.hashCode() : 0);
-      result = 31 * result + (skills != null ? skills.hashCode() : 0);
-      result = 31 * result + (playerWeapons != null ? playerWeapons.hashCode() : 0);
-      result = 31 * result + (talents != null ? talents.hashCode() : 0);
-      result = 31 * result + encumbrance;
-      result = 31 * result + force;
-      result = 31 * result + (hashKey != null ? hashKey.hashCode() : 0);
-      result = 31 * result + (background != null ? background.hashCode() : 0);
-      result = 31 * result + (obligations != null ? obligations.hashCode() : 0);
-      result = 31 * result + (motivations != null ? motivations.hashCode() : 0);
-      result = 31 * result + (achievements != null ? achievements.hashCode() : 0);
-      result = 31 * result + selectedAchievement;
-      result = 31 * result + (world != null ? world.hashCode() : 0);
-      return result;
-   }
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (species != null ? species.hashCode() : 0);
+        result = 31 * result + (career != null ? career.hashCode() : 0);
+        result = 31 * result + (specialization != null ? specialization.hashCode() : 0);
+        result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
+        result = 31 * result + currentXP;
+        result = 31 * result + totalXP;
+        result = 31 * result + soak;
+        result = 31 * result + currentWounds;
+        result = 31 * result + totalWounds;
+        result = 31 * result + currentStrain;
+        result = 31 * result + totalStrain;
+        result = Integer.parseInt(31 * result + defense);
+        result = 31 * result + brawn;
+        result = 31 * result + agility;
+        result = 31 * result + intellect;
+        result = 31 * result + cunning;
+        result = 31 * result + willpower;
+        result = 31 * result + presence;
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + age;
+        result = 31 * result + (height != null ? height.hashCode() : 0);
+        result = 31 * result + (eyes != null ? eyes.hashCode() : 0);
+        result = 31 * result + (hair != null ? hair.hashCode() : 0);
+        result = 31 * result + (other != null ? other.hashCode() : 0);
+        result = 31 * result + credits;
+        result = 31 * result + (equipments != null ? equipments.hashCode() : 0);
+        result = 31 * result + (skills != null ? skills.hashCode() : 0);
+        result = 31 * result + (playerWeapons != null ? playerWeapons.hashCode() : 0);
+        result = 31 * result + (talents != null ? talents.hashCode() : 0);
+        result = 31 * result + encumbrance;
+        result = 31 * result + force;
+        result = 31 * result + (hashKey != null ? hashKey.hashCode() : 0);
+        result = 31 * result + (background != null ? background.hashCode() : 0);
+        result = 31 * result + (obligations != null ? obligations.hashCode() : 0);
+        result = 31 * result + (motivations != null ? motivations.hashCode() : 0);
+        result = 31 * result + (achievements != null ? achievements.hashCode() : 0);
+        result = 31 * result + selectedAchievement;
+        result = 31 * result + (world != null ? world.hashCode() : 0);
+        return result;
+    }
 }
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../public/style/all.min.css"/>
+    <script type="text/javascript" src="../public/scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/jquery.tablesorter.js"></script>
+    <meta http-equiv="Content-Type" content="../text/html; charset=UTF-8"/>
+
+    <title>Books</title>
+</head>
+<body style="overflow:scroll;">
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <!-- <img class="card-img-top" src="" alt=""> -->
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">
+            <h5>ID</h5>
+            <p th:text="${ability.abilityId}">1</p>
+            <h5>Name</h5>
+            <p th:text="${ability.name}">Name</p>
+            <h5>Acronym</h5>
+            <p th:text="${ability.description}">0</p>
+            </p>
+            <form th:object="${ability}" th:action="@{'/ability/{id}'(id=${ability.abilityId})}" th:method="delete">
+                <input type="submit" value="Delete"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+
+            $('#myTable').tablesorter();
+        }
+    );
+
+</script>

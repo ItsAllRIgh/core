@@ -1,7 +1,7 @@
 package character.rest;
 
 
-import character.model.BookWeaponsEntity;
+import character.model.BookWeapons;
 import character.model.Player;
 import character.model.User;
 import character.repository.BookArmorRepository;
@@ -38,7 +38,7 @@ public class RestfulPlayer {
     BookWeaponsRepository bookWeaponsRepository;
 
 
-   @Autowired
+    @Autowired
     UserRepository userRepository;
 
     @RequestMapping(value = "/map", method = RequestMethod.GET)
@@ -47,129 +47,130 @@ public class RestfulPlayer {
 
     }
 
-   @RequestMapping(value = "/getMyChars", method = RequestMethod.GET)
-   public List<Player> getAllMyChars (Principal user){
-      System.out.println(user);
-      if(user != null){
-         User internalUser = userRepository.findByUserName(user.getName());
-         return internalUser.getPlayers();
-      }
+    @RequestMapping(value = "/getMyChars", method = RequestMethod.GET)
+    public List<Player> getAllMyChars(Principal user) {
+        System.out.println(user);
+        if (user != null) {
+            User internalUser = userRepository.findByUserName(user.getName());
+            return internalUser.getPlayers();
+        }
 
-      return null;
-   }
+        return null;
+    }
 
-   @RequestMapping(value = "/player/synch", method = RequestMethod.POST)
-   public List<Player> synchMyChars(@RequestBody List<Player> players, Principal user) {
-      if (user != null) {
-         User internalUser = userRepository.findByUserName(user.getName());
-         System.err.println("CREATING BO!");
-         PlayerBo playerBo = new PlayerBo(internalUser);
-      }
-      return players;
-   }
+    @RequestMapping(value = "/player/synch", method = RequestMethod.POST)
+    public List<Player> synchMyChars(@RequestBody List<Player> players, Principal user) {
+        if (user != null) {
+            User internalUser = userRepository.findByUserName(user.getName());
+            System.err.println("CREATING BO!");
+            PlayerBo playerBo = new PlayerBo(internalUser);
+        }
+        return players;
+    }
 
-   @RequestMapping(value="/newChar", method = RequestMethod.POST)
-   public Player saveNewChar (@RequestBody String character){
-      ObjectMapper mapper = new ObjectMapper();
-      Player player = new Player();
-      try {
-         player = mapper.readValue(character, Player.class);
-         String json = mapper.writeValueAsString(player);
-         System.out.println(json);
-         System.out.println(character);
-      } catch (JsonProcessingException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
+    @RequestMapping(value = "/newChar", method = RequestMethod.POST)
+    public Player saveNewChar(@RequestBody String character) {
+        ObjectMapper mapper = new ObjectMapper();
+        Player player = new Player();
+        try {
+            player = mapper.readValue(character, Player.class);
+            String json = mapper.writeValueAsString(player);
+            System.out.println(json);
+            System.out.println(character);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-      //playerRepository.save(character);
+        //playerRepository.save(character);
 
-      return player;
-   }
+        return player;
+    }
 
-   @RequestMapping(value = "/updateCharList", method = RequestMethod.POST)
-   public Player[] saveCharacterList (@RequestBody String players){
-      ObjectMapper mapper = new ObjectMapper();
-      ArrayList<Player> list = new ArrayList<Player>();
-      System.out.println("recieved stuff " + players);
-      Player[] group = null;// = new Player[50];
-      try {
-         group = mapper.readValue(players, Player[].class);
-         String json = mapper.writeValueAsString(group);
-         System.out.println(json);
-         //System.out.println(players);
-      } catch (JsonProcessingException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
+    @RequestMapping(value = "/updateCharList", method = RequestMethod.POST)
+    public Player[] saveCharacterList(@RequestBody String players) {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayList<Player> list = new ArrayList<Player>();
+        System.out.println("recieved stuff " + players);
+        Player[] group = null;// = new Player[50];
+        try {
+            group = mapper.readValue(players, Player[].class);
+            String json = mapper.writeValueAsString(group);
+            System.out.println(json);
+            //System.out.println(players);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-      // Find the new one/update all entries
-      if(null != group || group.length>0){
-         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-         String username = null;
-         if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-            System.err.println(username);
-         } else {
-            username = principal.toString();
-            System.err.println(username);
-         }
-         if(username != null){
-            User activeUser = userRepository.findByUserName(username);
-            if(activeUser != null){
-               for(Player p : group){
-                  if(p.id != null){
-                     p.id = null;
-                  }
-               }
-               list = new ArrayList<Player>(Arrays.asList(group));
-               List<Player> currentList = activeUser.getPlayers();
-               playerRepository.save(list);
-               if(currentList.size()>0){
-                  for(Player player: group){
-                     //player.userName = activeUser.userName;
-                     activeUser.getPlayers().add(player);
-                  }
-                  System.out.print("Found a player: "+ currentList.get(0));
-                  if(currentList.size()>1){
-                     System.out.print("trixy hobbitesess");
-                  }
-                  if(userRepository != null) {
-                     userRepository.save(activeUser);
-                  }
-               }else{
-                  currentList.addAll(list);
-                  if(userRepository != null){
-                     if(list != null)
-                     userRepository.save(activeUser);
-                  }
-               }
-
+        // Find the new one/update all entries
+        if (null != group || group.length > 0) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username = null;
+            if (principal instanceof UserDetails) {
+                username = ((UserDetails) principal).getUsername();
+                System.err.println(username);
+            } else {
+                username = principal.toString();
+                System.err.println(username);
             }
-         }
-      }
-      return group;
-   }
+            if (username != null) {
+                User activeUser = userRepository.findByUserName(username);
+                if (activeUser != null) {
+                    for (Player p : group) {
+                        if (p.id != null) {
+                            p.id = null;
+                        }
+                    }
+                    list = new ArrayList<Player>(Arrays.asList(group));
+                    List<Player> currentList = activeUser.getPlayers();
+                    playerRepository.save(list);
+                    if (currentList.size() > 0) {
+                        for (Player player : group) {
+                            //player.userName = activeUser.userName;
+                            activeUser.getPlayers().add(player);
+                        }
+                        System.out.print("Found a player: " + currentList.get(0));
+                        if (currentList.size() > 1) {
+                            System.out.print("trixy hobbitesess");
+                        }
+                        if (userRepository != null) {
+                            userRepository.save(activeUser);
+                        }
+                    } else {
+                        currentList.addAll(list);
+                        if (userRepository != null) {
+                            if (list != null)
+                                userRepository.save(activeUser);
+                        }
+                    }
 
-   @RequestMapping(value = "/weaponsName", method = RequestMethod.GET)
-   public List<String> getListOfWeapons (){
-      ArrayList<String> names = new ArrayList<>();
-      List<BookWeaponsEntity> repo = bookWeaponsRepository.findAll();
-      for(BookWeaponsEntity weapon: repo){
-         names.add(weapon.getWeaponName());
-      }
-      return names;
-   }
-   @RequestMapping(value = "/weapon", method = RequestMethod.GET)
-   public BookWeaponsEntity getListOfWeapons (@RequestParam("name") String name){
-      BookWeaponsEntity entity = null;
-      List<BookWeaponsEntity> repo = bookWeaponsRepository.findByWeaponNameAllIgnoreCase(name);
-      System.out.println(repo.size());
-      if (!repo.isEmpty()){
-         entity = repo.get(0);
-      }
-      return entity;
-   }
+                }
+            }
+        }
+        return group;
+    }
+
+    @RequestMapping(value = "/weaponsName", method = RequestMethod.GET)
+    public List<String> getListOfWeapons() {
+        ArrayList<String> names = new ArrayList<>();
+        List<BookWeapons> repo = bookWeaponsRepository.findAll();
+        for (BookWeapons weapon : repo) {
+            names.add(weapon.getWeaponName());
+        }
+        return names;
+    }
+
+    @RequestMapping(value = "/weapon", method = RequestMethod.GET)
+    public BookWeapons getListOfWeapons(@RequestParam("name") String name) {
+        BookWeapons entity = null;
+        List<BookWeapons> repo = bookWeaponsRepository.findByWeaponNameAllIgnoreCase(name);
+        System.out.println(repo.size());
+        if (!repo.isEmpty()) {
+            entity = repo.get(0);
+        }
+        return entity;
+    }
 }

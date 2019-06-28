@@ -2,7 +2,7 @@ package character.repository;
 
 /**
  * This will act as the store of Characters, server-side, flat-file or active DB.
- *
+ * <p>
  * Look@ Datastore
  * Created by Th'MASA of on 1/2/2017.
  */
@@ -19,13 +19,13 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "user_character", path = "user_character")
 public interface PlayerRepository extends CrudRepository<Player, Long> {
 
-   @RequestMapping(name = "/character/{name}")
+    @RequestMapping(name = "/character/{name}")
     List<Player> findByName(@PathVariable(required = true) String name);
 
     List<Player> findByNameOrderByIdAsc(String name);
 
     Player findById(Long id);
 
-   @RequestMapping("/allChars")
+    @RequestMapping("/allChars")
     List<Player> findAll();
 }

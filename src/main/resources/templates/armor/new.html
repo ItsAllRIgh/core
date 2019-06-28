@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../public/style/all.min.css"/>
+    <script type="text/javascript" src="../public/scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/jquery.tablesorter.js"></script>
+    <meta http-equiv="Content-Type" content="../text/html; charset=UTF-8"/>
+    <title>Armor</title>
+</head>
+<body>
+<div></div>
+<form action="#" th:action="@{/armor/addArmor}" th:object="${armor}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{armorName}" id="name" placeholder="Name"/>
+    <label for="description">Description</label>
+    <input type="text" th:field="*{description}" id="description" placeholder="XXX"></input>
+    <label for="defense">Defense</label>
+    <input type="number" th:field="*{defense}" id="defense" placeholder="0"/>
+    <label for="soak">Soak</label>
+    <input type="number" th:field="*{soak}" id="soak" placeholder="0"/>
+    <label for="encum">Encumbrance</label>
+    <input type="number" th:field="*{encum}" id="encum" placeholder="0"/>
+    <label for="price">Price</label>
+    <input type="number" th:field="*{price}" id="price" placeholder="0"/>
+    <label for="rarity">Rarity</label>
+    <input type="number" th:field="*{rarity}" id="rarity" placeholder="0"/>
+    <label for="restrict">Restricted</label>
+    <input type="checkbox" th:field="*{restricted}" id="restrict" placeholder="0"/>
+    <table id="">
+        <thead>
+        <tr>
+            <th>Page #</th>
+            <th>Book</th>
+            <th>
+                <button type="submit" name="addRef">Add row</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bookRef : *{bookReferences}">
+            <input hidden="true" th:field="*{bookReferences[__${bookRefStat.index}__].referenceId}"/>
+            <td>
+                <input th:field="*{bookReferences[__${bookRefStat.index}__].pageNumber}"/>
+            </td>
+            <td>
+                <select th:field="*{bookReferences[__${bookRefStat.index}__].book}">
+                    <option
+                            th:each="book : ${books}"
+                            th:value="${{book}}"
+                            th:selected="${book == books}"
+                            th:text="${book.name}"
+                    >
+                    </option>
+                </select>
+            </td>
+
+            <td>
+                <button type="submit" name="removeRef" th:value="${bookRefStat.index}">Remove row</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="submit" value="save"/>
+</form>
+</body>
+</html>

@@ -10,36 +10,36 @@ import java.util.List;
  */
 @Entity
 public class WeaponStore {
-   @Id
-   @GeneratedValue(generator = "increment")
-   @GenericGenerator(name="increment", strategy="increment")
-   int id;
-   @OneToMany
-   public List<Player_Weapon> weaponsList;
-   @Column
-   int inflation;
+    @OneToMany
+    public List<Player_Weapon> weaponsList;
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    int id;
+    @Column
+    int inflation;
 
-   public WeaponStore() {
-   }
+    public WeaponStore() {
+    }
 
-   public WeaponStore(int inflation, List<Player_Weapon> weaponsList) {
-      this.inflation = inflation;
-      this.weaponsList = weaponsList;
-   }
+    public WeaponStore(int inflation, List<Player_Weapon> weaponsList) {
+        this.inflation = inflation;
+        this.weaponsList = weaponsList;
+    }
 
-   public void setWeaponsList(List<Player_Weapon> weaponsList) {
-      this.weaponsList = weaponsList;
-   }
+    public List<Player_Weapon> getWeaponsList() {
+        return weaponsList;
+    }
 
-   public List<Player_Weapon> getWeaponsList() {
-      return weaponsList;
-   }
+    public void setWeaponsList(List<Player_Weapon> weaponsList) {
+        this.weaponsList = weaponsList;
+    }
 
-   public int getInflation() {
-      return inflation;
-   }
+    public int getInflation() {
+        return inflation;
+    }
 
-   public void setInflation(int inflation) {
-      this.inflation = inflation;
-   }
+    public void setInflation(int inflation) {
+        this.inflation = inflation;
+    }
 }

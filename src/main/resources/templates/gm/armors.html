@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <head>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/app.css" rel="stylesheet"/>
@@ -25,19 +25,19 @@
     <th>Is Restricted</th>
     <th>Book:INDEX</th>
     </thead>
-<!--/*@thymesVar id="armors" type="character.model.BookArmorEntity"*/-->
+        <!--/*@thymesVar id="armors" type="character.model.BookArmor"*/-->
         <tbody>
-<tr th:each="armor : ${armors}">
-    <td th:text="${armor.armorId}">1</td>
-    <td th:text="${armor.armorName}">Name</td>
-    <td th:text="${armor.defense}">0</td>
-    <td th:text="${armor.soak}">0</td>
-    <td th:text="${armor.price}">0</td>
-    <td th:text="${armor.encum}">0</td>
-    <td th:text="${armor.hp}">0</td>
-    <td th:text="${armor.rarity}">0</td>
-    <td th:text="${armor.restricted}">is restricted</td>
-    <td th:text="${armor.bookIndex}">Book_INDEX</td>
+        <tr th:each="playerArmorEntity : ${armors}">
+            <td th:text="${playerArmorEntity.armorId}">1</td>
+            <td th:text="${playerArmorEntity.armorName}">Name</td>
+            <td th:text="${playerArmorEntity.defense}">0</td>
+            <td th:text="${playerArmorEntity.soak}">0</td>
+            <td th:text="${playerArmorEntity.price}">0</td>
+            <td th:text="${playerArmorEntity.encum}">0</td>
+            <td th:text="${playerArmorEntity.hp}">0</td>
+            <td th:text="${playerArmorEntity.rarity}">0</td>
+            <td th:text="${playerArmorEntity.restricted}">is restricted</td>
+            <td th:text="${playerArmorEntity.bookIndex}">Book_INDEX</td>
 </tr>
         </tbody>
 </table>
@@ -47,7 +47,7 @@
 <!--
 {
 	"armorId": 1,
-	"armorName": "A/KT Mountaineer Armor",
+	"armorName": "A/KT Mountaineer PlayerArmorEntity",
 	"defense": 1,
 	"soak": 1,
 	"price": 1800,

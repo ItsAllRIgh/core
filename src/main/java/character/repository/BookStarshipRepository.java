@@ -1,0 +1,14 @@
+package character.repository;
+
+import character.model.BookStarship;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+@RepositoryRestResource
+public interface BookStarshipRepository extends CrudRepository<BookStarship, Long> {
+    @RequestMapping(name = "/starships/all")
+    List<BookStarship> findAll();
+}
