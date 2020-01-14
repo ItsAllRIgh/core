@@ -6,7 +6,13 @@
   <groupId>org.springframework</groupId>
   <artifactId>legends</artifactId>
   <version>0.1.0</version>
-
+    <repositories>
+        <repository>
+            <id>repository.spring.release</id>
+            <name>Spring GA Repository</name>
+            <url>10.0.0.66:8081/release</url>
+        </repository>
+    </repositories>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
