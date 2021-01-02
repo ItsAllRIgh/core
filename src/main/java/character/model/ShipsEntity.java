@@ -1,44 +1,33 @@
 package character.model;
 
-import javax.persistence.*;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Created by yr998d on 1/5/2017.
  */
-@Entity
-@Table(name = "ships", schema = "", catalog = "legends")
-public class ShipsEntity {
-    private int shipsId;
-    private String shipName;
-    private Integer sil;
-    private Integer spd;
-    private Integer hand;
-    private String model;
-    private String man;
-    private String hdNc;
-    private Integer crew;
-    private Integer encum;
-    private Integer pass;
-    private Integer cost;
-    private Integer rarity;
-    private Integer hp;
-    private Integer wep;
-    private Integer fuel;
-    private String bookIndex;
-    private Byte restricted;
 
-    @Id
-    @Column(name = "ships_id", nullable = false, insertable = true, updatable = true)
-    public int getShipsId() {
-        return shipsId;
-    }
 
-    public void setShipsId(int shipsId) {
-        this.shipsId = shipsId;
-    }
+public class ShipsEntity extends PanacheEntity {
 
-    @Basic
-    @Column(name = "fuel", nullable = true, insertable = true, updatable = true)
+    String shipName;
+    Integer sil;
+    Integer spd;
+    Integer hand;
+    String model;
+    String man;
+    String hdNc;
+    Integer crew;
+    Integer encum;
+    Integer pass;
+    Integer cost;
+    Integer rarity;
+    Integer hp;
+    Integer wep;
+    Integer fuel;
+    String bookIndex;
+    Boolean restricted;
+
+
     public Integer getFuel() {
         return fuel;
     }
@@ -47,8 +36,7 @@ public class ShipsEntity {
         this.fuel = fuel;
     }
 
-    @Basic
-    @Column(name = "ship_name", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getShipName() {
         return shipName;
     }
@@ -57,8 +45,7 @@ public class ShipsEntity {
         this.shipName = shipName;
     }
 
-    @Basic
-    @Column(name = "sil", nullable = true, insertable = true, updatable = true)
+
     public Integer getSil() {
         return sil;
     }
@@ -67,8 +54,7 @@ public class ShipsEntity {
         this.sil = sil;
     }
 
-    @Basic
-    @Column(name = "spd", nullable = true, insertable = true, updatable = true)
+
     public Integer getSpd() {
         return spd;
     }
@@ -77,8 +63,7 @@ public class ShipsEntity {
         this.spd = spd;
     }
 
-    @Basic
-    @Column(name = "hand", nullable = true, insertable = true, updatable = true)
+
     public Integer getHand() {
         return hand;
     }
@@ -87,8 +72,7 @@ public class ShipsEntity {
         this.hand = hand;
     }
 
-    @Basic
-    @Column(name = "model", nullable = true, insertable = true, updatable = true, length = 45)
+
     public String getModel() {
         return model;
     }
@@ -97,8 +81,7 @@ public class ShipsEntity {
         this.model = model;
     }
 
-    @Basic
-    @Column(name = "man", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getMan() {
         return man;
     }
@@ -107,8 +90,7 @@ public class ShipsEntity {
         this.man = man;
     }
 
-    @Basic
-    @Column(name = "HD_NC", nullable = true, insertable = true, updatable = true, length = 25)
+
     public String getHdNc() {
         return hdNc;
     }
@@ -117,8 +99,7 @@ public class ShipsEntity {
         this.hdNc = hdNc;
     }
 
-    @Basic
-    @Column(name = "crew", nullable = true, insertable = true, updatable = true)
+
     public Integer getCrew() {
         return crew;
     }
@@ -127,8 +108,7 @@ public class ShipsEntity {
         this.crew = crew;
     }
 
-    @Basic
-    @Column(name = "encum", nullable = true, insertable = true, updatable = true)
+
     public Integer getEncum() {
         return encum;
     }
@@ -137,8 +117,7 @@ public class ShipsEntity {
         this.encum = encum;
     }
 
-    @Basic
-    @Column(name = "pass", nullable = true, insertable = true, updatable = true)
+
     public Integer getPass() {
         return pass;
     }
@@ -147,8 +126,7 @@ public class ShipsEntity {
         this.pass = pass;
     }
 
-    @Basic
-    @Column(name = "cost", nullable = true, insertable = true, updatable = true)
+
     public Integer getCost() {
         return cost;
     }
@@ -157,8 +135,7 @@ public class ShipsEntity {
         this.cost = cost;
     }
 
-    @Basic
-    @Column(name = "rarity", nullable = true, insertable = true, updatable = true)
+
     public Integer getRarity() {
         return rarity;
     }
@@ -167,8 +144,7 @@ public class ShipsEntity {
         this.rarity = rarity;
     }
 
-    @Basic
-    @Column(name = "HP", nullable = true, insertable = true, updatable = true)
+
     public Integer getHp() {
         return hp;
     }
@@ -177,8 +153,7 @@ public class ShipsEntity {
         this.hp = hp;
     }
 
-    @Basic
-    @Column(name = "wep", nullable = true, insertable = true, updatable = true)
+
     public Integer getWep() {
         return wep;
     }
@@ -187,8 +162,7 @@ public class ShipsEntity {
         this.wep = wep;
     }
 
-    @Basic
-    @Column(name = "book_index", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getBookIndex() {
         return bookIndex;
     }
@@ -197,13 +171,12 @@ public class ShipsEntity {
         this.bookIndex = bookIndex;
     }
 
-    @Basic
-    @Column(name = "restricted", nullable = true, insertable = true, updatable = true)
-    public Byte getRestricted() {
+
+    public Boolean getRestricted() {
         return restricted;
     }
 
-    public void setRestricted(Byte restricted) {
+    public void setRestricted(Boolean restricted) {
         this.restricted = restricted;
     }
 
@@ -214,7 +187,6 @@ public class ShipsEntity {
 
         ShipsEntity that = (ShipsEntity) o;
 
-        if (shipsId != that.shipsId) return false;
         if (bookIndex != null ? !bookIndex.equals(that.bookIndex) : that.bookIndex != null) return false;
         if (cost != null ? !cost.equals(that.cost) : that.cost != null) return false;
         if (crew != null ? !crew.equals(that.crew) : that.crew != null) return false;
@@ -230,14 +202,12 @@ public class ShipsEntity {
         if (shipName != null ? !shipName.equals(that.shipName) : that.shipName != null) return false;
         if (sil != null ? !sil.equals(that.sil) : that.sil != null) return false;
         if (spd != null ? !spd.equals(that.spd) : that.spd != null) return false;
-        if (wep != null ? !wep.equals(that.wep) : that.wep != null) return false;
-
-        return true;
+        return wep != null ? wep.equals(that.wep) : that.wep == null;
     }
 
     @Override
     public int hashCode() {
-        int result = shipsId;
+        int result = 0;
         result = 31 * result + (shipName != null ? shipName.hashCode() : 0);
         result = 31 * result + (sil != null ? sil.hashCode() : 0);
         result = 31 * result + (spd != null ? spd.hashCode() : 0);

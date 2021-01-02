@@ -1,29 +1,13 @@
 package character.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-@Entity
-@Table(name = "character_abilities", schema = "", catalog = "legends")
-public class CharacterAbilities {
-    @Id
-    @Column(name = "character_abilities_id")
-    private long characterAbilitiesId;
-    private String ability;
-    private String description;
-    private String book_index;
+public class CharacterAbilities extends PanacheEntity {
 
 
-    public long getCharacterAbilitiesId() {
-        return characterAbilitiesId;
-    }
-
-    public void setCharacterAbilitiesId(long characterAbilitiesId) {
-        this.characterAbilitiesId = characterAbilitiesId;
-    }
-
+    String ability;
+    String description;
+    String book_index;
 
     public String getAbility() {
         return ability;

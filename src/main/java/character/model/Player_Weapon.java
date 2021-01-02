@@ -1,44 +1,22 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.io.Serializable;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Created by Th'MASA of on 1/2/2017.
  */
-@Entity
-@Table(name = "weapon", schema = "", catalog = "legends")
-public class Player_Weapon implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    Long id;
-    String name = "WEAPON";
-    String skill = null;
-    String special = "WEAPONSPECIAL";
-    @Column(name = "WEP_RANGE")
-    String range = "";
-    int damages = 2;
-    @JsonProperty(value = "critical")
-    int crit = 0;
-    @JsonProperty(value = "HP")
-    int HP = 0;
-    String mods = "WEAPONMODS";
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+public class Player_Weapon extends PanacheEntity {
+
+    String name;
+    String skill;
+    String special;
+    String range;
+    int damages;
+    int crit;
+    int HP;
+    String mods;
 
     public String getName() {
         return name;
@@ -107,8 +85,7 @@ public class Player_Weapon implements Serializable {
     @Override
     public String toString() {
         return "Weapon{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                " name='" + name + '\'' +
                 ", skill=" + skill +
                 ", special='" + special + '\'' +
                 ", range=" + range +

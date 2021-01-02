@@ -1,33 +1,19 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(schema = "legends", catalog = "legends")
-public class BookWeaponQualities {
-    @ManyToMany(cascade = CascadeType.ALL)
+
+public class BookWeaponQualities extends PanacheEntity {
+
     List<BookReference> bookReferences;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long weaponQualityId;
-    private String name;
-    private String description;
-    private boolean isActive;
-    private boolean hasActive;
-    private boolean isRanked;
-
-    @JsonIgnore
-    public long getWeaponQualityId() {
-        return weaponQualityId;
-    }
-
-    public void setWeaponQualityId(long weaponQualityId) {
-        this.weaponQualityId = weaponQualityId;
-    }
+    String name;
+    String description;
+    boolean isActive;
+    boolean hasActive;
+    boolean isRanked;
 
     public String getName() {
         return name;
@@ -82,8 +68,7 @@ public class BookWeaponQualities {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookWeaponQualities that = (BookWeaponQualities) o;
-        return weaponQualityId == that.weaponQualityId &&
-                isActive == that.isActive &&
+        return isActive == that.isActive &&
                 hasActive == that.hasActive &&
                 isRanked == that.isRanked &&
                 Objects.equals(name, that.name) &&
@@ -93,6 +78,6 @@ public class BookWeaponQualities {
     @Override
     public int hashCode() {
 
-        return Objects.hash(weaponQualityId, name, description, isActive, hasActive, isRanked);
+        return Objects.hash(name, description, isActive, hasActive, isRanked);
     }
 }

@@ -1,42 +1,30 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(schema = "legends", catalog = "legends")
-public class BookStarship {
-    @ManyToMany(cascade = CascadeType.ALL)
+
+public class BookStarship extends PanacheEntity {
+
     List<BookReference> bookReferences;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long vehicleId;
-    @Enumerated
-    private StarshipType type;
-    private String description;
-    private int silhouette;
-    private int speed;
-    private int handling;
-    private String manufacturer;
-    private String model;
-    private int crewCap;
-    private int encum;
-    private int passengerCap;
-    private int price;
-    private int rarity;
-    private int weaponCap;
-    private int hp;
 
-    @JsonIgnore
-    public long getVehicleId() {
-        return vehicleId;
-    }
 
-    public void setVehicleId(long vehicleId) {
-        this.vehicleId = vehicleId;
-    }
+    StarshipType type;
+    String description;
+    int silhouette;
+    int speed;
+    int handling;
+    String manufacturer;
+    String model;
+    int crewCap;
+    int encum;
+    int passengerCap;
+    int price;
+    int rarity;
+    int weaponCap;
+    int hp;
+
 
     public StarshipType getType() {
         return type;

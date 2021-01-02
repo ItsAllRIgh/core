@@ -1,27 +1,12 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
+public class BookReference extends PanacheEntity {
 
-@Entity
-@Table(schema = "legends", catalog = "legends")
-public class BookReference {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long referenceId;
-    private int pageNumber;
-    @ManyToOne
-    private Book book;
+    int pageNumber;
+    Book book;
 
-    @JsonIgnore
-    public long getReferenceId() {
-        return referenceId;
-    }
-
-    public void setReferenceId(long referenceId) {
-        this.referenceId = referenceId;
-    }
 
     public int getPageNumber() {
         return pageNumber;
@@ -42,8 +27,7 @@ public class BookReference {
     @Override
     public String toString() {
         return "BookReference{" +
-                "referenceId=" + referenceId +
-                ", pageNumber=" + pageNumber +
+                " pageNumber=" + pageNumber +
                 ", book=" + book +
                 '}';
     }

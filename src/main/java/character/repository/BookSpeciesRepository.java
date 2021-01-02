@@ -1,14 +1,7 @@
 package character.repository;
 
 import character.model.BookSpecies;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.web.bind.annotation.RequestMapping;
+import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 
-import java.util.List;
-
-@RepositoryRestResource
-public interface BookSpeciesRepository extends CrudRepository<BookSpecies, Long> {
-    @RequestMapping(name = "/species/all")
-    List<BookSpecies> findAll();
+public interface BookSpeciesRepository extends PanacheEntityResource<BookSpecies, Long> {
 }

@@ -2,7 +2,7 @@ package character.model;
 
 public enum CharacteristicType {
     Intellect(0), Brawn(1), Cunning(2), Willpower(4), Presence(5), Agility(6);
-    private int val;
+    int val;
 
     CharacteristicType(int val) {
         this.val = val;

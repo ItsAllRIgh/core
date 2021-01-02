@@ -1,43 +1,30 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(schema = "legends", catalog = "legends")
-public class BookSurfaceVehicle {
-    @ManyToMany(cascade = CascadeType.ALL)
+
+public class BookSurfaceVehicle extends PanacheEntity {
+
     List<BookReference> bookReferences;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long vehicleId;
-    @Enumerated
-    private VehicleType type;
-    private String description;
-    private int silhouette;
-    private int speed;
-    private int handling;
-    private String manufacturer;
-    private String model;
-    private int crewCap;
-    private int encum;
-    private int passengerCap;
-    private int price;
-    private int rarity;
-    private int weaponCap;
-    private int hp;
 
-    @JsonIgnore
-    public long getVehicleId() {
-        return vehicleId;
-    }
 
-    public void setVehicleId(long vehicleId) {
-        this.vehicleId = vehicleId;
-    }
+    VehicleType type;
+    String description;
+    int silhouette;
+    int speed;
+    int handling;
+    String manufacturer;
+    String model;
+    int crewCap;
+    int encum;
+    int passengerCap;
+    int price;
+    int rarity;
+    int weaponCap;
+    int hp;
 
     public VehicleType getType() {
         return type;
@@ -164,8 +151,7 @@ public class BookSurfaceVehicle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookSurfaceVehicle that = (BookSurfaceVehicle) o;
-        return vehicleId == that.vehicleId &&
-                silhouette == that.silhouette &&
+        return  silhouette == that.silhouette &&
                 speed == that.speed &&
                 handling == that.handling &&
                 crewCap == that.crewCap &&
@@ -184,6 +170,6 @@ public class BookSurfaceVehicle {
     @Override
     public int hashCode() {
 
-        return Objects.hash(vehicleId, type, description, silhouette, speed, handling, manufacturer, model, crewCap, encum, passengerCap, price, rarity, weaponCap, hp);
+        return Objects.hash(type, description, silhouette, speed, handling, manufacturer, model, crewCap, encum, passengerCap, price, rarity, weaponCap, hp);
     }
 }

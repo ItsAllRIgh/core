@@ -1,33 +1,22 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(schema = "legends", catalog = "legends")
-public class BookGear {
-    @ManyToMany(cascade = CascadeType.ALL)
+
+public class BookGear extends PanacheEntity {
+
     List<BookReference> bookReferences;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long gearId;
-    private String gearName;
-    private Integer price;
-    private Integer encum;
-    private Integer rarity;
-    private String bookIndex;
-    private String gearType;
 
-    @JsonIgnore
-    public long getGearId() {
-        return gearId;
-    }
 
-    public void setGearId(long gearId) {
-        this.gearId = gearId;
-    }
+    String gearName;
+    Integer price;
+    Integer encum;
+    Integer rarity;
+    String bookIndex;
+    String gearType;
+
 
     public String getGearName() {
         return gearName;
@@ -92,20 +81,17 @@ public class BookGear {
 
         BookGear that = (BookGear) o;
 
-        if (gearId != that.gearId) return false;
         if (bookIndex != null ? !bookIndex.equals(that.bookIndex) : that.bookIndex != null) return false;
         if (encum != null ? !encum.equals(that.encum) : that.encum != null) return false;
         if (gearName != null ? !gearName.equals(that.gearName) : that.gearName != null) return false;
         if (gearType != null ? !gearType.equals(that.gearType) : that.gearType != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (rarity != null ? !rarity.equals(that.rarity) : that.rarity != null) return false;
-
-        return true;
+        return rarity != null ? rarity.equals(that.rarity) : that.rarity == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) gearId;
+        int result = 0;
         result = 31 * result + (gearName != null ? gearName.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (encum != null ? encum.hashCode() : 0);

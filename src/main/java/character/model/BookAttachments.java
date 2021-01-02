@@ -1,34 +1,23 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(schema = "legends", catalog = "legends")
-public class BookAttachments {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long attachmentId;
-    private String name;
-    private String description;
-    private int price;
-    private int HPCost;
-    private int encum;
-    private int rarity;
-    @ManyToMany(cascade = CascadeType.ALL)
+
+public class BookAttachments extends PanacheEntity {
+
+
+    String name;
+    String description;
+    int price;
+    int HPCost;
+    int encum;
+    int rarity;
+
     List<BookReference> bookReferences;
 
-    @JsonIgnore
-    public long getAttachmentId() {
-        return attachmentId;
-    }
-
-    public void setAttachmentId(long attachmentId) {
-        this.attachmentId = attachmentId;
-    }
 
     public String getName() {
         return name;
@@ -91,8 +80,7 @@ public class BookAttachments {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookAttachments that = (BookAttachments) o;
-        return attachmentId == that.attachmentId &&
-                price == that.price &&
+        return  price == that.price &&
                 HPCost == that.HPCost &&
                 encum == that.encum &&
                 rarity == that.rarity &&
@@ -103,6 +91,6 @@ public class BookAttachments {
     @Override
     public int hashCode() {
 
-        return Objects.hash(attachmentId, name, description, price, HPCost, encum, rarity);
+        return Objects.hash(name, description, price, HPCost, encum, rarity);
     }
 }

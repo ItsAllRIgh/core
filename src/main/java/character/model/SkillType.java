@@ -3,7 +3,7 @@ package character.model;
 public enum SkillType {
     General(0), Knowledge(1);
 
-    private int val;
+    int val;
 
     SkillType(int val) {
         this.val = val;

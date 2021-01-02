@@ -1,34 +1,14 @@
 package character.model;
 
-import javax.persistence.*;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Created by Th'MASA of on 1/22/2017.
  */
-@Entity
-@Table(name = "player_gear")
-public class Gear {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
-    @ManyToOne
-    private GearEntity bookBase;
 
 
-    public Gear() {
-    }
-
-    public Gear(GearEntity base) {
-        this.bookBase = base;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+public class Gear extends PanacheEntity {
+    GearEntity bookBase;
 
     public GearEntity getBookBase() {
         return bookBase;

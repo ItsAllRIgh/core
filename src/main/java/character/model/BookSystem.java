@@ -1,9 +1,9 @@
 package character.model;
 
-public enum BookSystem {
+public enum BookSystem  {
     EotE("Edge of the Empire"), AoR("Age of Rebellion"), SWRPG("Star Wars Roleplaying"), FaD("Force and Destiny"), CUSTOM("Custom");
 
-    private final String text;
+    final String text;
 
     /**
      * @param text

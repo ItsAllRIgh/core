@@ -1,22 +1,16 @@
 package character.model;
 
-import org.hibernate.annotations.GenericGenerator;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by yr998d on 1/13/2017.
  */
-@Entity
-public class WeaponStore {
-    @OneToMany
+
+public class WeaponStore extends PanacheEntity {
+
     public List<Player_Weapon> weaponsList;
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    int id;
-    @Column
     int inflation;
 
     public WeaponStore() {

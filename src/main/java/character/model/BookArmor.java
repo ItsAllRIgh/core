@@ -1,42 +1,31 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by yr998d on 1/5/2017.
  */
-@Entity(name = "book_armor")
-@Table(schema = "legends", catalog = "legends", name = "book_armor")
-public class BookArmor {
-    @ManyToMany(cascade = CascadeType.ALL)
+
+
+public class BookArmor extends PanacheEntity {
+
     List<BookReference> bookReferences;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long armorId;
-    private String armorName;
-    private Integer defense;
-    private Integer soak;
-    private Integer price;
-    private Integer encum;
-    private Integer hp;
-    private Integer rarity;
-    private String bookIndex;
-    private Byte restricted;
-    @Column(columnDefinition = "varchar2(500)")
-    private String description;
 
 
-    @JsonIgnore
-    public long getArmorId() {
-        return armorId;
-    }
+    String armorName;
+    Integer defense;
+    Integer soak;
+    Integer price;
+    Integer encum;
+    Integer hp;
+    Integer rarity;
+    String bookIndex;
+    Boolean restricted;
 
-    public void setArmorId(long armorId) {
-        this.armorId = armorId;
-    }
+    String description;
+
 
     public String getArmorName() {
         return armorName;
@@ -102,11 +91,11 @@ public class BookArmor {
         this.bookIndex = bookIndex;
     }
 
-    public Byte getRestricted() {
+    public Boolean getRestricted() {
         return restricted;
     }
 
-    public void setRestricted(Byte restricted) {
+    public void setRestricted(Boolean restricted) {
         this.restricted = restricted;
     }
 
@@ -133,7 +122,6 @@ public class BookArmor {
 
         BookArmor that = (BookArmor) o;
 
-        if (armorId != that.armorId) return false;
         if (armorName != null ? !armorName.equals(that.armorName) : that.armorName != null) return false;
         if (bookIndex != null ? !bookIndex.equals(that.bookIndex) : that.bookIndex != null) return false;
         if (defense != null ? !defense.equals(that.defense) : that.defense != null) return false;
@@ -142,14 +130,12 @@ public class BookArmor {
         if (hp != null ? !hp.equals(that.hp) : that.hp != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (rarity != null ? !rarity.equals(that.rarity) : that.rarity != null) return false;
-        if (restricted != null ? !restricted.equals(that.restricted) : that.restricted != null) return false;
-
-        return true;
+        return restricted != null ? restricted.equals(that.restricted) : that.restricted == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (armorId);
+        int result = 0;
         result = 31 * result + (armorName != null ? armorName.hashCode() : 0);
         result = 31 * result + (defense != null ? defense.hashCode() : 0);
         result = 31 * result + (soak != null ? soak.hashCode() : 0);

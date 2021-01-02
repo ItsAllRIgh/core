@@ -1,25 +1,16 @@
 package character.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Created by Th'MASA of on 1/2/2017.
  */
-@Entity
-@Table(name = "species", schema = "", catalog = "legends")
-public class Species implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = -2257280953655899073L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+
+
+public class Species extends PanacheEntity {
     String name;
     int Brawn;
     int Agility;
-    @Column(name = "INTELLECT")
     int Int;
     int Cun;
     int Will;
@@ -33,14 +24,6 @@ public class Species implements Serializable {
 
     public Species(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

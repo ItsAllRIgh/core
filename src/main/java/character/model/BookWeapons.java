@@ -1,43 +1,31 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by yr998d on 1/5/2017.
  */
-@Entity
-@Table(schema = "legends", catalog = "legends")
-public class BookWeapons {
-    @ManyToMany(cascade = CascadeType.ALL)
+
+
+public class BookWeapons extends PanacheEntity {
+
     List<BookReference> bookReferences;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long weaponsId;
-    private String weaponName;
-    private String skill;
-    private Integer damage;
-    private String critical;
-    private String wepRange;
-    private Integer encumbrance;
-    private Integer hp;
-    private Integer price;
-    private Integer rarity;
-    private String special;
-    private String bookIndex;
-    private String weapType;
-    private Byte restricted;
+    String weaponName;
+    String skill;
+    Integer damage;
+    String critical;
+    String wepRange;
+    Integer encumbrance;
+    Integer hp;
+    Integer price;
+    Integer rarity;
+    String special;
+    String bookIndex;
+    String weapType;
+    Boolean restricted;
 
-    @JsonIgnore
-    public long getWeaponsId() {
-        return weaponsId;
-    }
-
-    public void setWeaponsId(long weaponsId) {
-        this.weaponsId = weaponsId;
-    }
 
     public String getWeaponName() {
         return weaponName;
@@ -135,11 +123,11 @@ public class BookWeapons {
         this.weapType = weapType;
     }
 
-    public Byte getRestricted() {
+    public Boolean getRestricted() {
         return restricted;
     }
 
-    public void setRestricted(Byte restricted) {
+    public void setRestricted(Boolean restricted) {
         this.restricted = restricted;
     }
 
@@ -158,7 +146,6 @@ public class BookWeapons {
 
         BookWeapons that = (BookWeapons) o;
 
-        if (weaponsId != that.weaponsId) return false;
         if (bookIndex != null ? !bookIndex.equals(that.bookIndex) : that.bookIndex != null) return false;
         if (critical != null ? !critical.equals(that.critical) : that.critical != null) return false;
         if (damage != null ? !damage.equals(that.damage) : that.damage != null) return false;
@@ -171,14 +158,12 @@ public class BookWeapons {
         if (special != null ? !special.equals(that.special) : that.special != null) return false;
         if (weapType != null ? !weapType.equals(that.weapType) : that.weapType != null) return false;
         if (weaponName != null ? !weaponName.equals(that.weaponName) : that.weaponName != null) return false;
-        if (wepRange != null ? !wepRange.equals(that.wepRange) : that.wepRange != null) return false;
-
-        return true;
+        return wepRange != null ? wepRange.equals(that.wepRange) : that.wepRange == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) weaponsId;
+        int result = 0;
         result = 31 * result + (weaponName != null ? weaponName.hashCode() : 0);
         result = 31 * result + (skill != null ? skill.hashCode() : 0);
         result = 31 * result + (damage != null ? damage.hashCode() : 0);

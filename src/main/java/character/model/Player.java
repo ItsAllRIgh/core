@@ -1,36 +1,20 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Th'MASA of on 1/2/2017.
  */
-@Entity
-@Table(name = "user_character", schema = "", catalog = "legends")
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Player implements Serializable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 8634742315900681847L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
+public class Player extends PanacheEntity {
+
     public String name = "NAME";
     public String userName = "";
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "character_species", joinColumns = {@JoinColumn(name = "characterId", nullable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn(name = "speciesId",
-            nullable = false, updatable = false)})
     public Species species;
     public String career = "CAREER";
-    @JsonProperty(value = "specializationTrees")
     public String specialization = "SPECIALIZATION";
     public String avatar = "http://url.avatar.com.bitches";
     public int currentXP = 0;
@@ -47,7 +31,7 @@ public class Player implements Serializable {
     public int cunning = 3;
     public int willpower = 3;
     public int presence = 3;
-    public String gender = String.valueOf(0);
+    public String gender;
     public int age = 18;
     public String height = "";
     public String eyes = "";
@@ -55,19 +39,12 @@ public class Player implements Serializable {
     public String other = "";
     public int credits = 0;
     public String equipments = "";
-    @OneToMany(cascade = CascadeType.ALL)
     public List<Skill> skills = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonProperty(value = "weapons")
     public List<Player_Weapon> playerWeapons = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
     public List<Talent> talents = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
     public List<PlayerArmorEntity> playerArmorEntity = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
     public List<Gear> gear = new ArrayList<>();
     public int encumbrance = 0;
-    @Column(name = "FORCE_POWERS")
     public int force = 0;
     public String hashKey = "006";
     public String background = "BACKGROUND";
@@ -75,14 +52,9 @@ public class Player implements Serializable {
     public String morality = "DUTY";
     public String duty = "DUTY";
     public String motivations = "MOTIVATIONS";
-    @Transient
     public String achievements;
-    @Transient
     public int selectedAchievement;
-    @Transient
-    @JsonProperty(value = "world")
     public String world;
-    @Transient
     public String webhash;
 
     public Player(Player them) {

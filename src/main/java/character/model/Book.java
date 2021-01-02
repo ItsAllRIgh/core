@@ -1,28 +1,15 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 
-@Table(schema = "legends", catalog = "legends")
-@Entity(name = "book")
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long bookId;
-    private String name;
-    @Enumerated
-    private BookSystem system;
-    private String acronym;
+public class Book extends PanacheEntity {
 
-    @JsonIgnore
-    public long getBookId() {
-        return bookId;
-    }
 
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
-    }
+    String name;
+    BookSystem system;
+    String acronym;
+
 
     public String getName() {
         return name;
@@ -51,8 +38,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "bookId=" + bookId +
-                ", name='" + name + '\'' +
+                " name='" + name + '\'' +
                 ", system=" + system +
                 ", acronym='" + acronym + '\'' +
                 '}';

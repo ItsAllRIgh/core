@@ -1,34 +1,23 @@
 package character.model;
 
-import javax.persistence.*;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Created by yr998d on 1/5/2017.
  */
-@Entity
-@Table(name = "creatures", schema = "", catalog = "legends")
-public class CreaturesEntity {
-    private int creaturesId;
-    private String creatureName;
-    private String creatureArmor;
-    private String skills;
-    private String talents;
-    private String abilities;
-    private String equipment;
-    private String bookIndex;
 
-    @Id
-    @Column(name = "creatures_id", nullable = false, insertable = true, updatable = true)
-    public int getCreaturesId() {
-        return creaturesId;
-    }
 
-    public void setCreaturesId(int creaturesId) {
-        this.creaturesId = creaturesId;
-    }
+public class CreaturesEntity extends PanacheEntity {
 
-    @Basic
-    @Column(name = "creature_name", nullable = true, insertable = true, updatable = true, length = 45)
+    String creatureName;
+    String creatureArmor;
+    String skills;
+    String talents;
+    String abilities;
+    String equipment;
+    String bookIndex;
+
+
     public String getCreatureName() {
         return creatureName;
     }
@@ -37,8 +26,7 @@ public class CreaturesEntity {
         this.creatureName = creatureName;
     }
 
-    @Basic
-    @Column(name = "creaturarmore_lvl", nullable = true, insertable = true, updatable = true, length = 12)
+
     public String getCreatureArmor() {
         return creatureArmor;
     }
@@ -47,8 +35,7 @@ public class CreaturesEntity {
         this.creatureArmor = creatureArmor;
     }
 
-    @Basic
-    @Column(name = "skills", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getSkills() {
         return skills;
     }
@@ -57,8 +44,7 @@ public class CreaturesEntity {
         this.skills = skills;
     }
 
-    @Basic
-    @Column(name = "talents", nullable = true, insertable = true, updatable = true, length = 45)
+
     public String getTalents() {
         return talents;
     }
@@ -67,8 +53,7 @@ public class CreaturesEntity {
         this.talents = talents;
     }
 
-    @Basic
-    @Column(name = "abilities", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getAbilities() {
         return abilities;
     }
@@ -77,8 +62,7 @@ public class CreaturesEntity {
         this.abilities = abilities;
     }
 
-    @Basic
-    @Column(name = "equipment", nullable = true, insertable = true, updatable = true, length = 255)
+
     public String getEquipment() {
         return equipment;
     }
@@ -87,8 +71,7 @@ public class CreaturesEntity {
         this.equipment = equipment;
     }
 
-    @Basic
-    @Column(name = "book_index", nullable = true, insertable = true, updatable = true, length = 45)
+
     public String getBookIndex() {
         return bookIndex;
     }
@@ -104,7 +87,6 @@ public class CreaturesEntity {
 
         CreaturesEntity that = (CreaturesEntity) o;
 
-        if (creaturesId != that.creaturesId) return false;
         if (abilities != null ? !abilities.equals(that.abilities) : that.abilities != null) return false;
         if (bookIndex != null ? !bookIndex.equals(that.bookIndex) : that.bookIndex != null) return false;
         if (creatureArmor != null ? !creatureArmor.equals(that.creatureArmor) : that.creatureArmor != null)
@@ -117,7 +99,7 @@ public class CreaturesEntity {
 
     @Override
     public int hashCode() {
-        int result = creaturesId;
+        int result = 0;
         result = 31 * result + (creatureName != null ? creatureName.hashCode() : 0);
         result = 31 * result + (creatureArmor != null ? creatureArmor.hashCode() : 0);
         result = 31 * result + (skills != null ? skills.hashCode() : 0);

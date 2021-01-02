@@ -1,35 +1,23 @@
 package character.model;
 
-import javax.persistence.*;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Created by yr998d on 1/5/2017.
  */
-@Entity
-@Table(name = "modifications", schema = "", catalog = "legends")
-public class ModificationsEntity {
-    private int modificationsId;
-    private String modName;
-    private Integer price;
-    private Integer encum;
-    private Integer hpRequired;
-    private Integer rarity;
-    private String bookIndex;
-    private String modType;
-    private Byte restricted;
 
-    @Id
-    @Column(name = "modifications_id", nullable = false, insertable = true, updatable = true)
-    public int getModificationsId() {
-        return modificationsId;
-    }
 
-    public void setModificationsId(int modificationsId) {
-        this.modificationsId = modificationsId;
-    }
+public class ModificationsEntity extends PanacheEntity {
 
-    @Basic
-    @Column(name = "mod_name", nullable = true, insertable = true, updatable = true, length = 255)
+    String modName;
+    Integer price;
+    Integer encum;
+    Integer hpRequired;
+    Integer rarity;
+    String bookIndex;
+    String modType;
+    Boolean restricted;
+
     public String getModName() {
         return modName;
     }
@@ -38,8 +26,7 @@ public class ModificationsEntity {
         this.modName = modName;
     }
 
-    @Basic
-    @Column(name = "Price", nullable = true, insertable = true, updatable = true)
+
     public Integer getPrice() {
         return price;
     }
@@ -48,8 +35,7 @@ public class ModificationsEntity {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "Encum", nullable = true, insertable = true, updatable = true)
+
     public Integer getEncum() {
         return encum;
     }
@@ -58,8 +44,7 @@ public class ModificationsEntity {
         this.encum = encum;
     }
 
-    @Basic
-    @Column(name = "HP_Required", nullable = true, insertable = true, updatable = true)
+
     public Integer getHpRequired() {
         return hpRequired;
     }
@@ -68,8 +53,7 @@ public class ModificationsEntity {
         this.hpRequired = hpRequired;
     }
 
-    @Basic
-    @Column(name = "Rarity", nullable = true, insertable = true, updatable = true)
+
     public Integer getRarity() {
         return rarity;
     }
@@ -78,8 +62,7 @@ public class ModificationsEntity {
         this.rarity = rarity;
     }
 
-    @Basic
-    @Column(name = "book_index", nullable = true, insertable = true, updatable = true, length = 45)
+
     public String getBookIndex() {
         return bookIndex;
     }
@@ -88,8 +71,7 @@ public class ModificationsEntity {
         this.bookIndex = bookIndex;
     }
 
-    @Basic
-    @Column(name = "mod_type", nullable = true, insertable = true, updatable = true, length = 12)
+
     public String getModType() {
         return modType;
     }
@@ -98,13 +80,12 @@ public class ModificationsEntity {
         this.modType = modType;
     }
 
-    @Basic
-    @Column(name = "restricted", nullable = true, insertable = true, updatable = true)
-    public Byte getRestricted() {
+
+    public Boolean getRestricted() {
         return restricted;
     }
 
-    public void setRestricted(Byte restricted) {
+    public void setRestricted(Boolean restricted) {
         this.restricted = restricted;
     }
 
@@ -115,7 +96,6 @@ public class ModificationsEntity {
 
         ModificationsEntity that = (ModificationsEntity) o;
 
-        if (modificationsId != that.modificationsId) return false;
         if (bookIndex != null ? !bookIndex.equals(that.bookIndex) : that.bookIndex != null) return false;
         if (encum != null ? !encum.equals(that.encum) : that.encum != null) return false;
         if (hpRequired != null ? !hpRequired.equals(that.hpRequired) : that.hpRequired != null) return false;
@@ -123,14 +103,12 @@ public class ModificationsEntity {
         if (modType != null ? !modType.equals(that.modType) : that.modType != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (rarity != null ? !rarity.equals(that.rarity) : that.rarity != null) return false;
-        if (restricted != null ? !restricted.equals(that.restricted) : that.restricted != null) return false;
-
-        return true;
+        return restricted != null ? restricted.equals(that.restricted) : that.restricted == null;
     }
 
     @Override
     public int hashCode() {
-        int result = modificationsId;
+        int result = 0;
         result = 31 * result + (modName != null ? modName.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (encum != null ? encum.hashCode() : 0);

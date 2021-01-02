@@ -1,29 +1,19 @@
 package character.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Table(schema = "legends", catalog = "legends")
-@Entity(name = "book_ability")
-public class BookAbility {
-    @ManyToMany(cascade = CascadeType.ALL)
+
+public class BookAbility extends PanacheEntity {
+
     List<BookReference> bookReferences;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long abilityId;
-    private String name;
-    private String description;
 
-    @JsonIgnore
-    public long getAbilityId() {
-        return abilityId;
-    }
 
-    public void setAbilityId(long abilityId) {
-        this.abilityId = abilityId;
-    }
+    String name;
+    String description;
+
+
 
     public String getName() {
         return name;

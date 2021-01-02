@@ -1,30 +1,17 @@
 package character.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Created by Th'MASA of on 1/2/2017.
  */
-@Entity
-@Table(name = "skill", schema = "", catalog = "legends")
-public class Skill implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 5772429839841222500L;
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    Long id;
-    String name = "SKILLNAME";
-    boolean career = false;
-    int rank = 0;
+
+
+public class Skill extends PanacheEntity {
+
+    String name;
+    boolean career;
+    int rank;
 
     public Skill() {
     }
@@ -37,14 +24,6 @@ public class Skill implements Serializable {
         this.name = name;
         this.career = career;
         this.rank = rank;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public boolean isCareer() {
